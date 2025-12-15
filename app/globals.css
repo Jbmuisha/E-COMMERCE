@@ -1,0 +1,7 @@
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+.wellcome h1{
+  text-align: center;
+}
