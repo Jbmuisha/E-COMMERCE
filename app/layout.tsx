@@ -2,6 +2,8 @@ import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
 import Link from "next/link";
 import "./globals.css";
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faUser } from '@fortawesome/free-solid-svg-icons';
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -25,34 +27,53 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="fr">
+      <head>
+     
+      </head>
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased bg-gray-50`}
       >
-        {/* Navbar */}
-        <nav className="bg-white shadow p-4 flex justify-between items-center ">
-          <div className="font-bold text-xl">Lgo</div>
-          <div className="flex gap-4 items-center gap-20" >
-            <Link href="/">Accueil</Link>
-            <Link href="/products">Produits</Link>
-            <Link href="/contact">Contact</Link>
-            <button>🛒</button>
-            <button>👤</button>
-            <select className="border rounded px-1 py-0.5">
-              <option>FR</option>
-              <option>EN</option>
+
+    
+       
+       <div className="navbar">
+        <div className="logo">
+          
+        </div>
+        <nav className="nav_list">
+          <div className="Link_list">
+            <Link href='/Acceuil'>Home</Link>
+            <Link href='/product'>Product</Link>
+             <Link href='/about_us'>About_us</Link>
+             <Link href='/contact_us'>Contact_us</Link>
+          
+          <div className="icon">
+            <div className="IconIput">
+             <FontAwesomeIcon icon={faUser} 
+             style={{ width: '20px' }} />
+            </div>
+            <div className="langageOptions">
+            <select name="" id="">
+              <option value="fr">FR</option>
+              <option value="EN">EN</option>
+              
             </select>
-            <input
-              type="text"
-              placeholder="Rechercher..."
-              className="border rounded px-2 py-1"
-            />
+            </div>
+            <div className="searchInput">
+            <input type="text"placeholder="searching..." />
+            </div>
+
           </div>
+          </div>
+
         </nav>
 
-        {/* Contenu principal */}
+       </div>
+
+      
         <main className="p-4">{children}</main>
 
-        {/* Footer */}
+       
         <footer className="bg-white shadow mt-8 p-4 text-center">
           &copy; 2025 E-Commerce Parfum. Tous droits réservés.
         </footer>
