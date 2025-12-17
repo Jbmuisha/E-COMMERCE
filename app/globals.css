@@ -53,4 +53,6 @@ main {
 }
 .Link_list  a:hover{
   color: blue;
+}.icon {
+  margin-left: 350px;
 }

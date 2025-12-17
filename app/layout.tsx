@@ -3,7 +3,7 @@ import { Geist, Geist_Mono } from "next/font/google";
 import Link from "next/link";
 import "./globals.css";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faUser } from '@fortawesome/free-solid-svg-icons';
+import { faUser,faCartShopping  } from '@fortawesome/free-solid-svg-icons';
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -49,9 +49,14 @@ export default function RootLayout({
           
           <div className="icon">
             <div className="IconIput">
+              
              <FontAwesomeIcon icon={faUser} 
              style={{ width: '20px' }} />
+             
             </div>
+            <div className="panierIcon">
+              <FontAwesomeIcon icon={faCartShopping }
+               style={{width:'20px'}}/></div>
             <div className="langageOptions">
             <select name="" id="">
               <option value="fr">FR</option>
@@ -71,7 +76,13 @@ export default function RootLayout({
        </div>
 
       
-        <main className="p-4">{children}</main>
+        <main className="p-4">{children}
+
+          <div className="slideimage">
+            {/* Next job Will be the slide image for the with a carousel*/}
+
+          </div>
+        </main>
 
        
         <footer className="bg-white shadow mt-8 p-4 text-center">
