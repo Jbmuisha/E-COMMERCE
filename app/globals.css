@@ -1,4 +1,7 @@
 
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
 
 .wellcome h1{
   text-align: center;
@@ -54,5 +57,5 @@ main {
 .Link_list  a:hover{
   color: blue;
 }.icon {
-  margin-left: 350px;
+  margin-left: 35ant t0px;
 }

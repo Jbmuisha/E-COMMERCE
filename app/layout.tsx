@@ -4,6 +4,9 @@ import Link from "next/link";
 import "./globals.css";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faUser,faCartShopping  } from '@fortawesome/free-solid-svg-icons';
+import "@/component/home";
+
+
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -14,6 +17,8 @@ const geistMono = Geist_Mono({
   variable: "--font-geist-mono",
   subsets: ["latin"],
 });
+
+
 
 export const metadata: Metadata = {
   title: "E-Commerce Parfum",
@@ -78,10 +83,8 @@ export default function RootLayout({
       
         <main className="p-4">{children}
 
-          <div className="slideimage">
-            {/* Next job Will be the slide image for the with a carousel*/}
-
-          </div>
+          {children}
+          
         </main>
 
        
