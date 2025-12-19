@@ -81,9 +81,9 @@ export default function RootLayout({
        </div>
 
       
-        <main className="p-4">{children}
+        <main className="p-4 mb-[400px]" >{children}
 
-          {children}
+
           
         </main>
 
