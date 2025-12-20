@@ -60,9 +60,10 @@ main {
   margin-left: 35ant t0px;
 }
 .mega-shadow {
-  background-color: #facc15; 
+  background-color: white; 
   border-radius: 0.75rem;    
   height: 290px;
+  gap: 20px;
   box-shadow: 
     rgba(0, 0, 0, 0.25) 0px 54px 55px, 
     rgba(0, 0, 0, 0.12) 0px -12px 30px, 
@@ -70,3 +71,4 @@ main {
     rgba(0, 0, 0, 0.17) 0px 12px 13px, 
     rgba(0, 0, 0, 0.09) 0px -3px 5px;
 }
+
