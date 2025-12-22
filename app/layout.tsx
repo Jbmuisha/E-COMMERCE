@@ -21,7 +21,7 @@ export default function RootLayout({ children }: RootLayoutProps) {
   return (
     <html lang="fr">
       <body className="antialiased bg-gray-50">
-        {/* Header */}
+        
         <header
           className={`fixed top-0 left-0 w-full h-[100px] flex justify-center items-center bg-white transition-shadow duration-300`}
           style={{
@@ -33,7 +33,9 @@ export default function RootLayout({ children }: RootLayoutProps) {
           }}
         >
           <div className="max-w-[1400px] w-full mx-auto px-4 flex items-center justify-between">
-            <div className="text-2xl font-black tracking-tighter">PARFUM.</div>
+            <div className="text-2xl font-black tracking-tighter">
+              <img src="/image/parfum copie 2.png" alt="" className="w-[100px]"/>
+            </div>
 
             <nav className="hidden md:flex space-x-8 font-bold text-[11px] tracking-[0.2em] uppercase text-gray-400">
               <Link href="/" className="hover:text-black transition">
@@ -71,7 +73,7 @@ export default function RootLayout({ children }: RootLayoutProps) {
 
         {/* Footer */}
         <footer className="bg-white py-10 text-center text-[10px] font-bold tracking-widest text-gray-400 uppercase">
-          &copy; 2025 ParfumShop — All Rights Reserved.
+          &copy; 2025 jboy — All Rights Reserved.
         </footer>
       </body>
     </html>
