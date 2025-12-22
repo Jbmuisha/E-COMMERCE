@@ -13,6 +13,19 @@ export default function Home() {
     { id: 8, image: '/image/product9.jpg', itemDetails: "Bureau Setup", price: "299.00€" }
   ];
 
+  const ParfumMenu=[
+    {id: 1,
+    display:" ALL PERFUMS",
+    FemaleGender:" WOMEN'S ",
+    MaleGender: " MALE'S",
+    Type_of_parfum: " BATH AND BODY "},
+    {
+      id:2,
+       FilterBotton:""
+    }
+
+  ]
+
   return (
     <main className="bg-gray-50 min-h-screen">
       <section className='mt-[80px] w-full'>
@@ -21,9 +34,27 @@ export default function Home() {
         </div>
       </section>
 
-      <section className="max-w-[1400px] mx-auto px-4 pb-20">
+      <section className="max-w-[1400px] mx-auto px-4 pb-20 ">
         
-        <div className='grid grid-cols-4 sm:grid-cols-2 lg:grid-cols-4 gap-[30px]'>
+      <div className="flex items-center gap-[8px] overflow-x-auto w-full md:w-auto pb-2 md:pb-0 no-scrollbar mb-[60px]" >
+      {ParfumMenu.map((item) => (
+        item.display && (
+          <div key={item.id} className="flex items-center gap-6">
+            <button className="whitespace-nowrap text-[11px] font-black tracking-[0.2em] text-gray-400 hover:text-black transition-colors uppercase flex items-center gap-1">
+              {item.display}
+            </button>
+            <button className="whitespace-nowrap text-[11px] font-black tracking-[0.2em] text-gray-400 hover:text-black transition-colors uppercase">
+              {item.FemaleGender}
+            </button>
+            <button className="whitespace-nowrap text-[11px] font-black tracking-[0.2em] text-gray-400 hover:text-black transition-colors uppercase">
+              {item.MaleGender}
+            </button>
+          </div>
+        )
+      ))}
+      </div>
+      <hr  className='mb-[70px'/>
+        <div className='grid grid-cols-4 sm:grid-cols-2 lg:grid-cols-4 gap-[30px] mt-[70px]'>
           {products.map((item) => (
             <div 
               key={item.id} 
@@ -61,6 +92,9 @@ export default function Home() {
             </div>
           ))}
         </div>
+      </section>
+      <section>
+
       </section>
     </main>
   );
