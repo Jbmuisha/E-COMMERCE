@@ -122,3 +122,9 @@ header input[type="text"]:focus {
     width: 80%;
   }
 }
+.empla_side1{
+  margin: auto;
+  padding: auto;
+  background-color: rgb(23, 103, 103);
+
+}

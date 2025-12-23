@@ -32,13 +32,13 @@ export default function RootLayout({ children }: RootLayoutProps) {
             backgroundColor: "white"
           }}
         >
-          <div className="max-w-[1400px] w-full mx-auto px-4 flex items-center justify-between">
+          <div className="max-w-[1400px] w-full mx-auto px-4 flex items-center justify-between mr-[20px]">
             <div className="text-2xl font-black tracking-tighter">
               <img src="/image/parfum copie 2.png" alt="" className="w-[100px]"/>
             </div>
 
-            <nav className="hidden md:flex space-x-8 font-bold text-[11px] tracking-[0.2em] uppercase text-gray-400">
-              <Link href="/" className="hover:text-black transition">
+            <nav className=" md:flex space-x-8 font-bold text-[11px] tracking-[0.2em] uppercase text-gray-400">
+              <Link href="/page.tsx" className="hover:text-black transition">
                 Home
               </Link>
               <Link href="/product" className="hover:text-black transition">
@@ -46,6 +46,9 @@ export default function RootLayout({ children }: RootLayoutProps) {
               </Link>
               <Link href="/about" className="hover:text-black transition">
                 About Us
+              </Link>
+              <Link href="" className="hover:text-black transition">
+              Contact us
               </Link>
             </nav>
 

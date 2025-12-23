@@ -91,14 +91,14 @@ export default function Home() {
       {/* ================= PRODUCTS ================= */}
       <section className="w-full">
         <div className="w-full max-w-[1400px] mx-auto px-4 pb-24">
-          {/* 🔥 YOUR GRID — FIXED */}
+        
           <div className="grid grid-cols-4 sm:grid-cols-2 lg:grid-cols-4 gap-[30px] mt-[70px]">
             {products.map((item) => (
               <div
                 key={item.id}
                 className="group bg-white rounded-2xl overflow-hidden transition-all duration-300 hover:shadow-xl"
               >
-                {/* Image */}
+             
                 <div className="relative h-[280px] bg-[#FAFAFA] flex items-center justify-center">
                   <img
                     src={item.image}
@@ -106,13 +106,13 @@ export default function Home() {
                     className="max-h-[75%] object-contain transition-transform duration-500 group-hover:scale-110"
                   />
 
-                  {/* Heart */}
-                  <button className="absolute top-4 right-4 p-2 rounded-full bg-white shadow hover:text-red-500 transition">
-                    <Heart size={18} />
+                
+                  <button className="absolute top-[20px] right-[20px] p-[2px] rounded-full bg-transparent shadow hover:text-red-500  hover:bg-red transition border-none">
+                     <Heart size={25} />
                   </button>
                 </div>
 
-                {/* Content */}
+               
                 <div className="p-5">
                   <p className="text-sm text-gray-500 mb-2">
                     {item.itemDetails}
