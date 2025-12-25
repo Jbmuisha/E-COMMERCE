@@ -11,6 +11,7 @@
   "dependencies": {
     "@faker-js/faker": "^10.1.0",
     "@fortawesome/fontawesome-svg-core": "^7.1.0",
+    "@fortawesome/free-brands-svg-icons": "^7.1.0",
     "@fortawesome/free-solid-svg-icons": "^7.1.0",
     "@fortawesome/react-fontawesome": "^3.1.1",
     "embla-carousel": "^8.6.0",

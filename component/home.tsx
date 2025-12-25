@@ -3,6 +3,9 @@ import React from "react";
 import useEmblaCarousel from "embla-carousel-react";
 import Autoplay from "embla-carousel-autoplay";
 import { Radius } from "lucide-react";
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faFacebookF, faInstagram, faTwitter, faLinkedinIn } from '@fortawesome/free-brands-svg-icons';
+
 
 export default function Hero() {
   const [emblaRef] = useEmblaCarousel(
@@ -17,7 +20,7 @@ export default function Hero() {
 
         
           <div 
-  className="embla__slide flex-[0_0_100%] min-w-0 relative h-[650px] overflow-hidden"
+  className="embla__slide flex-[0_0_100%] min-w-0 relative h-[500px] overflow-hidden"
   style={{ 
  
     background: 'linear-gradient(135deg, rgba(10, 20, 45, 1) 0%, rgba(20, 35, 75, 1) 50%, rgba(5, 10, 25, 1) 100%)' 
@@ -125,30 +128,67 @@ export default function Hero() {
   </div>
 </div>
 <div 
-  className="embla__slide flex-[0_0_100%] min-w-0 bg-[#E5E7EB] relative h-[500px] overflow-hidden bg-center"
-  style={{ 
-    backgroundImage: `linear-gradient(rgba(229, 231, 235, 0.6), rgba(229, 231, 235, 0.6)), url('/image/IMG.webp')`,
-    backgroundSize: 'cover'
+  className="embla__slide flex-[0_0_100%] min-w-0 relative h-[500px] overflow-hidden"
+  style={{
+    background: 'linear-gradient(135deg, rgba(5, 20, 60, 1) 0%, rgba(25, 80, 120, 1) 50%, rgba(10, 25, 50, 1) 100%)',
+
   }}
 >
 
-<div className="absolute inset-0 flex items-center justify-center pointer-events-none overflow-hidden">
-    <span 
-      style={{ 
+ 
+  <div className="absolute inset-0 pointer-events-none z-10">
+    <div className="absolute right-0 top-1/2 -translate-y-1/2 w-[600px] h-[600px] rounded-full bg-[#F7E7CE]/12 blur-[140px]"></div>
+    <div className="absolute w-[150px] h-[150px] rounded-full bg-white/10 blur-[60px] top-[10px] left-[16px] animate-bounce-slow"></div>
+    <div className="absolute w-[100px] h-[100px] rounded-full bg-white/5 blur-[40px] bottom-[20px] right-[28px] animate-spin-slow"></div>
+  </div>
 
-        color:'rgba(0, 0, 0, 0.10)',
-        whiteSpace: 'nowrap' 
-      }} 
-      className="text-[15vw] font-black uppercase leading-none select-none tracking-tighter"
-    >
-      SMILE GOOD
-    </span>
+  <div className="relative z-20 h-full max-w-[1400px] mx-auto flex items-center px-[10px]">
+   
+    <div className="w-1/2 flex items-center justify-start h-full">
+  <img 
+    src="/image/product10.png" 
+    alt="Luxury" 
+    className="h-full w-auto object-contain drop-shadow-[-50px_20px_100px_rgba(0,0,0,0.8)] transition-transform duration-1000 hover:scale-105"
+  />
+</div>
+
+
+    <div className="w-1/2 flex flex-col items-start justify-center space-y-[24px] pl-[40px]">
+      <h1 className="text-[80px] md:text-[120px] font-black uppercase tracking-tighter text-transparent bg-clip-text bg-gradient-to-r from-[#F7E7CE] via-white to-[#F7E7CE] animate-fade-in-down">
+        EXPENSIVE SMILE
+      </h1>
+      <p className="text-[20px] md:text-[24px] text-white/80 italic animate-fade-in-up" 
+      style={{color:'white'}}>
+  “Une signature olfactive audacieuse pour captiver les sens, éveiller l’émotion et laisser une empreinte inoubliable dans chaque souvenir. Inspiré par l’élégance intemporelle, ce parfum révèle une harmonie parfaite entre audace et sophistication.”
+</p>
+
+      <div className="flex gap-[24px] mt-[16px]">
+        <button className="px-[24px] py-[12px] bg-[#F7E7CE] text-[#0A142D] font-bold uppercase tracking-[0.2em] rounded-[18px] shadow-lg hover:scale-105 transition-transform animate-fade-in-up">
+          faire vos commande
+        </button>
+        
+      </div>
+
+   
+      <div className="flex gap-[16px] mt-[24px] text-white animate-fade-in-up">
+  <a href="#" className="hover:text-[#F7E7CE] decoration-none" style={{ color:'white'}}>
+    <FontAwesomeIcon icon={faFacebookF} size="lg" />
+  </a>
+  <a href="#" className="hover:text-[#F7E7CE] decoration-none " style={{ color:'white'}}>
+    <FontAwesomeIcon icon={faInstagram} size="lg" />
+  </a>
+  <a href="#" className="hover:text-[#F7E7CE] decoration-none"style={{ color:'white'}}>
+    <FontAwesomeIcon icon={faTwitter} size="lg" />
+  </a>
+  <a href="#" className="hover:text-[#F7E7CE] decoration-none"style={{ color:'white'}}>
+    <FontAwesomeIcon icon={faLinkedinIn} size="lg" />
+  </a>
+</div>
+
+    </div>
   </div>
-            
-    
-    
-    
-  </div>
+</div>
+
 </div>
 </div>
 </section>
