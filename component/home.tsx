@@ -124,34 +124,31 @@ export default function Hero() {
 
   </div>
 </div>
-<div className="embla__slide flex-[0_0_100%] min-w-0 bg-[#E5E7EB] relative h-[650px] overflow-hidden">
-  
-  <div className="absolute right-[-10%] top-0 h-full w-[50%] z-0 opacity-60">
-    <img 
-      src="/image/bgra.jpeg" 
-      alt="background" 
-      className="w-full h-full object-cover" 
-      
-    />
-  </div>
+<div 
+  className="embla__slide flex-[0_0_100%] min-w-0 bg-[#E5E7EB] relative h-[500px] overflow-hidden bg-center"
+  style={{ 
+    backgroundImage: `linear-gradient(rgba(229, 231, 235, 0.6), rgba(229, 231, 235, 0.6)), url('/image/IMG.webp')`,
+    backgroundSize: 'cover'
+  }}
+>
 
-
-  <div className="absolute inset-0 flex items-center justify-center pointer-events-none z-10">
+<div className="absolute inset-0 flex items-center justify-center pointer-events-none overflow-hidden">
     <span 
-      className="text-[15vw] font-black uppercase leading-none select-none tracking-tighter text-white drop-shadow-2xl"
+      style={{ 
+
+        color:'rgba(0, 0, 0, 0.10)',
+        whiteSpace: 'nowrap' 
+      }} 
+      className="text-[15vw] font-black uppercase leading-none select-none tracking-tighter"
     >
       SMILE GOOD
     </span>
   </div>
-
-  <div className="relative z-20 h-full flex items-center px-10">
-    <div className="max-w-xl">
-       <h2 className="text-6xl font-serif text-slate-900">New arrivals</h2>
-       <p className="text-slate-700 mt-4 font-medium">Limited Edition 2025</p>
-    </div>
+            
+    
+    
+    
   </div>
-</div>
-
 </div>
 </div>
 </section>
