@@ -2,6 +2,7 @@
 import React from "react";
 import useEmblaCarousel from "embla-carousel-react";
 import Autoplay from "embla-carousel-autoplay";
+import { Radius } from "lucide-react";
 
 export default function Hero() {
   const [emblaRef] = useEmblaCarousel(
@@ -10,84 +11,149 @@ export default function Hero() {
   );
 
   return (
-    <section className="pt-[80px] bg-[#0d3b3b]">
+    <section className="pt-[80px] ">
       <div className="embla w-full overflow-hidden" ref={emblaRef}>
         <div className="embla__container flex">
 
-          {/* ================= SLIDE 1 ================= */}
-          <div className="embla__slide flex-[0_0_100%] min-w-0 relative h-[650px] bg-[#176767] overflow-hidden">
-  
-  {/* 1. BACKGROUND WATERMARK (Subtle White) */}
-  <div className="absolute inset-0 flex items-center justify-center pointer-events-none">
-  <span 
-  style={{ color: 'white' }} 
-  className="text-[18vw] font-black uppercase leading-none select-none absolute inset-0 flex items-center justify-center"
->
-  FRAGRANCE
-</span>
-
-  </div>
-
-  <div className="relative z-10 h-full max-w-[1400px] mx-auto flex items-center px-10">
-    
-    {/* 2. TEXT BLOCK (Forced White) */}
-    <div className="w-full md:w-1/2 space-y-8">
-      <div className="space-y-4">
-        <p className="!text-emerald-300 font-bold tracking-[0.5em] uppercase text-sm">
-          New Arrival 2025
-        </p>
         
-        {/* We use !text-white to stop any global black text rules */}
-        <h1 className="text-7xl md:text-9xl font-serif !text-white leading-[0.9] tracking-tighter">
-          Pure <br />
-          <span className="italic font-light !text-emerald-50">Essence</span>
-        </h1>
+          <div 
+  className="embla__slide flex-[0_0_100%] min-w-0 relative h-[650px] overflow-hidden"
+  style={{ 
+ 
+    background: 'linear-gradient(135deg, rgba(10, 20, 45, 1) 0%, rgba(20, 35, 75, 1) 50%, rgba(5, 10, 25, 1) 100%)' 
+  }}
+>
+  
+  <div className="absolute inset-0 flex items-center justify-center pointer-events-none overflow-hidden">
+    <span 
+      style={{ 
+        color: 'rgba(247, 231, 206, 0.05)', 
+        whiteSpace: 'nowrap' 
+      }} 
+      className="text-[15vw] font-black uppercase leading-none select-none tracking-tighter"
+    >
+      PRESTIGE
+    </span>
+  </div>
 
-        <p className="!text-white/80 text-xl max-w-sm font-light leading-relaxed border-l-2 border-emerald-400/40 pl-6">
-          Elevate your presence with a scent that defines luxury. Crafted for the modern connoisseur.
-        </p>
-      </div>
+  
+  <div 
+    className="absolute right-0 top-1/2 -translate-y-1/2 w-[600px] h-[600px] rounded-full pointer-events-none blur-[140px] mb-[20px]"
+    style={{ background: 'rgba(247, 231, 206, 0.12)' }} 
+  />
 
-      <div className="flex gap-4 pt-4">
-        <button className="px-10 py-5 bg-white !text-[#176767] font-bold uppercase text-xs tracking-widest hover:bg-black hover:!text-white transition-all duration-500 shadow-2xl">
-          Shop the Collection
-        </button>
-      </div>
+  <div className="relative z-20 h-full max-w-[1400px] mx-auto flex items-center px-10">
+    
+  <div className="w-full md:w-1/2 space-y-10 px-[20px] md:pl-[60px] relative z-30">
+  
+ 
+  <div className="space-y-4 animate-in fade-in slide-in-from-left duration-1000 mt-[40px]">
+    <div className="flex items-center gap-[4px] mb-[20px]">
+      <span className="w-12 h-[1px]" style={{ backgroundColor: 'rgba(247, 231, 206, 0.4)' }}></span>
+      <p className="font-bold tracking-[0.6em] uppercase text-xs md:text-sm" 
+         style={{ color: 'rgba(247, 231, 206, 0.9)' }}>
+        Édition Limitée 2025
+      </p>
     </div>
+    
+   
+    <h1 className="text-[70px] md:text-[130px] font-serif leading-[0.8] tracking-[-0.04em] !text-white flex flex-col">
 
-    {/* 3. IMAGE POSITIONED TO FAR RIGHT BOTTOM */}
-    <div className="absolute right-[20px] top-[10px] h-full w-[40%] z-10 flex items-end justify-end">
-    <img
-      src="/image/product9.jpg"
-      alt="Perfume Bottle"
-      className="
-        h-[95%] w-auto 
-        object-contain 
-        object-right-bottom
-        drop-shadow-[-40px_0px_80px_rgba(0,0,0,0.4)]
-      "
-    />
-  </div>
+  <span className="font-black uppercase tracking-normal">
+    Velvet
+  </span>
+  
 
-  </div>
+  <span className="font-extralight italic opacity-90 ml-[40px] md:ml-[80px] text-transparent bg-clip-text bg-gradient-to-r from-[#F7E7CE] via-white to-[#F7E7CE]">
+    Orchid
+  </span>
+  </h1>
+</div>
+
+ 
+  <div className="relative mt-[40px] group max-w-[500px]">
+ 
+  <div 
+    className="absolute left-0 top-[50%] translate-y-[-50%] w-[2px] h-[60px] transition-all duration-700 group-hover:h-full" 
+    style={{ backgroundColor: 'rgba(247, 231, 206, 0.6)' }}
+  ></div>
+
+  <p 
+    className="text-[20px] font-light leading-[1.6] pl-[35px] tracking-[0.02em] italic" 
+    style={{ 
+      color: 'rgba(255, 255, 255, 0.8)',
+    }}
+  >
+    "Une signature olfactive audacieuse. Conçue pour captiver les sens et laisser une empreinte indélébile dans les mémoires."
+  </p>
 </div>
 
 
-          {/* ================= SLIDE 2 ================= */}
-          <div className="embla__slide flex-[0_0_100%] min-w-0 bg-[#0f3f3f]">
-             <div className="max-w-[1400px] mx-auto grid grid-cols-1 md:grid-cols-2 min-h-[600px] items-center px-10">
-                <div className="text-white">
-                   <h2 className="text-7xl font-serif italic">New Arrivals</h2>
-                   <p className="mt-4 text-white/60">Limited Edition Seasonal Scents</p>
-                </div>
-                <div className="h-full bg-white/5 border-l border-white/10 flex items-center justify-center">
-                   <span className="text-white/20 text-9xl font-bold">2025</span>
-                </div>
-             </div>
-          </div>
 
-        </div>
-      </div>
-    </section>
+  <div className="flex gap-[6px] pt-[6px] items-center">
+    <button className="group relative overflow-hidden px-[12px] py-[5px] bg-[#F7E7CE] text-[#0A142D] font-bold uppercase text-xs tracking-[0.2em] transition-all duration-500 hover:pr-[16px] active:scale-95 shadow-[0_20px_50px_rgba(0,0,0,0.3)] border-none border rounded-[18px]"
+       >
+      <span className="relative z-10">Découvrir l'univers</span>
+      <span className="absolute right-[4px] top-1/2 -translate-y-1/2 opacity-0 group-hover:opacity-100 transition-all duration-500 translate-x-2 group-hover:translate-x-0">
+        →
+      </span>
+    </button>
+    
+  
+    <button className="text-white/50 hover:text-white text-xs uppercase tracking-widest font-semibold transition-colors border-none border-white/20 pb-[1px] px-[12px] py-[5px] rounded-[18px]">
+      Voir les notes
+    </button>
+  </div>
+
+</div>
+
+    
+    <div className="absolute right-[0px] bottom-[0px] h-full w-[45%] z-10 flex items-end justify-end overflow-visible">
+      <img
+        src="/image/product10.png"
+        alt="Luxury Perfume"
+        className="
+          h-[92%] w-auto 
+          object-contain 
+          object-right-bottom
+          drop-shadow-[-50px_20px_100px_rgba(0,0,0,0.8)]
+          transition-transform duration-1000 hover:scale-105
+        "
+      />
+    </div>
+
+  </div>
+</div>
+<div className="embla__slide flex-[0_0_100%] min-w-0 bg-[#E5E7EB] relative h-[650px] overflow-hidden">
+  
+  <div className="absolute right-[-10%] top-0 h-full w-[50%] z-0 opacity-60">
+    <img 
+      src="/image/bgra.jpeg" 
+      alt="background" 
+      className="w-full h-full object-cover" 
+      
+    />
+  </div>
+
+
+  <div className="absolute inset-0 flex items-center justify-center pointer-events-none z-10">
+    <span 
+      className="text-[15vw] font-black uppercase leading-none select-none tracking-tighter text-white drop-shadow-2xl"
+    >
+      SMILE GOOD
+    </span>
+  </div>
+
+  <div className="relative z-20 h-full flex items-center px-10">
+    <div className="max-w-xl">
+       <h2 className="text-6xl font-serif text-slate-900">New arrivals</h2>
+       <p className="text-slate-700 mt-4 font-medium">Limited Edition 2025</p>
+    </div>
+  </div>
+</div>
+
+</div>
+</div>
+</section>
   );
 }
