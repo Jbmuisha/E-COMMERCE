@@ -164,9 +164,9 @@ export default function Home() {
         </div>
       </section>
 
-     {/* ================= BRAND SLIDER ================= */}
-     {/* ================= BRAND SLIDER ================= */}
-     <section className="w-full bg-white py-12 overflow-hidden border-y border-gray-100">
+   
+     {/* ================= FOR MY PRIDER SLIDER ================= */}
+     <section className="w-full bg-white py-12 overflow-hidden border-y border-gray-100 mb-[40] mt-[40px]">
         <div className="relative max-w-[1400px] mx-auto">
           
         
@@ -190,6 +190,10 @@ export default function Home() {
             ))}
           </div>
         </div>
+      </section>
+
+      <section>
+        {/* AI RECOMMENDATION PLACE */}
       </section>
 
 

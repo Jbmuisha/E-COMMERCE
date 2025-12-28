@@ -75,7 +75,7 @@ export default function RootLayout({ children }: RootLayoutProps) {
         <main className="pt-[100px]">{children}</main>
 
         {/* Footer */}
-        <footer className="bg-white py-10 text-center text-[10px] font-bold tracking-widest text-gray-400 uppercase">
+        <footer className="bg-white py-10 text-center text-[10px] font-bold tracking-widest text-gray-400 uppercase mb-[20px]">
           &copy; 2025 jboy — All Rights Reserved.
         </footer>
       </body>
