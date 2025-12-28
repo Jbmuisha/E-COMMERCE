@@ -1,5 +1,5 @@
 import HeroCarosel from "@/component/home";
-import { Heart, SlidersHorizontal } from "lucide-react";
+import { Heart, SlidersHorizontal ,Image } from "lucide-react";
 
 export default function Home() {
   const products = [
@@ -52,6 +52,10 @@ export default function Home() {
       price: "299.00€",
     },
   ];
+  const Image=[{
+    id :1 ,
+    image:""
+  }]
 
   return (
     <main className="w-full bg-gray-50 min-h-screen">
@@ -151,6 +155,26 @@ export default function Home() {
               </div>
             ))}
           </div>
+        </div>
+      </section>
+
+      <section>
+        <div className=" carrosel_bround"> 
+          <div className="groupe_of_image">
+            {Image.map((img =>
+            <div key={img.id}>
+              
+
+            </div>
+
+
+
+            ))}
+          
+
+          </div>
+
+
         </div>
       </section>
     </main>
