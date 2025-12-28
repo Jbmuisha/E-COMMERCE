@@ -104,6 +104,24 @@ header input[type="text"]:focus {
   box-shadow: 0 0 0 2px rgba(0,0,0,0.1);
 }
 
+@keyframes scrollCustom {
+  0% { transform: translateX(0); }
+  100% { transform: translateX(calc(-250px * 8)); }
+}
+
+
+.slide-track-custom {
+  display: flex;
+  width: calc(250px * 16); 
+  animation: scrollCustom 40s linear infinite;
+}
+
+
+.slide-track-custom:hover {
+  animation-play-state: paused;
+}
+
+
 /* ------------------ Mobile ------------------ */
 @media (max-width: 768px) {
   nav {

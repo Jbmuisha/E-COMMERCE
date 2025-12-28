@@ -1,5 +1,5 @@
 import HeroCarosel from "@/component/home";
-import { Heart, SlidersHorizontal ,Image } from "lucide-react";
+import { Heart, SlidersHorizontal  } from "lucide-react";
 
 export default function Home() {
   const products = [
@@ -52,10 +52,16 @@ export default function Home() {
       price: "299.00€",
     },
   ];
-  const Image=[{
-    id :1 ,
-    image:""
-  }]
+  const logos = [
+    { id: 1, image: "/image/ajmal .webp" },
+    { id: 2, image: "/image/chanel.svg" },
+    { id: 3, image: "/image/dior.png" },
+    { id: 4, image: "/image/kalvin.png" },
+    { id: 5, image: "/image/lafata.webp" },
+    { id: 6, image: "/image/blackopium.png" },
+    { id: 7, image: "/image/haramain.png" },
+    { id: 8, image: "/image/afana.webp" }
+  ];
 
   return (
     <main className="w-full bg-gray-50 min-h-screen">
@@ -158,25 +164,35 @@ export default function Home() {
         </div>
       </section>
 
-      <section>
-        <div className=" carrosel_bround"> 
-          <div className="groupe_of_image">
-            {Image.map((img =>
-            <div key={img.id}>
-              
-
-            </div>
-
-
-
-            ))}
+     {/* ================= BRAND SLIDER ================= */}
+     {/* ================= BRAND SLIDER ================= */}
+     <section className="w-full bg-white py-12 overflow-hidden border-y border-gray-100">
+        <div className="relative max-w-[1400px] mx-auto">
           
+        
+          <div className="absolute inset-y-0 left-0 w-40 bg-gradient-to-r from-white to-transparent z-10 pointer-events-none"></div>
+          <div className="absolute inset-y-0 right-0 w-40 bg-gradient-to-l from-white to-transparent z-10 pointer-events-none"></div>
 
+         
+          <div className="slide-track-custom">
+          
+            {[...logos, ...logos].map((img, index) => (
+              <div
+                key={index}
+                className="flex w-[250px] h-[100px] items-center justify-center px-8 flex-shrink-0"
+              >
+                <img
+                  src={img.image}
+                  alt="brand logo"
+                  className="max-h-full max-w-full object-contain grayscale hover:grayscale-0 transition-all duration-300"
+                />
+              </div>
+            ))}
           </div>
-
-
         </div>
       </section>
+
+
     </main>
   );
 }
