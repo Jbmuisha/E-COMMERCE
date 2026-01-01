@@ -122,26 +122,24 @@ export default function Home() {
         </div>
       </section>
 
-      {/* ================= AI RECOMMENDATION CAROUSEL ================= */}
+  
       <section
-        className="w-full py-16 overflow-hidden"
+        className="w-full py-[16] overflow-hidden mb-[40px] mt-[20px]"
         style={{ background: "linear-gradient(180deg, #F6F1EB 0%, #F3ECE5 100%)" }}
       >
         <div className="w-full max-w-[1400px] mx-auto px-4">
-          {/* Header */}
-          <div className="mb-16 max-w-xl">
-            <p className="text-[10px] tracking-[0.45em] uppercase text-gray-400 mb-[20px]">
-              AI CURATED
-            </p>
-            <h2 className="text-3xl md:text-4xl font-black">Sélection intelligente pour vous</h2>
+        
+          <div className="mb-16 max-w-xl mb-[20px] mt-[20px]">
+          
+            <h2 className="text-3xl md:text-4xl font-black"> Recommanded for you </h2>
           </div>
 
         
-          <div className="relative w-full group">
+          <div className="relative w-full group overflow-hidden">
            
             <div
               ref={carouselRef}
-              className="flex gap-[10] overflow-x-auto scroll-smooth snap-x snap-mandatory no-scrollbar pb-10"
+              className="flex gap-[10] overflow-x-auto scroll-smooth snap-x snap-mandatory no-scrollbar pb-10 mb-[20px]"
             >
               {[0, 2, 4, 6].map((startIndex) => (
                 <div
@@ -155,9 +153,8 @@ export default function Home() {
                         index === 1 ? "mt-16" : ""
                       }`}
                     >
-                      <span className="text-[9px] tracking-[0.35em] uppercase text-gray-400 mb-6 block">
-                        AI Pick
-                      </span>
+                     
+
                       <div className="h-[260px] flex items-center justify-center mb-8">
                         <img
                           src={item.image}
