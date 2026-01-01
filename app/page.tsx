@@ -1,57 +1,20 @@
+"use client";
 import HeroCarosel from "@/component/home";
-import { Heart, SlidersHorizontal  } from "lucide-react";
+import { useRef } from "react";
+import { Heart, SlidersHorizontal, ChevronLeft, ChevronRight } from "lucide-react";
 
 export default function Home() {
   const products = [
-    {
-      id: 1,
-      image: "/image/product1.webp",
-      itemDetails: "Chaussures de sport",
-      price: "85.00€",
-    },
-    {
-      id: 2,
-      image: "/image/product2.jpeg",
-      itemDetails: "Montre connectée",
-      price: "199.00€",
-    },
-    {
-      id: 3,
-      image: "/image/product2.jpg",
-      itemDetails: "Sac à dos",
-      price: "45.00€",
-    },
-    {
-      id: 4,
-      image: "/image/product 4.webp",
-      itemDetails: "Casque Audio",
-      price: "120.00€",
-    },
-    {
-      id: 5,
-      image: "/image/product 5.webp",
-      itemDetails: "Clavier RGB",
-      price: "75.00€",
-    },
-    {
-      id: 6,
-      image: "/image/product 7.png",
-      itemDetails: "Souris Gamer",
-      price: "55.00€",
-    },
-    {
-      id: 7,
-      image: "/image/product8.png",
-      itemDetails: "Écran 4K",
-      price: "350.00€",
-    },
-    {
-      id: 8,
-      image: "/image/product9.jpg",
-      itemDetails: "Bureau Setup",
-      price: "299.00€",
-    },
+    { id: 1, image: "/image/product1.webp", itemDetails: "Chaussures de sport", price: "85.00€" },
+    { id: 2, image: "/image/product2.jpeg", itemDetails: "Montre connectée", price: "199.00€" },
+    { id: 3, image: "/image/product2.jpg", itemDetails: "Sac à dos", price: "45.00€" },
+    { id: 4, image: "/image/product 4.webp", itemDetails: "Casque Audio", price: "120.00€" },
+    { id: 5, image: "/image/product 5.webp", itemDetails: "Clavier RGB", price: "75.00€" },
+    { id: 6, image: "/image/product 7.png", itemDetails: "Souris Gamer", price: "55.00€" },
+    { id: 7, image: "/image/product8.png", itemDetails: "Écran 4K", price: "350.00€" },
+    { id: 8, image: "/image/product9.jpg", itemDetails: "Bureau Setup", price: "299.00€" },
   ];
+
   const logos = [
     { id: 1, image: "/image/ajmal .webp" },
     { id: 2, image: "/image/chanel.svg" },
@@ -62,6 +25,17 @@ export default function Home() {
     { id: 7, image: "/image/haramain.png" },
     { id: 8, image: "/image/afana.webp" }
   ];
+
+  const carouselRef = useRef<HTMLDivElement>(null);
+
+  const scrollCarousel = (direction: "left" | "right") => {
+    if (!carouselRef.current) return;
+    const width = carouselRef.current.offsetWidth;
+    carouselRef.current.scrollBy({
+      left: direction === "left" ? -width : width,
+      behavior: "smooth",
+    });
+  };
 
   return (
     <main className="w-full bg-gray-50 min-h-screen">
@@ -76,19 +50,15 @@ export default function Home() {
       <section className="w-full">
         <div className="w-full max-w-[1400px] mx-auto px-4">
           <div className="flex justify-between items-center border-b pb-6 mb-10">
-            {/* Left */}
-            <button className="flex items-center gap-2 text-sm font-semibold text-gray-600 hover:text-black transition  bg-transparent border-none">
+            <button className="flex items-center gap-2 text-sm font-semibold text-gray-600 hover:text-black transition bg-transparent border-none">
               <SlidersHorizontal size={16} />
               Filtrer
             </button>
-
-            {/* Right */}
             <div className="flex gap-8">
               {["ALL PERFUMS", "WOMEN'S", "MEN'S"].map((item) => (
                 <button
                   key={item}
-                  className="text-[11px] font-black tracking-[0.25em] text-gray-400 hover:text-black transition uppercase mr-[30px] px-[6px] py-[7px] border-none"
-
+                  className="text-[11px] font-black tracking-[0.25em] text-gray-400 hover:text-black transition uppercase px-2 py-1 border-none"
                 >
                   {item}
                 </button>
@@ -101,60 +71,26 @@ export default function Home() {
       {/* ================= PRODUCTS ================= */}
       <section className="w-full">
         <div className="w-full max-w-[1400px] mx-auto px-4 pb-24">
-        
           <div className="grid grid-cols-4 sm:grid-cols-2 lg:grid-cols-4 gap-[30px] mt-[70px]">
             {products.map((item) => (
               <div
                 key={item.id}
                 className="group bg-white rounded-2xl overflow-hidden transition-all duration-300 hover:shadow-xl"
               >
-             
                 <div className="relative h-[280px] bg-[#FAFAFA] flex items-center justify-center">
                   <img
                     src={item.image}
                     alt={item.itemDetails}
                     className="max-h-[75%] object-contain transition-transform duration-500 group-hover:scale-110"
                   />
-
-                
-                  <button className="absolute top-[20px] right-[20px] p-[2px] rounded-full bg-transparent shadow hover:text-red-500  hover:bg-red transition border-none">
-                     <Heart size={25} />
+                  <button className="absolute top-[20px] right-[20px] p-[2px] rounded-full bg-transparent shadow hover:text-red-500 hover:bg-red transition border-none">
+                    <Heart size={25} />
                   </button>
                 </div>
-
-               
                 <div className="p-5">
-                  <p className="text-sm text-gray-500 mb-2">
-                    {item.itemDetails}
-                  </p>
-
-                  <span
-                    className="text-xl 
-                  font-black text-gray-900"
-                  >
-                    {item.price}
-                  </span>
-                  <button
-                    className="
-    mt-6
-    w-full
-    h-[46px]
-    rounded-xl
-    border
-    border-black
-    text-black
-    text-sm
-    font-semibold
-    tracking-wide
-    bg-transparent
-    opacity-0
-    group-hover:opacity-100
-    transition-all
-    duration-300
-    hover:bg-black-500
-    hover:text-white
-  "
-                  >
+                  <p className="text-sm text-gray-500 mb-2">{item.itemDetails}</p>
+                  <span className="text-xl font-black text-gray-900">{item.price}</span>
+                  <button className="mt-6 w-full h-[46px] rounded-xl border border-black text-black text-sm font-semibold tracking-wide bg-transparent opacity-0 group-hover:opacity-100 transition-all duration-300 hover:bg-black-500 hover:text-white">
                     Ajouter au panier
                   </button>
                 </div>
@@ -164,18 +100,12 @@ export default function Home() {
         </div>
       </section>
 
-   
-     {/* ================= FOR MY PRIDER SLIDER ================= */}
-     <section className="w-full bg-white py-12 overflow-hidden border-y border-gray-100 mb-[40] mt-[40px]">
+      {/* ================= BRAND SLIDER ================= */}
+      <section className="w-full bg-white py-12 overflow-hidden border-y border-gray-100 my-10">
         <div className="relative max-w-[1400px] mx-auto">
-          
-        
-          <div className="absolute inset-y-0 left-0 w-40 bg-gradient-to-r from-white to-transparent z-10 pointer-events-none"></div>
-          <div className="absolute inset-y-0 right-0 w-40 bg-gradient-to-l from-white to-transparent z-10 pointer-events-none"></div>
-
-         
-          <div className="slide-track-custom">
-          
+          <div className="absolute inset-y-0 left-0 w-40 bg-gradient-to-r from-white to-transparent z-10 pointer-events-none" />
+          <div className="absolute inset-y-0 right-0 w-40 bg-gradient-to-l from-white to-transparent z-10 pointer-events-none" />
+          <div className="slide-track-custom flex gap-8">
             {[...logos, ...logos].map((img, index) => (
               <div
                 key={index}
@@ -192,11 +122,78 @@ export default function Home() {
         </div>
       </section>
 
-      <section>
-        {/* AI RECOMMENDATION PLACE */}
+      {/* ================= AI RECOMMENDATION CAROUSEL ================= */}
+      <section
+        className="w-full py-16 overflow-hidden"
+        style={{ background: "linear-gradient(180deg, #F6F1EB 0%, #F3ECE5 100%)" }}
+      >
+        <div className="w-full max-w-[1400px] mx-auto px-4">
+          {/* Header */}
+          <div className="mb-16 max-w-xl">
+            <p className="text-[10px] tracking-[0.45em] uppercase text-gray-400 mb-[20px]">
+              AI CURATED
+            </p>
+            <h2 className="text-3xl md:text-4xl font-black">Sélection intelligente pour vous</h2>
+          </div>
+
+        
+          <div className="relative w-full group">
+           
+            <div
+              ref={carouselRef}
+              className="flex gap-[10] overflow-x-auto scroll-smooth snap-x snap-mandatory no-scrollbar pb-10"
+            >
+              {[0, 2, 4, 6].map((startIndex) => (
+                <div
+                  key={startIndex}
+                  className="snap-start flex gap-[8px] min-w-[760px] flex-shrink-0"
+                >
+                  {products.slice(startIndex, startIndex + 2).map((item, index) => (
+                    <div
+                      key={item.id}
+                      className={`w-1/2 bg-white rounded-[32px] p-8 transition-all duration-500 hover:-translate-y-2 hover:shadow-2xl ${
+                        index === 1 ? "mt-16" : ""
+                      }`}
+                    >
+                      <span className="text-[9px] tracking-[0.35em] uppercase text-gray-400 mb-6 block">
+                        AI Pick
+                      </span>
+                      <div className="h-[260px] flex items-center justify-center mb-8">
+                        <img
+                          src={item.image}
+                          alt={item.itemDetails}
+                          className="max-h-full object-contain transition-transform duration-500 hover:scale-105"
+                        />
+                      </div>
+                      <p className="text-sm text-gray-500 mb-2">{item.itemDetails}</p>
+                      <p className="text-2xl font-black mb-6">{item.price}</p>
+                      <button className="mt-6 w-full h-[46px] rounded-xl border border-black text-black text-sm font-semibold tracking-wide bg-transparent opacity-0 group-hover:opacity-100 transition-all duration-300 hover:bg-black-500 hover:text-white ">
+                        Découvrir
+                      </button>
+                    </div>
+                  ))}
+                </div>
+              ))}
+            </div>
+
+           
+            <button
+              onClick={() => scrollCarousel("left")}
+              className="absolute left-[4px] top-1/2 -translate-y-1/2 w-12 h-12 rounded-full bg-white/80 backdrop-blur shadow-lg flex items-center justify-center z-20 opacity-0 group-hover:opacity-100 transition"
+            >
+              <ChevronLeft className="w-5 h-5 text-gray-800" />
+            </button>
+
+   
+            <button
+              onClick={() => scrollCarousel("right")}
+              className="absolute right-[4px] top-1/2 -translate-y-1/2 w-12 h-12 rounded-full bg-white/80 backdrop-blur shadow-lg flex items-center justify-center z-20 opacity-0 group-hover:opacity-100 transition"
+            >
+              <ChevronRight className="w-5 h-5 text-gray-800" />
+            </button>
+          </div>
+        </div>
       </section>
-
-
     </main>
   );
 }
