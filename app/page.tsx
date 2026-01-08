@@ -41,24 +41,24 @@ export default function Home() {
     <main className="w-full bg-gray-50 min-h-screen">
       {/* ================= HERO ================= */}
       <section className="w-full mt-[80px]">
-        <div className="w-full max-w-[1400px] mx-auto px-4 mb-24">
+        <div className="w-full max-w-[1400px] mx-auto px-[4] mb-[24]">
           <HeroCarosel />
         </div>
       </section>
 
       {/* ================= FILTER BAR ================= */}
       <section className="w-full">
-        <div className="w-full max-w-[1400px] mx-auto px-4">
-          <div className="flex justify-between items-center border-b pb-6 mb-10">
-            <button className="flex items-center gap-2 text-sm font-semibold text-gray-600 hover:text-black transition bg-transparent border-none">
+        <div className="w-full max-w-[1400px] mx-auto px-[4]">
+          <div className="flex justify-between items-center border-b pb-6 mb-[10]">
+            <button className="flex items-center gap-[2] text-sm font-semibold text-gray-600 hover:text-black transition bg-transparent border-none">
               <SlidersHorizontal size={16} />
               Filtrer
             </button>
-            <div className="flex gap-8">
+            <div className="flex gap-[8]">
               {["ALL PERFUMS", "WOMEN'S", "MEN'S"].map((item) => (
                 <button
                   key={item}
-                  className="text-[11px] font-black tracking-[0.25em] text-gray-400 hover:text-black transition uppercase px-2 py-1 border-none"
+                  className="text-[11px] font-black tracking-[0.25em] text-gray-400 hover:text-black transition uppercase px-[2] py-[1] border-none"
                 >
                   {item}
                 </button>
@@ -70,7 +70,7 @@ export default function Home() {
 
       {/* ================= PRODUCTS ================= */}
       <section className="w-full">
-        <div className="w-full max-w-[1400px] mx-auto px-4 pb-24">
+        <div className="w-full max-w-[1400px] mx-auto px-[4] pb-24">
           <div className="grid grid-cols-4 sm:grid-cols-2 lg:grid-cols-4 gap-[30px] mt-[70px]">
             {products.map((item) => (
               <div
@@ -101,7 +101,7 @@ export default function Home() {
       </section>
 
       {/* ================= BRAND SLIDER ================= */}
-      <section className="w-full bg-white py-12 overflow-hidden border-y border-gray-100 my-10">
+      <section className="w-full bg-white py-[12] overflow-hidden border-y border-gray-100 my-[10]">
         <div className="relative max-w-[1400px] mx-auto">
           <div className="absolute inset-y-0 left-0 w-40 bg-gradient-to-r from-white to-transparent z-10 pointer-events-none" />
           <div className="absolute inset-y-0 right-0 w-40 bg-gradient-to-l from-white to-transparent z-10 pointer-events-none" />
@@ -191,6 +191,36 @@ export default function Home() {
           </div>
         </div>
       </section>
+      <section className="w-full py-[32] bg-white">
+  <div className="max-w-[1400px] mx-auto px-[4] grid grid-cols-2 md:grid-cols-2 gap-[20] items-center">
+
+   
+    <div className="h-[520px] rounded-[32px] bg-gradient-to-br from-[#EFE9E3] to-[#E5DED7] flex items-center justify-center">
+      <span className="text-6xl font-black text-gray-300">ESSENCE</span>
+    </div>
+
+   
+    <div>
+      <p className="text-xs tracking-[0.35em] uppercase text-gray-400 mb-[4]">
+        Featured Selection
+      </p>
+      <h3 className="text-4xl font-black mb-[6]">
+        Timeless Fragrance
+      </h3>
+      <p className="text-gray-500 mb-[8] max-w-md">
+        A refined scent crafted for everyday elegance.
+      </p>
+      <p className="text-3xl font-black mb-[8]">199.00€</p>
+
+      <button className="h-[48px] px-[10] rounded-xl border border-black font-semibold hover:bg-black hover:text-white transition">
+        Discover
+      </button>
+    </div>
+
+  </div>
+</section>
+
+
     </main>
   );
 }
