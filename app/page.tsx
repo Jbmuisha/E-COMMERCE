@@ -71,7 +71,7 @@ export default function Home() {
       {/* ================= PRODUCTS ================= */}
       <section className="w-full">
         <div className="w-full max-w-[1400px] mx-auto px-[4] pb-24">
-          <div className="grid grid-cols-4 sm:grid-cols-2 lg:grid-cols-4 gap-[30px] mt-[70px]">
+          <div className="grid grid-cols-4 sm:grid-cols-2 lg:grid-cols-2 gap-[30px] mt-[70px]">
             {products.map((item) => (
               <div
                 key={item.id}

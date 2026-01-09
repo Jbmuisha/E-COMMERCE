@@ -3,7 +3,7 @@ import { useState, useEffect, ReactNode } from "react";
 import Link from "next/link";
 import "./globals.css";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faUser, faCartShopping } from "@fortawesome/free-solid-svg-icons";
+import { faUser, faCartShopping, faSearch ,faBars } from "@fortawesome/free-solid-svg-icons";
 import { faInstagram, faFacebookF, faXTwitter } from "@fortawesome/free-brands-svg-icons";
 
 
@@ -25,94 +25,96 @@ export default function RootLayout({ children }: RootLayoutProps) {
       <body className="antialiased bg-gray-50">
         
       <header
-  className={`fixed top-0 left-0 w-full h-[100px] flex justify-center items-center bg-white transition-shadow duration-300 z-50`}
+  className={`header-container fixed top-0 left-0 w-full h-[100px] flex justify-center items-center bg-white transition-shadow duration-300 z-50`}
   style={{
     boxShadow: scrolled ? "rgba(0, 0, 0, 0.15) 0px 5px 15px" : "none",
   }}
 >
-  <div className="max-w-[1400px] w-full mx-auto px-[24px] flex items-center justify-between">
+  <div className="header-inner max-w-[1400px] w-full mx-auto px-[24px] flex items-center justify-between">
 
-    {/* Logo */}
-    <div className="flex items-center">
+
+    <div className="logo flex items-start">
       <img src="/image/parfum copie 2.png" alt="Logo" className="w-[120px] h-auto"/>
     </div>
 
-  
-    <nav className="hidden md:flex items-center gap-[32px] font-bold text-[12px] tracking-[0.15em] uppercase text-gray-500">
-
-      <Link href="/" className="hover:text-black transition">Home</Link>
-
-      
-      <div className="relative group">
-        <button className="flex items-center gap-[4px] hover:text-black transition">
-          Product
-          <span className="text-[10px]">▼</span>
-        </button>
-
-        <div className="absolute top-[100%] left-0 w-[480px] bg-white shadow-lg rounded-[12px] p-[16px] opacity-0 group-hover:opacity-100 transition-opacity duration-300 z-50">
-          <div className="grid grid-cols-2 gap-[16px]">
-
-            <div>
-              <h5 className="font-black text-[10px] mb-[8px]">Women</h5>
-              <ul className="space-y-[8px]">
-                <li><Link href="/product/women/perfumes" className="hover:text-black transition">Perfumes</Link></li>
-                <li><Link href="/product/women/gifts" className="hover:text-black transition">Gift Sets</Link></li>
-              </ul>
-            </div>
-
-            <div>
-              <h5 className="font-black text-[10px] mb-[8px]">Men</h5>
-              <ul className="space-y-[8px]">
-                <li><Link href="/product/men/perfumes" className="hover:text-black transition">Perfumes</Link></li>
-                <li><Link href="/product/men/gifts" className="hover:text-black transition">Gift Sets</Link></li>
-              </ul>
-            </div>
-
-          </div>
-        </div>
+ 
+    <div className="search-wrapper flex items-center">
+      <div className="relative">
+        <input
+          type="product"
+          placeholder="search your parfum"
+          className="search-input w-[540px] h-[44px] pl-[18px] pr-[42px] rounded-full border border-gray-200 bg-white text-sm text-gray-700 placeholder-gray-400 outline-none transition focus:border-black"
+        />
+        <FontAwesomeIcon
+          icon={faSearch}
+          className="search-icon absolute right-[25px] top-1/2 -translate-y-1/2 text-gray-400 text-[14px] pointer-events-none mr-[6px] "
+        />
       </div>
+    </div>
 
+  
+    <nav className="desktop-menu hidden md:flex items-center gap-[32px] font-bold text-[12px] tracking-[0.15em] uppercase text-gray-500">
+      <Link href="/" className="hover:text-black transition">Home</Link>
+      <Link  href="/"  className="hover:text-black transition"> Shipping & Returns</Link>
       <Link href="/about" className="hover:text-black transition">About Us</Link>
       <Link href="/contact" className="hover:text-black transition">Contact</Link>
-
     </nav>
 
-    
-    <div className="flex items-center gap-[24px]">
 
-     
-      <div className="relative">
+    <div className="header-actions flex items-center gap-[24px]">
+      <div className="user-icon relative">
         <FontAwesomeIcon
           icon={faUser}
           className="w-[20px] h-[20px] cursor-pointer hover:text-gray-600 transition"
         />
       </div>
 
-     
-      <div className="relative">
+      <div className="cart-icon relative">
         <FontAwesomeIcon
           icon={faCartShopping}
           className="w-[20px] h-[20px] cursor-pointer hover:text-gray-600 transition"
         />
-        <span className="absolute -top-[4px] -right-0 bg-red-500 text-white text-[10px] font-bold px-[4px] py-[1px] rounded-full">
+        <span className="cart-count absolute -top-[4px] -right-0 bg-red-500 text-white text-[10px] font-bold px-[4px] py-[1px] rounded-full">
           3
         </span>
       </div>
 
-     
-      <select className="bg-transparent font-bold text-[10px] outline-none cursor-pointer">
+      <select className="lang-select bg-transparent font-bold text-[10px] outline-none cursor-pointer">
         <option>FR</option>
         <option>EN</option>
       </select>
-
     </div>
-
   </div>
 </header>
 
+<div className="sub-header fixed top-[100px] left-0 w-full h-[44px] bg-[#E5E7EB] border-b border-gray-200 z-40">
+  <div className="sub-header-inner max-w-[1400px] mx-auto px-[24px] h-full flex items-center gap-[28px]">
+    <div className="all-menu relative group cursor-pointer">
+      <div className="flex items-center gap-[6px] font-bold uppercase text-[12px] tracking-wide hover:text-black transition">
+        <FontAwesomeIcon icon={faBars} className="w-[14px] h-[14px]" />
+        All
+      </div>
+
+      <div className="mega-menu absolute top-[100%] left-0 w-[480px] bg-white shadow-lg rounded-[12px] p-[16px] opacity-0 group-hover:opacity-100 transition-opacity duration-300 z-50">
+     
+      </div>
+    </div>
+
+    <Link href="/new" className="sub-link">New</Link>
+    <Link href="/women" className="sub-link">Women</Link>
+    <Link href="/men" className="sub-link">Men</Link>
+    <Link href="/gifts" className="sub-link">Gift Sets</Link>
+    <Link href="/best" className="sub-link">Best Sellers</Link>
+    <Link href="/offers" className="sub-link text-red-600 hover:text-red-700 transition">Offers</Link>
+  </div>
+</div>
+
+
+
+
 
        
-        <main className="pt-[100px]">{children}</main>
+ <main className="pt-[100px]">{children}</main>
 <footer className="bg-[#F6F1EB] border-t border-gray-100">
 
 
