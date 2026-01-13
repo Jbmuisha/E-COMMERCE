@@ -101,7 +101,7 @@ export default function RootLayout({ children }: RootLayoutProps) {
     </div>
 
     <Link href="/new" className="sub-link">New</Link>
-    <Link href="/women" className="sub-link">Women</Link>
+    <Link href="/femme" className="sub-link">Women</Link>
     <Link href="/homme" className="sub-link">Men</Link>
     <Link href="/gifts" className="sub-link">Gift Sets</Link>
     <Link href="/best" className="sub-link">Best Sellers</Link>
