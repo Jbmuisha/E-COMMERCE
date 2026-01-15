@@ -52,7 +52,7 @@ export default function BestSeller() {
                     </div>
 
                  
-                    )}
+                 )}
 
                 </div>
 
