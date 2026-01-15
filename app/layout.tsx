@@ -5,12 +5,9 @@ import "./globals.css";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faUser, faCartShopping, faSearch ,faBars } from "@fortawesome/free-solid-svg-icons";
 import { faInstagram, faFacebookF, faXTwitter } from "@fortawesome/free-brands-svg-icons";
-
-
 interface RootLayoutProps {
   children: ReactNode;
 }
-
 export default function RootLayout({ children }: RootLayoutProps) {
   const [scrolled, setScrolled] = useState(false);
 
@@ -19,11 +16,9 @@ export default function RootLayout({ children }: RootLayoutProps) {
     window.addEventListener("scroll", handleScroll);
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
-
   return (
     <html lang="fr">
       <body className="antialiased bg-gray-50">
-        
       <header
   className={`header-container fixed top-0 left-0 w-full h-[100px] flex justify-center items-center bg-white transition-shadow duration-300 z-50`}
   style={{
@@ -31,13 +26,9 @@ export default function RootLayout({ children }: RootLayoutProps) {
   }}
 >
   <div className="header-inner max-w-[1400px] w-full mx-auto px-[24px] flex items-center justify-between">
-
-
     <div className="logo flex items-start">
       <img src="/image/parfum copie 2.png" alt="Logo" className="w-[120px] h-auto"/>
     </div>
-
- 
     <div className="search-wrapper flex items-center">
       <div className="relative">
         <input
@@ -103,8 +94,8 @@ export default function RootLayout({ children }: RootLayoutProps) {
     <Link href="/new" className="sub-link">New</Link>
     <Link href="/femme" className="sub-link">Women</Link>
     <Link href="/homme" className="sub-link">Men</Link>
-    <Link href="/gifts" className="sub-link">Gift Sets</Link>
-    <Link href="/best" className="sub-link">Best Sellers</Link>
+    <Link href="/" className="sub-link">Gift Sets</Link>
+    <Link href="/bestSeller" className="sub-link">Best Sellers</Link>
     <Link href="/offers" className="sub-link text-red-600 hover:text-red-700 transition">Offers</Link>
   </div>
 </div>

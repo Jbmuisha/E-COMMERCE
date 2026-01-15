@@ -1,3 +1,4 @@
+"use client";
 import { Repeat } from "lucide-react";
 import { useState,useEffect } from "react"
 export default function BestSeller() {
@@ -23,9 +24,6 @@ export default function BestSeller() {
         return()=>window.removeEventListener("resize",updateAllColumn);
 
     })
-    
-
-
     return(
 
         <main className="w-full bg-gray-500 mb-[40px] mt-[40px]">
@@ -33,18 +31,27 @@ export default function BestSeller() {
                 <div
                  style={{
                     display:'grid',
-                    gridTemplateColumns :  `repeat(${columns}, minmax(0, 1fr))`,
+                    gridTemplateColumns :`repeat(${columns}, minmax(0, 1fr))`,
                     gap:'20px'
                  }}>
-                    {bestProducts.map((bestsellProduct)=>
-                    <div key={bestsellProduct.id} className="flex flex-col border-[1px] rounded-[10px] p-[12px] bg-white" >
+                    
+                {bestProducts.map((bestsellProduct)=>
+                 <div className="flex flex-col border-[1px] rounded-[10px] p-[12px] bg-white">
+                      <div key={bestsellProduct.id}  className="w-full overflow-hidden rounded-[8px] bg-[#f0f0f0]" >
                         <img src={bestsellProduct.image} 
                          alt={bestsellProduct.itemDetails}
                          className="w-full h-full object-cover"
                         />
+                 </div>
+                    <div className="mt-[10px] flex flex-col flex-grow">
+                        <p className="text-[14px] font-semibold text-[#444]">{bestsellProduct.itemDetails}</p>
+                        <span className="text-[18px] font-bold my-[5px] text-black">{bestsellProduct.price}</span>
+                        <button className="mt-auto w-full bg-black text-white py-[8px] rounded-[5px]"> ajouter</button>
+
+                    </div>
                     </div>
 
-                   
+                 
                     )}
 
                 </div>
