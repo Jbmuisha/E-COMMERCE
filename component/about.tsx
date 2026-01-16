@@ -20,12 +20,19 @@ export default function AboutPage() {
         </div>
       </section>
 
-      <section className="max-w-[1400px] mx-auto px-[6] mt-[20] mb-[80px]">
-  <div className="grid grid-cols-2  gap-[16] items-center">
 
-    
+<section className=" aboutdetail max-w-[1400px] mx-auto px-[6] mt-[20] mb-[80px]">
+  <div className="title mb-[20px]" >
+  <span className="group relative inline-block uppercase tracking-widest text-sm text-red-600 font-semibold cursor-pointer">
+  Who are we?
+  <span className="myunderline"
+   ></span>
+</span>
+
+
+</div>
+  <div className="myfullgrid grid grid-cols-2  gap-[16] items-center">
     <div className="grid grid-cols-2 grid-rows-2 gap-[16] h-[450px]">
-      
       <div className="row-span-2 relative rounded-2xl overflow-hidden shadow-2xl">
         <img
           src="/image/about3.jpeg"
@@ -37,7 +44,7 @@ export default function AboutPage() {
     
       <div className="relative rounded-2xl overflow-hidden shadow-lg">
         <img
-          src="/image/about2.jpg"
+          src="/image/abo2.jpg"
           className="absolute inset-0 w-full h-full object-cover hover:scale-105 transition-transform duration-700"
           alt="Perfume detail"
         />
@@ -46,31 +53,42 @@ export default function AboutPage() {
     
       <div className="relative rounded-2xl overflow-hidden shadow-lg">
         <img
-          src="/image/abou1.jpg"
+          src="/image/abu1.jpg"
           className="absolute inset-0 w-full h-full object-cover hover:scale-105 transition-transform duration-700"
           alt="Perfume lifestyle"
         />
       </div>
     </div>
-
-    {/* 🔹 TEXTE (DROITE – SIGNATURE PARFUM) */}
-    <div className="flex flex-col justify-center space-y-6 max-w-lg">
+    <div className=" mytext flex flex-col justify-center space-y-6 max-w-lg"
       
+      >
       <div className="w-16 h-[2px] bg-red-600"></div>
 
-      <h2 className="text-4xl font-bold uppercase tracking-wide text-gray-900">
-        Our <span className="text-red-600">Essence</span>
-      </h2>
 
-      <p className="text-gray-600 leading-relaxed text-lg">
-        Nous sommes une maison de parfumerie dédiée à l’élégance et à l’émotion.
-        Chaque fragrance est pensée comme une signature, mêlant savoir-faire,
-        innovation et matières nobles pour sublimer chaque instant.
-      </p>
 
-      <button className="self-start px-10 py-3 bg-black text-white uppercase tracking-widest text-sm hover:bg-red-600 transition-all">
-        Découvrir nos parfums
-      </button>
+      <h2 className="about-title">
+  Our <span className="highlight">Essence</span>
+</h2>
+
+<p className="about-text">
+  Nous sommes une <span className="highlight">maison de parfumerie</span> dédiée à l’élégance et à l’émotion.
+  Chaque <span className="italic-text">fragrance</span> est pensée comme une véritable signature, mêlant
+  <span className="medium-text"> savoir-faire artisanal</span>, innovation et matières nobles pour sublimer
+  chaque instant. À travers notre plateforme, nous offrons à chacun la
+  possibilité de découvrir et de commander nos créations en toute simplicité,
+  pour vivre une <span className="highlight">expérience olfactive unique</span>, accessible où que vous soyez.
+</p>
+
+
+
+     
+     <button
+  className="aboubnt self-start px-[10px] py-[10px] text-white uppercase tracking-widest text-sm transition-all mt-[20px]"
+  
+>
+  Découvrir nos parfums
+</button>
+
     </div>
 
   </div>

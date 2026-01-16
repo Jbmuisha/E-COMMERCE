@@ -79,7 +79,7 @@ export default function RootLayout({ children }: RootLayoutProps) {
 </header>
 
 <div className="sub-header fixed top-[100px] left-0 w-full h-[44px] bg-[#E5E7EB] border-b border-gray-200 z-40">
-  <div className="sub-header-inner max-w-[1400px] mx-auto px-[24px] h-full flex items-center gap-[28px]">
+  <div className="sub-header-inner max-w-[1400px] mx-auto px-[24px] h-full flex items-center gap-[28px] decoration-none">
     <div className="all-menu relative group cursor-pointer">
       <div className="flex items-center gap-[6px] font-bold uppercase text-[12px] tracking-wide hover:text-black transition">
         <FontAwesomeIcon icon={faBars} className="w-[14px] h-[14px]" />
@@ -91,12 +91,13 @@ export default function RootLayout({ children }: RootLayoutProps) {
       </div>
     </div>
 
-    <Link href="/new" className="sub-link">New</Link>
-    <Link href="/femme" className="sub-link">Women</Link>
-    <Link href="/homme" className="sub-link">Men</Link>
-    <Link href="/" className="sub-link">Gift Sets</Link>
-    <Link href="/bestSeller" className="sub-link">Best Sellers</Link>
-    <Link href="/offers" className="sub-link text-red-600 hover:text-red-700 transition">Offers</Link>
+    <Link href="/new" className="sub-link no-underline text-black">New</Link>
+<Link href="/femme" className="sub-link no-underline text-black">Women</Link>
+<Link href="/homme" className="sub-link no-underline text-black">Men</Link>
+<Link href="/" className="sub-link no-underline text-black">Gift Sets</Link>
+<Link href="/bestSeller" className="sub-link no-underline text-black">Best Sellers</Link>
+<Link href="/offers" className="sub-link no-underline text-black hover:text-red-600 transition">Offers</Link>
+
   </div>
 </div>
 
