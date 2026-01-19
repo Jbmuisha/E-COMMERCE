@@ -78,9 +78,6 @@ export default function AboutPage() {
   possibilité de découvrir et de commander nos créations en toute simplicité,
   pour vivre une <span className="highlight">expérience olfactive unique</span>, accessible où que vous soyez.
 </p>
-
-
-
      
      <button
   className="aboubnt self-start px-[10px] py-[10px] text-white uppercase tracking-widest text-sm transition-all mt-[20px]"

@@ -46,7 +46,7 @@ export default function RootLayout({ children }: RootLayoutProps) {
   
     <nav className="desktop-menu hidden md:flex items-center gap-[32px] font-bold text-[12px] tracking-[0.15em] uppercase text-gray-500">
       <Link href="/" className="hover:text-black transition">Home</Link>
-      <Link  href="/"  className="hover:text-black transition"> Shipping & Returns</Link>
+      <Link  href="/shipp_and_return"  className="hover:text-black transition"> Shipping & Returns</Link>
       <Link href="/about" className="hover:text-black transition">About Us</Link>
       <Link href="/contact" className="hover:text-black transition">Contact</Link>
     </nav>
@@ -107,15 +107,15 @@ export default function RootLayout({ children }: RootLayoutProps) {
 
        
  <main className="pt-[100px]">{children}</main>
-<footer className="bg-[#F6F1EB] border-t border-gray-100">
+<footer className="bg-[#F6F1EB] border-gray-100">
 
 
   <div className="max-w-[1400px] mx-auto px-[16px] py-[96px]">
 
-    {/* Top */}
+ 
     <div className="grid grid-cols-4 md:grid-cols-4 gap-[64px] mb-[32px]">
 
-      {/* Brand */}
+     
       <div>
         <img
           src="/image/parfum copie 2.png"
@@ -126,7 +126,7 @@ export default function RootLayout({ children }: RootLayoutProps) {
           Curated fragrances crafted for modern elegance and timeless identity.
         </p>
 
-        {/* Social Media */}
+        
         <div className="flex gap-[16px]">
           <a
             href="#"
@@ -152,7 +152,7 @@ export default function RootLayout({ children }: RootLayoutProps) {
         </div>
       </div>
 
-      {/* Shop */}
+   
       <div>
         <h4 className="text-xs font-bold tracking-[0.25em] uppercase mb-[24px]">
           Shop
@@ -165,7 +165,7 @@ export default function RootLayout({ children }: RootLayoutProps) {
         </ul>
       </div>
 
-      {/* Support */}
+   
       <div>
         <h4 className="text-xs font-bold tracking-[0.25em] uppercase mb-[24px]">
           Support
@@ -177,7 +177,7 @@ export default function RootLayout({ children }: RootLayoutProps) {
         </ul>
       </div>
 
-      {/* Legal */}
+   
       <div>
         <h4 className="text-xs font-bold tracking-[0.25em] uppercase mb-[24px]">
           Legal
@@ -191,7 +191,7 @@ export default function RootLayout({ children }: RootLayoutProps) {
 
     </div>
 
-    {/* Bottom */}
+
  <div className="border-t border-gray-100 pt-[32px] flex flex-col md:flex-row items-center justify-between text-xs text-gray-400">
       <p>© {new Date().getFullYear()} JBOY. All rights reserved.</p>
 

@@ -163,17 +163,17 @@ header input[type="text"]:focus {
   }
   
   .about-text {
-    color: #4b5563; /* gris foncé */
-    font-size: 1.125rem; /* text-lg */
-    line-height: 1.75rem; /* leading-relaxed */
-    max-width: 720px; /* limite largeur pour confort lecture */
+    color: #4b5563; 
+    font-size: 1.125rem; 
+    line-height: 1.75rem; 
+    max-width: 720px;
     margin-top: 1rem;
     margin-bottom: 1rem;
     font-family: 'Inter', sans-serif;
   }
   
   .about-text .highlight {
-    color: #dc2626; /* rouge premium */
+    color: #dc2626;
     font-weight: 600;
     transition: all 0.3s ease;
   }
@@ -191,24 +191,24 @@ header input[type="text"]:focus {
     font-weight: 500;
   }
   .about-title {
-    font-size: 2.5rem; /* équivalent à text-4xl */
-    font-weight: 800;   /* font-bold mais plus prononcé */
+    font-size: 2.5rem; 
+    font-weight: 800;   
     text-transform: uppercase;
-    letter-spacing: 0.08em; /* tracking-wide */
-    color: #111827; /* gris très foncé / presque noir */
+    letter-spacing: 0.08em;
+    color: #111827; 
     margin-bottom: 1rem;
     line-height: 1.2;
-    font-family: 'Playfair Display', serif; /* luxe et élégance */
+    font-family: 'Playfair Display', serif; 
   }
   
   .about-title .highlight {
-    color: #dc2626; /* rouge premium */
+    color: #dc2626;
     position: relative;
     display: inline-block;
     transition: all 0.3s ease;
   }
   
-  /* Option hover subtil sur “Essence” */
+ 
   .about-title .highlight::after {
     content: '';
     position: absolute;
@@ -251,7 +251,7 @@ header input[type="text"]:focus {
     width: 80%;
   }
 }
-/* Header Principal */
+
 .header-container {
   transition: all 0.3s ease;
   z-index: 50;
@@ -334,7 +334,7 @@ header input[type="text"]:focus {
   border-radius: 9999px;
 }
 
-/* Sub-header */
+
 .sub-header {
   height: 44px;
   background: #e5e7eb;
@@ -364,10 +364,6 @@ header input[type="text"]:focus {
   letter-spacing: 0.05em;
   transition: color 0.3s ease;
 }
-
-/* ========================
-   MENU RESPONSIVE 
-======================== */
 
 
 @media (max-width: 1024px) {
@@ -444,4 +440,380 @@ header input[type="text"]:focus {
     padding: 8px 16px;
     font-size: 0.875rem;
   }
+}
+
+.shipping-page {
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 40px 20px;
+  font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  background-color: #f9f9f9;
+  margin-top: 40px;
+}
+
+
+.shipping,
+.returnShipping {
+  background: #ffffff;
+  border: 1px solid #e6e6e6;
+  border-radius: 10px;
+  padding: 30px;
+  margin-bottom: 40px;
+}
+
+
+.shipping h1,
+.returnShipping h1 {
+  font-size: 22px;
+  font-weight: 600;
+  margin-bottom: 25px;
+  color: #111;
+}
+
+
+.shipping-form {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 20px;
+}
+
+
+.form-group {
+  display: flex;
+  flex-direction: column;
+}
+
+
+.form-group label,
+.return-status label {
+  font-size: 13px;
+  font-weight: 600;
+  color: #444;
+  margin-bottom: 6px;
+}
+
+.form-group input,
+.form-group select {
+  height: 42px;
+  padding: 0 12px;
+  font-size: 14px;
+  border-radius: 6px;
+  border: 1px solid #ccc;
+  background: #fff;
+  transition: border 0.2s ease, box-shadow 0.2s ease;
+}
+
+.form-group input::placeholder {
+  color: #aaa;
+}
+
+.form-group input:focus,
+.form-group select:focus {
+  outline: none;
+  border-color: #111;
+  box-shadow: 0 0 0 2px rgba(0,0,0,0.05);
+}
+
+
+.form-group:last-child {
+  grid-column: span 2;
+}
+
+
+.return-status {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.return-status p {
+  font-size: 14px;
+  color: #333;
+  line-height: 1.6;
+}
+
+
+.status {
+  width: fit-content;
+  padding: 6px 14px;
+  border-radius: 20px;
+  font-size: 13px;
+  font-weight: 600;
+}
+
+
+.status.approved {
+  background-color: #e7f8ef;
+  color: #1f8b4c;
+}
+
+
+@media (max-width: 768px) {
+  .shipping-form {
+    grid-template-columns: 1fr;
+  }
+
+  .form-group:last-child {
+    grid-column: span 1;
+  }
+
+  .shipping,
+  .returnShipping {
+    padding: 20px;
+  }
+}
+
+.btn-check-return {
+  margin-top: 20px;
+  padding: 12px 20px;         
+  background-color: #111;      
+  color: #fff;                
+  border: none;               
+  border-radius: 6px;          
+  font-size: 14px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background 0.2s ease, transform 0.1s ease;
+}
+
+
+.btn-check-return:hover {
+  background-color: #333;     
+  transform: scale(1.02);      
+}
+
+
+.btn-check-return:active {
+  background-color: #000;
+  transform: scale(0.98);     
+}
+
+/* PAGE STYLES */
+.contact-page {
+  background: #f5f8ff;
+  padding: 80px 20px;
+  font-family: 'Inter', sans-serif;
+}
+
+.contact-container {
+  max-width: 1100px;
+  margin: auto;
+  display: grid;
+  grid-template-columns: 1.2fr 1fr;
+  gap: 50px;
+  align-items: flex-start;
+}
+
+/* LEFT SIDE */
+.contact-info h1 {
+  font-size: 42px;
+  margin-bottom: 15px;
+  font-weight: 700;
+  color: #111;
+}
+
+.contact-info p {
+  color: #666;
+  font-size: 16px;
+  line-height: 1.6;
+  margin-bottom: 30px;
+}
+
+.info-block h4 {
+  font-weight: 600;
+  margin-bottom: 5px;
+  color: #333;
+}
+
+.info-block span {
+  color: #555;
+  font-size: 14px;
+}
+
+.support-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 20px;
+  margin-top: 30px;
+}
+
+.support-grid h5 {
+  font-size: 14px;
+  font-weight: 600;
+  color: #111;
+  margin-bottom: 5px;
+}
+
+.support-grid p {
+  font-size: 13px;
+  color: #666;
+  line-height: 1.5;
+}
+
+
+.media-icons {
+  display: flex;
+  gap: 10px;
+  margin-top: 8px;
+}
+
+.media-icons a {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 36px;
+  height: 36px;
+  background-color: #111;      
+  color: #fff;
+  border-radius: 50%;
+  font-size: 16px;
+  transition: background 0.2s ease, transform 0.1s ease;
+}
+
+.media-icons a:hover {
+  background-color: rgb(197, 107, 107);
+  transform: scale(1.1);
+}
+
+
+.contact-form-card {
+  background: #fff;
+  padding: 35px;
+  border-radius: 16px;
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.08);
+}
+
+.contact-form-card h3 {
+  margin-bottom: 5px;
+  font-size: 24px;
+  font-weight: 700;
+  color: #111;
+}
+
+.contact-form-card p {
+  color: #777;
+  font-size: 14px;
+  margin-bottom: 25px;
+}
+
+.contact-form-card form input,
+.contact-form-card form textarea {
+  width: 100%;
+  padding: 14px;
+  margin-bottom: 15px;
+  border-radius: 10px;
+  border: 1px solid #ddd;
+  font-size: 14px;
+  transition: all 0.2s ease;
+}
+
+.contact-form-card form input:focus,
+.contact-form-card form textarea:focus {
+  outline: none;
+  border-color: #2563eb;
+  box-shadow: 0 0 0 2px rgba(37, 99, 235, 0.2);
+}
+
+.form-row {
+  display: flex;
+  gap: 10px;
+  flex-wrap: wrap;
+}
+
+.contact-form-card button {
+  width: 100%;
+  padding: 14px;
+  background-color: #111;      
+  color: #fff;
+  border: none;
+  border-radius: 10px;
+  font-size: 16px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background 0.2s ease, transform 0.1s ease;
+}
+
+.contact-form-card button:hover {
+  background: rgb(123, 65, 65);
+  transform: scale(1.02);
+}
+
+.contact-form-card small {
+  display: block;
+  margin-top: 12px;
+  font-size: 12px;
+  color: #777;
+}
+@media (max-width: 900px) {
+  .contact-container {
+    grid-template-columns: 1fr;
+  }
+
+  .form-row {
+    flex-direction: column;
+  }
+}
+.info-block-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 20px;
+  margin-bottom: 30px;
+}
+
+
+.info-block h4 {
+  font-weight: 600;
+  margin-bottom: 5px;
+  color: #333;
+}
+
+.info-block span {
+  color: #555;
+  font-size: 14px;
+}
+
+@media (max-width: 700px) {
+  .info-block-grid {
+    grid-template-columns: 1fr; 
+  }
+}
+.faq-section {
+  background: #f5f8ff;
+  padding: 60px 20px;
+}
+
+.faq-container {
+  max-width: 900px;
+  margin: auto;
+}
+
+.faq-container h2 {
+  font-size: 36px;
+  margin-bottom: 40px;
+  text-align: center;
+}
+
+.faq-grid {
+  display: grid;
+  gap: 20px;
+}
+
+.faq-item {
+  background: #fff;
+  padding: 20px 25px;
+  border-radius: 16px;
+  box-shadow: 0 20px 40px rgba(0,0,0,0.05);
+  cursor: pointer;
+}
+
+.faq-item summary {
+  font-weight: 600;
+  font-size: 18px;
+  outline: none;
+}
+
+.faq-item p {
+  margin-top: 10px;
+  color: #555;
+  line-height: 1.6;
 }
