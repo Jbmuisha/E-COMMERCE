@@ -1,16 +1,17 @@
 "use client";
 import HeroCarosel from "@/component/home";
 import { useRef } from "react";
-import { Heart, SlidersHorizontal, ChevronLeft, ChevronRight } from "lucide-react";
+import { SlidersHorizontal, ChevronLeft, ChevronRight } from "lucide-react";
+import ProductCard from "@/component/ProductCard";
 
 export default function Home() {
   const products = [
     { id: 1, image: "/image/product1.webp", itemDetails: "Chaussures de sport", price: "85.00€" },
     { id: 2, image: "/image/product2.jpeg", itemDetails: "Montre connectée", price: "199.00€" },
     { id: 3, image: "/image/product2.jpg", itemDetails: "Sac à dos", price: "45.00€" },
-    { id: 4, image: "/image/product 4.webp", itemDetails: "Casque Audio", price: "120.00€" },
-    { id: 5, image: "/image/product 5.webp", itemDetails: "Clavier RGB", price: "75.00€" },
-    { id: 6, image: "/image/product 7.png", itemDetails: "Souris Gamer", price: "55.00€" },
+    { id: 4, image: "/image/product4.webp", itemDetails: "Casque Audio", price: "120.00€" },
+    { id: 5, image: "/image/product5.webp", itemDetails: "Clavier RGB", price: "75.00€" },
+    { id: 6, image: "/image/product7.png", itemDetails: "Souris Gamer", price: "55.00€" },
     { id: 7, image: "/image/product8.png", itemDetails: "Écran 4K", price: "350.00€" },
     { id: 8, image: "/image/product9.jpg", itemDetails: "Bureau Setup", price: "299.00€" },
   ];
@@ -70,31 +71,10 @@ export default function Home() {
 
       {/* ================= PRODUCTS ================= */}
       <section className="w-full">
-        <div className="w-full max-w-[1400px] mx-auto px-[4] pb-24">
+        <div className="w-full max-w-[1400px] mx-auto px-4 pb-24">
           <div className="grid grid-cols-4 sm:grid-cols-2 lg:grid-cols-2 gap-[30px] mt-[70px]">
-            {products.map((item) => (
-              <div
-                key={item.id}
-                className="group bg-white rounded-2xl overflow-hidden transition-all duration-300 hover:shadow-xl"
-              >
-                <div className="relative h-[280px] bg-[#FAFAFA] flex items-center justify-center">
-                  <img
-                    src={item.image}
-                    alt={item.itemDetails}
-                    className="max-h-[75%] object-contain transition-transform duration-500 group-hover:scale-110"
-                  />
-                  <button className="absolute top-[20px] right-[20px] p-[2px] rounded-full bg-transparent shadow hover:text-red-500 hover:bg-red transition border-none">
-                    <Heart size={25} />
-                  </button>
-                </div>
-                <div className="p-5">
-                  <p className="text-sm text-gray-500 mb-2">{item.itemDetails}</p>
-                  <span className="text-xl font-black text-gray-900">{item.price}</span>
-                  <button className="mt-6 w-full h-[46px] rounded-xl border border-black text-black text-sm font-semibold tracking-wide bg-transparent opacity-0 group-hover:opacity-100 transition-all duration-300 hover:bg-black-500 hover:text-white">
-                    Ajouter au panier
-                  </button>
-                </div>
-              </div>
+            {products.map((product) => (
+              <ProductCard key={product.id} product={product} />
             ))}
           </div>
         </div>
@@ -122,21 +102,21 @@ export default function Home() {
         </div>
       </section>
 
-  
+
       <section
         className="w-full py-[16] overflow-hidden mb-[40px] mt-[20px]"
         style={{ background: "linear-gradient(180deg, #F6F1EB 0%, #F3ECE5 100%)" }}
       >
         <div className="w-full max-w-[1400px] mx-auto px-4">
-        
+
           <div className="mb-16 max-w-xl mb-[20px] mt-[20px]">
-          
+
             <h2 className="text-3xl md:text-4xl font-black"> Recommanded for you </h2>
           </div>
 
-        
+
           <div className="relative w-full group overflow-hidden">
-           
+
             <div
               ref={carouselRef}
               className="flex gap-[10] overflow-x-auto scroll-smooth snap-x snap-mandatory no-scrollbar pb-10 mb-[20px]"
@@ -149,31 +129,18 @@ export default function Home() {
                   {products.slice(startIndex, startIndex + 2).map((item, index) => (
                     <div
                       key={item.id}
-                      className={`w-1/2 bg-white rounded-[32px] p-8 transition-all duration-500 hover:-translate-y-2 hover:shadow-2xl ${
-                        index === 1 ? "mt-16" : ""
-                      }`}
+                      className={`w-1/2 ${index === 1 ? "mt-16" : ""}`}
                     >
-                     
-
-                      <div className="h-[260px] flex items-center justify-center mb-8">
-                        <img
-                          src={item.image}
-                          alt={item.itemDetails}
-                          className="max-h-full object-contain transition-transform duration-500 hover:scale-105"
-                        />
+                      <div className="bg-white rounded-[32px] p-8 transition-all duration-500 hover:-translate-y-2 hover:shadow-2xl h-full">
+                        <ProductCard product={item} />
                       </div>
-                      <p className="text-sm text-gray-500 mb-2">{item.itemDetails}</p>
-                      <p className="text-2xl font-black mb-6">{item.price}</p>
-                      <button className="mt-6 w-full h-[46px] rounded-xl border border-black text-black text-sm font-semibold tracking-wide bg-transparent opacity-0 group-hover:opacity-100 transition-all duration-300 hover:bg-black-500 hover:text-white ">
-                        Découvrir
-                      </button>
                     </div>
                   ))}
                 </div>
               ))}
             </div>
 
-           
+
             <button
               onClick={() => scrollCarousel("left")}
               className="absolute left-[4px] top-1/2 -translate-y-1/2 w-12 h-12 rounded-full bg-white/80 backdrop-blur shadow-lg flex items-center justify-center z-20 opacity-0 group-hover:opacity-100 transition"
@@ -181,7 +148,7 @@ export default function Home() {
               <ChevronLeft className="w-5 h-5 text-gray-800" />
             </button>
 
-   
+
             <button
               onClick={() => scrollCarousel("right")}
               className="absolute right-[4px] top-1/2 -translate-y-1/2 w-12 h-12 rounded-full bg-white/80 backdrop-blur shadow-lg flex items-center justify-center z-20 opacity-0 group-hover:opacity-100 transition"
@@ -192,33 +159,33 @@ export default function Home() {
         </div>
       </section>
       <section className="w-full py-[32] bg-white">
-  <div className="max-w-[1400px] mx-auto px-[4] grid grid-cols-2 md:grid-cols-2 gap-[20] items-center">
+        <div className="max-w-[1400px] mx-auto px-[4] grid grid-cols-2 md:grid-cols-2 gap-[20] items-center">
 
-   
-    <div className="h-[520px] rounded-[32px] bg-gradient-to-br from-[#EFE9E3] to-[#E5DED7] flex items-center justify-center">
-      <span className="text-6xl font-black text-gray-300">ESSENCE</span>
-    </div>
 
-   
-    <div>
-      <p className="text-xs tracking-[0.35em] uppercase text-gray-400 mb-[4]">
-        Featured Selection
-      </p>
-      <h3 className="text-4xl font-black mb-[6]">
-        Timeless Fragrance
-      </h3>
-      <p className="text-gray-500 mb-[8] max-w-md">
-        A refined scent crafted for everyday elegance.
-      </p>
-      <p className="text-3xl font-black mb-[8]">199.00€</p>
+          <div className="h-[520px] rounded-[32px] bg-gradient-to-br from-[#EFE9E3] to-[#E5DED7] flex items-center justify-center">
+            <span className="text-6xl font-black text-gray-300">ESSENCE</span>
+          </div>
 
-      <button className="h-[48px] px-[10] rounded-xl border border-black font-semibold hover:bg-black hover:text-white transition">
-        Discover
-      </button>
-    </div>
 
-  </div>
-</section>
+          <div>
+            <p className="text-xs tracking-[0.35em] uppercase text-gray-400 mb-[4]">
+              Featured Selection
+            </p>
+            <h3 className="text-4xl font-black mb-[6]">
+              Timeless Fragrance
+            </h3>
+            <p className="text-gray-500 mb-[8] max-w-md">
+              A refined scent crafted for everyday elegance.
+            </p>
+            <p className="text-3xl font-black mb-[8]">199.00€</p>
+
+            <button className="h-[48px] px-[10] rounded-xl border border-black font-semibold hover:bg-black hover:text-white transition">
+              Discover
+            </button>
+          </div>
+
+        </div>
+      </section>
 
 
     </main>

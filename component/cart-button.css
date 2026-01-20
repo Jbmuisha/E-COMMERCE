@@ -1,0 +1,64 @@
+.cart-button {
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    width: 44px;
+    height: 44px;
+
+    background-color: #ffffff;
+    cursor: pointer;
+
+    border: none; /* pas de bordure */
+    outline: none; /* retire le focus ring par défaut */
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1); /* légère ombre */
+    border-radius: 50%; /* rond parfait */
+    transition: transform 0.2s ease, box-shadow 0.2s ease, background-color 0.2s ease;
+}
+
+.cart-button:hover {
+    transform: scale(1.05); /* léger zoom */
+    background-color: #f5f5f5; /* hover subtil */
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15); /* ombre plus visible */
+}
+
+.cart-icon {
+    font-size: 20px;
+    color: #1f2937; /* gris foncé */
+    transition: color 0.2s ease;
+}
+
+.cart-button:hover .cart-icon {
+    color: #8b1c1c; /* rouge subtil au hover */
+}
+
+.cart-badge {
+    position: absolute;
+    top: -6px;
+    right: -6px;
+
+    min-width: 20px;
+    height: 20px;
+    padding: 0 6px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    background-color: #8b1c1c; /* rouge classique */
+    color: #ffffff;
+    font-size: 10px;
+    font-weight: 700;
+
+    border-radius: 50%; /* rond parfait */
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.2);
+    animation: badge-pop 0.3s ease; /* petit effet au changement */
+}
+
+/* effet pop du badge quand on ajoute au panier */
+@keyframes badge-pop {
+    0% { transform: scale(0.5); }
+    50% { transform: scale(1.2); }
+    100% { transform: scale(1); }
+}
