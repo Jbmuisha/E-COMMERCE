@@ -10,6 +10,7 @@ import Cart from "@/component/Cart";
 import "@/component/cart-button.css";
 import "@/component/ui-buttons.css";
 
+
 // Composant Bouton Recherche
 function SearchButton() {
   return (
@@ -23,7 +24,7 @@ function SearchButton() {
   );
 }
 
-// Composant Bouton Langue
+
 function LangButton() {
   const [isOpen, setIsOpen] = useState(false);
   const [currentLang, setCurrentLang] = useState('FR');
@@ -92,97 +93,114 @@ function LayoutContent({ children }: RootLayoutProps) {
       <CartProvider>
         <body className="antialiased bg-gray-50">
           <Cart />
-          <header
-            className={`header-container fixed top-0 left-0 w-full h-[100px] flex justify-center items-center bg-white transition-all duration-300 z-50`}
-            style={{
-              boxShadow: scrolled ? "rgba(0, 0, 0, 0.08) 0px 4px 12px" : "none",
-              backdropFilter: scrolled ? 'blur(8px)' : 'none',
-              backgroundColor: scrolled ? 'rgba(255, 255, 255, 0.95)' : 'white',
-              height: scrolled ? '80px' : '100px',
-            }}
-          >
-            <div className="header-inner max-w-[1400px] w-full mx-auto px-6 lg:px-8 flex items-center justify-between">
-              <div className="logo flex items-center transition-transform duration-300 hover:scale-105">
-                <img
-                  src="/image/parfum copie 2.png"
-                  alt="Logo"
-                  className="w-[120px] h-auto transition-all duration-300"
-                  style={{
-                    transform: scrolled ? 'scale(0.9)' : 'scale(1)'
-                  }}
-                />
+
+          <header className={`header-container fixed top-0 left-0 w-full h-[100px] flex justify-center items-center bg-white transition-all duration-300 z-50`}>
+            <div className="sub-header fixed top-[100px] left-0 w-full h-[44px] bg-[#E5E7EB] border-b border-gray-200 z-40">
+              <div className="sub-header-inner max-w-[1400px] mx-auto px-[24px] h-full flex items-center gap-[28px] decoration-none">
+                <div className="all-menu relative group cursor-pointer">
+                  <div className="flex items-center gap-[6px] font-bold uppercase text-[12px] tracking-wide hover:text-black transition">
+                    <FontAwesomeIcon icon={faBars} className="w-[14px] h-[14px]" />
+                    All
+                  </div>
+
+                  <div className="mega-menu absolute top-[100%] left-[0] w-[1500px] bg-white shadow-lg rounded-[12px] p-[16px] opacity-0 group-hover:opacity-100 transition-opacity duration-300 z-50">
+                    {/* Mega Menu Content */}
+                  </div>
+                </div>
+
+                <Link href="/new" className="sub-link no-underline text-black">
+                  New
+                </Link>
+                <Link href="/femme" className="sub-link no-underline text-black">
+                  Women
+                </Link>
+                <Link href="/homme" className="sub-link no-underline text-black">
+                  Men
+                </Link>
+                <Link href="/" className="sub-link no-underline text-black">
+                  Gift Sets
+                </Link>
+                <Link href="/bestSeller" className="sub-link no-underline text-black">
+                  Best Sellers
+                </Link>
+                <Link href="/offers" className="sub-link no-underline text-black hover:text-red-600 transition">
+                  Offers
+                </Link>
+
+
               </div>
-              <div className="search-wrapper flex items-center">
-                <SearchButton />
+            </div>
+            <div
+              style={{
+                boxShadow: scrolled ? "rgba(0, 0, 0, 0.08) 0px 4px 12px" : "none",
+                backdropFilter: scrolled ? 'blur(8px)' : 'none',
+                backgroundColor: scrolled ? 'rgba(255, 255, 255, 0.95)' : 'white',
+                height: scrolled ? '80px' : '100px',
+              }}>
+              <div className="header-inner max-w-[1400px] w-full mx-auto px-6 lg:px-8 flex items-center justify-between">
+                <div className="logo flex items-center transition-transform duration-300 hover:scale-105">
+                  <img
+                    src="/image/parfum copie 2.png"
+                    alt="Logo"
+                    className="w-[120px] h-auto transition-all duration-300"
+                    style={{
+                      transform: scrolled ? 'scale(0.9)' : 'scale(1)'
+                    }}
+                  />
+                </div>
+                <div className="search-wrapper">
+                  <div className="search-input-wrapper">
+                    <input
+                      type="text"
+                      placeholder="Search..."
+                      className="search-input"
+                    />
+                    <FontAwesomeIcon icon={faSearch} className="search-icon-right" />
+                  </div>
+                </div>
+
+
+
+
+                <nav className="desktop-menu hidden md:flex items-center gap-[32px] font-bold text-[12px] tracking-[0.15em] uppercase text-gray-500">
+                  <Link href="/" className="hover:text-black transition">
+                    Home
+                  </Link>
+                  <Link href="/about" className="hover:text-black transition">
+                    About Us
+                  </Link>
+                  <Link href="/contact" className="hover:text-black transition">
+                    Contact
+                  </Link>
+
+
+                </nav>
+
+
+
+                <div className="flex items-center gap-4 sm:gap-6">
+                  <LangButton />
+
+                  <Link href="/account" className="icon-btn" title="Account">
+                    <FontAwesomeIcon icon={faUser} />
+                  </Link>
+
+                  <CartButton />
+
+                  <Link
+                    href="/"
+                    aria-label="Menu"
+                    className="icon-btn hidden"
+                  >
+                    <FontAwesomeIcon icon={faBars} />
+                  </Link>
+
+                </div>
               </div>
-
-              <nav className="desktop-menu hidden md:flex items-center gap-[32px] font-bold text-[12px] tracking-[0.15em] uppercase text-gray-500">
-                <Link href="/" className="hover:text-black transition">
-                  Home
-                </Link>
-                <Link href="/shipp_and_return" className="hover:text-black transition">
-                  Shipping & Returns
-                </Link>
-                <Link href="/about" className="hover:text-black transition">
-                  About Us
-                </Link>
-                <Link href="/contact" className="hover:text-black transition">
-                  Contact
-                </Link>
-              </nav>
-
-              <div className="flex items-center gap-4 sm:gap-6">
-                <LangButton />
-
-                <Link
-                  href="/account"
-                  className="hidden md:flex items-center justify-center w-10 h-10 rounded-full hover:bg-gray-50 transition-colors text-gray-600 hover:text-black"
-                  title="Account"
-                >
-                  <FontAwesomeIcon icon={faUser} className="text-lg" />
-                </Link>
-
-                <CartButton />
-              </div>
-              <button className="md:hidden hover:text-black transition">
-                <FontAwesomeIcon icon={faBars} className="text-lg" />
-              </button>
             </div>
           </header>
 
-          <div className="sub-header fixed top-[100px] left-0 w-full h-[44px] bg-[#E5E7EB] border-b border-gray-200 z-40">
-            <div className="sub-header-inner max-w-[1400px] mx-auto px-[24px] h-full flex items-center gap-[28px] decoration-none">
-              <div className="all-menu relative group cursor-pointer">
-                <div className="flex items-center gap-[6px] font-bold uppercase text-[12px] tracking-wide hover:text-black transition">
-                  <FontAwesomeIcon icon={faBars} className="w-[14px] h-[14px]" />
-                  All
-                </div>
 
-                <div className="mega-menu absolute top-[100%] left-0 w-[480px] bg-white shadow-lg rounded-[12px] p-[16px] opacity-0 group-hover:opacity-100 transition-opacity duration-300 z-50">
-                  {/* Mega Menu Content */}
-                </div>
-              </div>
-
-              <Link href="/new" className="sub-link no-underline text-black">
-                New
-              </Link>
-              <Link href="/femme" className="sub-link no-underline text-black">
-                Women
-              </Link>
-              <Link href="/homme" className="sub-link no-underline text-black">
-                Men
-              </Link>
-              <Link href="/" className="sub-link no-underline text-black">
-                Gift Sets
-              </Link>
-              <Link href="/bestSeller" className="sub-link no-underline text-black">
-                Best Sellers
-              </Link>
-              <Link href="/offers" className="sub-link no-underline text-black hover:text-red-600 transition">
-                Offers
-              </Link>
-            </div>
-          </div>
 
           <main className="pt-[100px]">{children}</main>
 
@@ -253,7 +271,9 @@ function LayoutContent({ children }: RootLayoutProps) {
                       <a className="hover:text-black transition">Contact</a>
                     </li>
                     <li>
-                      <a className="hover:text-black transition">Shipping & Returns</a>
+                      <Link href="/shipp_and_return" className="hover:text-black transition">
+                        Shipping & Returns
+                      </Link>
                     </li>
                     <li>
                       <a className="hover:text-black transition">FAQ</a>

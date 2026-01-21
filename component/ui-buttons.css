@@ -1,10 +1,7 @@
-/* ======================= Search Button ======================= */
 .search-button {
     display: flex;
     align-items: center;
     justify-content: center;
-    width: 44px;
-    height: 44px;
     background-color: #ffffff;
     border: 1px solid #e5e7eb;
     border-radius: 9999px;
@@ -27,7 +24,7 @@
     color: #000000;
 }
 
-/* ======================= Language Button ======================= */
+
 .lang-button {
     display: flex;
     align-items: center;
@@ -57,7 +54,7 @@
     font-size: 12px;
 }
 
-/* Dropdown */
+
 .lang-dropdown {
     position: absolute;
     right: 0;
@@ -66,7 +63,7 @@
     width: 160px;
     background-color: #ffffff;
     border-radius: 8px;
-    box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
     overflow: hidden;
     z-index: 50;
 }
@@ -94,43 +91,14 @@
     font-weight: 600;
 }
 
-/* ======================= Hamburger Button ======================= */
-.hamburger-button {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    width: 44px;
-    height: 44px;
-    background-color: #ffffff;
-    border: 1px solid #e5e7eb;
-    border-radius: 9999px;
-    cursor: pointer;
-    transition: all 0.2s ease;
-}
 
-.hamburger-button:hover {
-    background-color: #f9fafb;
-    border-color: #8b1c1c;
-}
 
-.hamburger-button svg {
-    color: #374151;
-    font-size: 18px;
-    transition: color 0.2s ease;
-}
-
-.hamburger-button:hover svg {
-    color: #000000;
-}
-
-/* ======================= Search Input ======================= */
 .search-input {
-    width: 500px;
-    max-width: 100%;
-    height: 44px;
+    width: 250px;
+    height: 40px;
     padding-left: 16px;
     padding-right: 40px;
-    border-radius: 9999px;
+    border-radius: 18px;
     border: 1px solid #e5e7eb;
     outline: none;
     font-size: 14px;
@@ -145,6 +113,7 @@
 .search-input:focus {
     border-color: #000000;
 }
+
 /* ======================= Language Button ======================= */
 .lang-button {
     display: flex;
