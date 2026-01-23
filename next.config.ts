@@ -10,6 +10,9 @@ const nextConfig = {
       },
     ],
   },
+  experimental: {
+    // Configuration expérimentale si nécessaire
+  }
 };
 
 export default nextConfig;

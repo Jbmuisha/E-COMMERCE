@@ -6,7 +6,8 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "eslint"
+    "lint": "eslint",
+    "test:connection": "tsx scripts/test-connection.ts"
   },
   "dependencies": {
     "@faker-js/faker": "^10.1.0",
@@ -19,6 +20,8 @@
     "embla-carousel-react": "^8.6.0",
     "framer-motion": "^12.27.5",
     "lucide-react": "^0.562.0",
+    "mongodb": "^7.0.0",
+    "mongoose": "^9.1.5",
     "next": "16.0.10",
     "react": "19.2.1",
     "react-dom": "19.2.1",
@@ -35,6 +38,7 @@
     "eslint-config-next": "16.0.10",
     "postcss": "^8.5.6",
     "tailwindcss": "^4.1.18",
+    "tsx": "^4.19.2",
     "typescript": "^5"
   }
 }

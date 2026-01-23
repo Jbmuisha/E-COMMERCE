@@ -1043,3 +1043,23 @@ header input[type="text"]:focus {
     transform: scale(1);
   }
 }
+
+/* New Arrival Responsive Styles */
+.new-arrival-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 8px;
+}
+
+@media (min-width: 768px) {
+  .new-arrival-grid {
+    grid-template-columns: repeat(3, 1fr);
+    gap: 4px;
+  }
+}
+
+@media (min-width: 1024px) {
+  .new-arrival-grid {
+    grid-template-columns: repeat(4, 1fr);
+  }
+}

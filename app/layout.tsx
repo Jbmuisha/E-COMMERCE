@@ -6,6 +6,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faUser, faCartShopping, faSearch, faBars, faGlobe, faChevronDown } from "@fortawesome/free-solid-svg-icons";
 import { faInstagram, faFacebookF, faXTwitter } from "@fortawesome/free-brands-svg-icons";
 import { CartProvider, useCart } from "@/context/Cart";
+import { TranslationProvider, useTranslation } from "@/context/Translation";
 import Cart from "@/component/Cart";
 import "@/component/cart-button.css";
 import "@/component/ui-buttons.css";
@@ -27,13 +28,13 @@ function SearchButton() {
 
 function LangButton() {
   const [isOpen, setIsOpen] = useState(false);
-  const [currentLang, setCurrentLang] = useState('FR');
+  const { language, setLanguage, t } = useTranslation();
 
   const languages = [
-    { code: 'EN', name: 'English' },
-    { code: 'FR', name: 'Français' },
-    { code: 'ES', name: 'Español' },
-    { code: 'AR', name: 'العربية' },
+    { code: 'EN' as const, name: 'English' },
+    { code: 'FR' as const, name: 'Français' },
+    { code: 'ES' as const, name: 'Español' },
+    { code: 'AR' as const, name: 'العربية' },
   ];
 
   return (
@@ -41,20 +42,20 @@ function LangButton() {
       <button
         className="lang-button"
         onClick={() => setIsOpen(!isOpen)}
-        aria-label="Changer de langue"
-        title="Changer de langue"
+        aria-label={t("nav.changeLanguage")}
+        title={t("nav.changeLanguage")}
       >
         <FontAwesomeIcon icon={faGlobe} className="lang-icon" />
-        <span className="lang-badge">{currentLang}</span>
+        <span className="lang-badge">{language}</span>
       </button>
 
       <div className={`lang-dropdown ${isOpen ? 'open' : ''}`}>
         {languages.map((lang) => (
           <button
             key={lang.code}
-            className={currentLang === lang.code ? 'active' : ''}
+            className={language === lang.code ? 'active' : ''}
             onClick={() => {
-              setCurrentLang(lang.code);
+              setLanguage(lang.code);
               setIsOpen(false);
             }}
           >
@@ -69,8 +70,9 @@ function LangButton() {
 interface RootLayoutProps {
   children: ReactNode;
 }
-function LayoutContent({ children }: RootLayoutProps) {
+function LayoutContentInner({ children }: RootLayoutProps) {
   const [scrolled, setScrolled] = useState(false);
+  const { language, t } = useTranslation();
 
   useEffect(() => {
     const handleScroll = () => setScrolled(window.scrollY > 10);
@@ -78,20 +80,12 @@ function LayoutContent({ children }: RootLayoutProps) {
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
-  const [isLangOpen, setIsLangOpen] = useState(false);
-  const [currentLang, setCurrentLang] = useState('EN');
-
-  const languages = [
-    { code: 'EN', name: 'English' },
-    { code: 'FR', name: 'Français' },
-    { code: 'ES', name: 'Español' },
-    { code: 'AR', name: 'العربية' },
-  ];
+  useEffect(() => {
+    document.documentElement.lang = language.toLowerCase();
+  }, [language]);
 
   return (
-    <html lang={currentLang.toLowerCase()}>
-      <CartProvider>
-        <body className="antialiased bg-gray-50">
+    <body className="antialiased bg-gray-50">
           <Cart />
 
           <header className={`header-container fixed top-0 left-0 w-full h-[100px] flex justify-center items-center bg-white transition-all duration-300 z-50`}>
@@ -100,7 +94,7 @@ function LayoutContent({ children }: RootLayoutProps) {
                 <div className="all-menu relative group cursor-pointer">
                   <div className="flex items-center gap-[6px] font-bold uppercase text-[12px] tracking-wide hover:text-black transition">
                     <FontAwesomeIcon icon={faBars} className="w-[14px] h-[14px]" />
-                    All
+                    {t("nav.all")}
                   </div>
 
                   <div className="mega-menu absolute top-[100%] left-[0] w-[1500px] bg-white shadow-lg rounded-[12px] p-[16px] opacity-0 group-hover:opacity-100 transition-opacity duration-300 z-50">
@@ -108,23 +102,23 @@ function LayoutContent({ children }: RootLayoutProps) {
                   </div>
                 </div>
 
-                <Link href="/new" className="sub-link no-underline text-black">
-                  New
+                <Link href="/newArrival" className="sub-link no-underline text-black">
+                  {t("nav.new")}
                 </Link>
                 <Link href="/femme" className="sub-link no-underline text-black">
-                  Women
+                  {t("nav.women")}
                 </Link>
                 <Link href="/homme" className="sub-link no-underline text-black">
-                  Men
+                  {t("nav.men")}
                 </Link>
                 <Link href="/" className="sub-link no-underline text-black">
-                  Gift Sets
+                  {t("nav.giftSets")}
                 </Link>
                 <Link href="/bestSeller" className="sub-link no-underline text-black">
-                  Best Sellers
+                  {t("nav.bestSellers")}
                 </Link>
                 <Link href="/offers" className="sub-link no-underline text-black hover:text-red-600 transition">
-                  Offers
+                  {t("nav.offers")}
                 </Link>
 
 
@@ -152,7 +146,7 @@ function LayoutContent({ children }: RootLayoutProps) {
                   <div className="search-input-wrapper">
                     <input
                       type="text"
-                      placeholder="Search..."
+                      placeholder={t("nav.search")}
                       className="search-input"
                     />
                     <FontAwesomeIcon icon={faSearch} className="search-icon-right" />
@@ -164,13 +158,13 @@ function LayoutContent({ children }: RootLayoutProps) {
 
                 <nav className="desktop-menu hidden md:flex items-center gap-[32px] font-bold text-[12px] tracking-[0.15em] uppercase text-gray-500">
                   <Link href="/" className="hover:text-black transition">
-                    Home
+                    {t("nav.home")}
                   </Link>
                   <Link href="/about" className="hover:text-black transition">
-                    About Us
+                    {t("nav.about")}
                   </Link>
                   <Link href="/contact" className="hover:text-black transition">
-                    Contact
+                    {t("nav.contact")}
                   </Link>
 
 
@@ -333,7 +327,18 @@ function LayoutContent({ children }: RootLayoutProps) {
             </div>
           </footer>
         </body>
-      </CartProvider>
+  );
+}
+
+function LayoutContent({ children }: RootLayoutProps) {
+  return (
+    <html lang="en">
+      <head />
+      <TranslationProvider>
+        <CartProvider>
+          <LayoutContentInner>{children}</LayoutContentInner>
+        </CartProvider>
+      </TranslationProvider>
     </html>
   );
 }
