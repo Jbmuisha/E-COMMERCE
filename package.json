@@ -7,7 +7,7 @@
     "build": "next build",
     "start": "next start",
     "lint": "eslint",
-    "test:connection": "tsx scripts/test-connection.ts"
+    "test:connection": "npx tsx scripts/test-connection.ts"
   },
   "dependencies": {
     "@faker-js/faker": "^10.1.0",

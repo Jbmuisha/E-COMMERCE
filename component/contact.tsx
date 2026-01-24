@@ -1,8 +1,10 @@
 "use client";
 
 import { FaFacebookF, FaTwitter, FaInstagram, FaLinkedinIn, FaYoutube } from "react-icons/fa";
+import { useTranslation } from "@/context/Translation"; 
 
 export default function Contact() {
+  const { t } = useTranslation();
   return (
     <main className="contact-page">
       <section className="contact-section">
@@ -10,37 +12,34 @@ export default function Contact() {
 
           {/* LEFT SIDE */}
           <div className="contact-info">
-            <h1>Contact Us</h1>
+            <h1>{t("contact.title")}</h1>
             <p>
-              Welcome to our world of exquisite fragrances. Contact us to explore our
-              exclusive perfume collection, place orders online, or receive personalized
-              recommendations to find the perfect scent. Our team is always ready to assist
-              you with any questions about our products, shipping, or gift options.
+              {t("contact.description")}
             </p>
 
             <div className="info-block-grid">
               <div className="info-block">
-                <h4>Email</h4>
+                <h4>{t("contact.email")}</h4>
                 <span>info@DPf243.io</span>
               </div>
 
               <div className="info-block">
-                <h4>Phone</h4>
+                <h4>{t("contact.phone")}</h4>
                 <span>321-221-2231</span>
               </div>
             </div>
 
             <div className="support-grid">
               <div>
-                <h5>Customer Support</h5>
-                <p>Our perfume experts are available 24/7 to help you choose your perfect fragrance or assist with your order.</p>
+                <h5>{t("contact.customerSupport.title")}</h5>
+                <p>{t("contact.customerSupport.description")}</p>
               </div>
               <div>
-                <h5>Feedback</h5>
-                <p>We value your feedback to improve our fragrance collection and your shopping experience.</p>
+                <h5>{t("contact.feedback.title")}</h5>
+                <p>{t("contact.feedback.description")}</p>
               </div>
               <div>
-                <h5>Media Inquiries</h5>
+                <h5>{t("contact.mediaInquiries.title")}</h5>
                 <div className="media-icons">
                   <a href="#" title="Facebook" target="_blank" rel="noopener noreferrer">
                     <FaFacebookF />
@@ -64,23 +63,23 @@ export default function Contact() {
 
           {/* RIGHT SIDE */}
           <div className="contact-form-card">
-            <h3>Get in Touch</h3>
-            <p>You can reach us anytime</p>
+            <h3>{t("contact.form.title")}</h3>
+            <p>{t("contact.form.subtitle")}</p>
 
             <form>
               <div className="form-row">
-                <input type="text" placeholder="First name" />
-                <input type="text" placeholder="Last name" />
+                <input type="text" placeholder={t("contact.form.firstNamePlaceholder")} />
+                <input type="text" placeholder={t("contact.form.lastNamePlaceholder")} />
               </div>
 
-              <input type="email" placeholder="Your email" />
-              <input type="tel" placeholder="Phone number" />
-              <textarea placeholder="How can we help?" rows={4}></textarea>
+              <input type="email" placeholder={t("contact.form.emailPlaceholder")} />
+              <input type="tel" placeholder={t("contact.form.phonePlaceholder")} />
+              <textarea placeholder={t("contact.form.helpPlaceholder")} rows={4}></textarea>
 
-              <button type="submit">Submit</button>
+              <button type="submit">{t("contact.form.submitButton")}</button>
 
               <small>
-                By contacting us, you agree to our Terms of Service and Privacy Policy
+                {t("contact.form.agreementText")}
               </small>
             </form>
           </div>
