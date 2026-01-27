@@ -14,8 +14,8 @@ async function main() {
         const isConnected = await testConnection();
         
         if (isConnected) {
-            console.log('✅ Connexion réussie!');
-            console.log('📊 État de la connexion:');
+            console.log(' Connexion réussie!');
+            console.log(' État de la connexion:');
             console.log('   - État:', mongoose.connection.readyState === 1 ? 'Connecté' : 'Non connecté');
             console.log('   - Base de données:', mongoose.connection.db?.databaseName || 'N/A');
             console.log('   - Host:', mongoose.connection.host || 'N/A');
