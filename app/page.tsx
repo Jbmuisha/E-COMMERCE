@@ -1,6 +1,5 @@
-import ShopLayout from "./shop/layout";
-import Hero from "@/component/home";
+import { redirect } from "next/navigation";
 
-export default function(){
-    return <ShopLayout><Hero /></ShopLayout>;
+export default function Page() {
+  redirect("/shop");
 }

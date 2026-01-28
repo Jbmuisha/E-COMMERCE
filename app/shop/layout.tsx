@@ -79,6 +79,8 @@ function CartButton() {
 
 /* ========= SHOP LAYOUT ========= */
 export default function ShopLayout({ children }: LayoutProps) {
+  const SHOP = "/shop";
+
   const [scrolled, setScrolled] = useState(false);
   const { language, t } = useTranslation();
 
@@ -112,7 +114,7 @@ export default function ShopLayout({ children }: LayoutProps) {
         >
           <div className="logo flex items-center transition-transform duration-300 hover:scale-105">
             <img
-              src="/image/parfum-copie-2.png"
+              src="/image/logo.png"
               alt="Logo"
               className="w-[120px] h-auto transition-all duration-300"
               style={{
@@ -133,16 +135,19 @@ export default function ShopLayout({ children }: LayoutProps) {
           </div>
 
           <nav className="desktop-menu hidden md:flex items-center gap-[32px] font-bold text-[12px] tracking-[0.15em] uppercase text-gray-500">
-            <Link href="/" className="hover:text-black transition">
-              {t("nav.home")}
-            </Link>
-            <Link href="/about" className="hover:text-black transition">
-              {t("nav.about")}
-            </Link>
-            <Link href="/contact" className="hover:text-black transition">
-              {t("nav.contact")}
-            </Link>
-          </nav>
+  <Link href={SHOP} className="hover:text-black transition">
+    {t("nav.home")}
+  </Link>
+
+  <Link href={`${SHOP}/about`} className="hover:text-black transition">
+    {t("nav.about")}
+  </Link>
+
+  <Link href={`${SHOP}/contact`} className="hover:text-black transition">
+    {t("nav.contact")}
+  </Link>
+</nav>
+
 
           <div className="flex items-center gap-4 sm:gap-6">
             <LangButton />
@@ -169,27 +174,29 @@ export default function ShopLayout({ children }: LayoutProps) {
               </div>
             </div>
 
-            <Link href="/newArrival" className="sub-link no-underline text-black">
-              {t("nav.new")}
-            </Link>
-            <Link href="/femme" className="sub-link no-underline text-black">
-              {t("nav.women")}
-            </Link>
-            <Link href="/homme" className="sub-link no-underline text-black">
-              {t("nav.men")}
-            </Link>
-            <Link href="/" className="sub-link no-underline text-black">
-              {t("nav.giftSets")}
-            </Link>
-            <Link href="/bestSeller" className="sub-link no-underline text-black">
-              {t("nav.bestSellers")}
-            </Link>
-            <Link
-              href="/offers"
-              className="sub-link no-underline text-black hover:text-red-600 transition"
-            >
-              {t("nav.offers")}
-            </Link>
+            <Link href={`${SHOP}/newArrival`} className="sub-link">
+  {t("nav.new")}
+</Link>
+
+<Link href={`${SHOP}/femme`} className="sub-link">
+  {t("nav.women")}
+</Link>
+
+<Link href={`${SHOP}/homme`} className="sub-link">
+  {t("nav.men")}
+</Link>
+
+<Link href={`${SHOP}/bestSeller`} className="sub-link">
+  {t("nav.bestSellers")}
+</Link>
+
+<Link
+  href={`${SHOP}/offers`}
+  className="sub-link hover:text-red-600 transition"
+>
+  {t("nav.offers")}
+</Link>
+
           </div>
         </div>
       </header>
