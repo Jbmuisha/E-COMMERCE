@@ -11,6 +11,7 @@ import {
   faBars,
   faXmark,
   faBell,
+  faAngleDown,
 } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import "./admin.css";
@@ -31,7 +32,6 @@ export default function AdminLayout({ children }: { children: ReactNode }) {
               <span>ADMIN</span>
             </div>
           )}
-
           <button className="toggle" onClick={() => setOpen(!open)}>
             <FontAwesomeIcon icon={open ? faXmark : faBars} />
           </button>
@@ -54,20 +54,20 @@ export default function AdminLayout({ children }: { children: ReactNode }) {
       <div className="main">
         {/* TOPBAR */}
         <header className="topbar">
-          {/* LEFT */}
+          {/* LOGO */}
           <div className="topbar-logo">
             <img src="/image/logo.png" alt="Admin Logo" />
           </div>
 
-          {/* RIGHT */}
+          {/* ACTIONS */}
           <div className="topbar-actions">
-            {/* NOTIFICATION */}
-            <button className="icon-btn">
+            {/* NOTIFICATIONS */}
+            <button className="icon-btn" title="Notifications">
               <FontAwesomeIcon icon={faBell} />
               <span className="notif-dot" />
             </button>
 
-            {/* LANGUAGE */}
+            {/* LANGUAGE SWITCH */}
             <div className="lang-switch">
               <button
                 className={`lang-btn ${lang === "EN" ? "active" : ""}`}
@@ -83,36 +83,17 @@ export default function AdminLayout({ children }: { children: ReactNode }) {
               </button>
             </div>
 
-            {/* PROFILE */}
+            {/* PROFILE DROPDOWN */}
             <div className="profile-wrapper">
-              <button
-                className="profile-btn"
-                onClick={() => setProfileOpen(!profileOpen)}
-              >
-                <img src="/image/avatar.png" className="avatar-img" />
-                <div className="profile-text">
-                  <p>Admin</p>
-                  <span>admin@jboy.com</span>
-                </div>
-              </button>
+  <button
+    className={`profile-btn ${profileOpen ? "open" : ""}`}
+    onClick={() => setProfileOpen(!profileOpen)}
+  >
+    <img src="/image/avatar.png" className="avatar-img" alt="Admin Avatar" />
+    {profileOpen && <span className="profile-name">Admin</span>}
+  </button>
+</div>
 
-              {profileOpen && (
-                <div className="profile-dropdown">
-                  <div className="dropdown-user">
-                    <img src="/image/avatar.png" />
-                    <div>
-                      <p>Admin</p>
-                      <span>admin@jboy.com</span>
-                    </div>
-                  </div>
-
-                  <button className="dropdown-logout">
-                    <FontAwesomeIcon icon={faRightFromBracket} />
-                    Logout
-                  </button>
-                </div>
-              )}
-            </div>
           </div>
         </header>
 
@@ -123,6 +104,7 @@ export default function AdminLayout({ children }: { children: ReactNode }) {
   );
 }
 
+/* LINK COMPONENT */
 function AdminLink({
   href,
   icon,

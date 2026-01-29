@@ -1,12 +1,14 @@
+/* =================== ADMIN LAYOUT =================== */
 .admin {
     width: 100vw;
     height: 100vh;
     display: flex;
     background: #f4f6f8;
     overflow: hidden;
+    font-family: 'Inter', sans-serif;
   }
   
- 
+  /* =================== SIDEBAR =================== */
   .sidebar {
     height: 100%;
     background: #0b0f19;
@@ -23,7 +25,6 @@
     width: 88px;
   }
   
- 
   .sidebar-header {
     height: 72px;
     padding: 0 20px;
@@ -50,7 +51,6 @@
     color: white;
   }
   
-
   .toggle {
     width: 36px;
     height: 36px;
@@ -58,13 +58,13 @@
     border: none;
     color: #9ca3af;
     cursor: pointer;
+    transition: color 0.2s;
   }
   
   .toggle:hover {
     color: white;
   }
   
- 
   .menu {
     flex: 1;
     padding: 16px 10px;
@@ -83,7 +83,7 @@
     color: #9ca3af;
     font-size: 13px;
     text-decoration: none;
-    transition: background 0.2s, color 0.2s;
+    transition: all 0.2s ease;
   }
   
   .menu-link:hover {
@@ -91,7 +91,6 @@
     color: white;
   }
   
-
   .logout {
     margin: 14px 16px;
     height: 44px;
@@ -103,20 +102,21 @@
     align-items: center;
     gap: 14px;
     cursor: pointer;
+    transition: all 0.2s;
   }
   
   .logout:hover {
     background: rgba(255, 255, 255, 0.1);
   }
   
-
+  /* =================== MAIN AREA =================== */
   .main {
     flex: 1;
     display: flex;
     flex-direction: column;
   }
   
-
+  /* =================== TOPBAR =================== */
   .topbar {
     height: 72px;
     padding: 0 28px;
@@ -127,64 +127,18 @@
     justify-content: space-between;
   }
   
-  .topbar h1 {
-    font-size: 18px;
-    font-weight: 600;
-  }
-  
-
-  .profile {
-    display: flex;
-    align-items: center;
-    gap: 14px;
-  }
-  
-  .profile .info p {
-    font-size: 13px;
-    font-weight: 500;
-  }
-  
-  .profile .info span {
-    font-size: 11px;
-    color: #9ca3af;
-  }
-  
-  .avatar {
-    width: 40px;
-    height: 40px;
-    background: #0b0f19;
-    color: white;
-    border-radius: 50%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-weight: 700;
-  }
-  
- 
-  .content {
-    flex: 1;
-    padding: 28px;
-    overflow-y: auto;
-  }
-  .topbar-logo {
-    height: 100%;
-    display: flex;
-    align-items: center;
-  }
-  
   .topbar-logo img {
     height: 50px;
     width: auto;
   }
-
-.topbar-actions {
+  
+  .topbar-actions {
     display: flex;
     align-items: center;
-    gap: 18px;
+    gap: 16px;
   }
   
-
+  /* =================== ICON BUTTON =================== */
   .icon-btn {
     position: relative;
     width: 38px;
@@ -196,7 +150,6 @@
     align-items: center;
     justify-content: center;
     cursor: pointer;
-    color: #111;
     transition: all 0.2s ease;
   }
   
@@ -205,7 +158,6 @@
     box-shadow: 0 6px 20px rgba(0, 0, 0, 0.08);
     transform: translateY(-1px);
   }
-  
   
   .notif-dot {
     position: absolute;
@@ -218,7 +170,7 @@
     box-shadow: 0 0 0 2px #ffffff;
   }
   
-
+  /* =================== LANGUAGE SWITCH =================== */
   .lang-switch {
     display: flex;
     align-items: center;
@@ -226,9 +178,9 @@
     background: linear-gradient(180deg, #ffffff, #f1f3f5);
     border: 1px solid rgba(0, 0, 0, 0.06);
     border-radius: 999px;
+    gap: 4px;
   }
   
-
   .lang-btn {
     min-width: 42px;
     height: 30px;
@@ -246,70 +198,13 @@
     color: #111;
   }
   
- 
   .lang-btn.active {
     background: #0b0f19;
     color: #ffffff;
     box-shadow: 0 6px 16px rgba(11, 15, 25, 0.3);
   }
-  /* TOPBAR ACTIONS */
-.topbar-actions {
-    display: flex;
-    align-items: center;
-    gap: 14px;
-  }
   
-  /* ICON BUTTON */
-  .icon-btn {
-    width: 38px;
-    height: 38px;
-    border-radius: 12px;
-    background: #f4f5f7;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    position: relative;
-    cursor: pointer;
-  }
-  
-  .icon-btn:hover {
-    background: #e9ecef;
-  }
-  
-  /* NOTIFICATION DOT */
-  .notif-dot {
-    position: absolute;
-    top: 9px;
-    right: 9px;
-    width: 7px;
-    height: 7px;
-    background: #ff3b30;
-    border-radius: 50%;
-  }
-  
-  /* LANGUAGE SWITCH */
-  .lang-switch {
-    display: flex;
-    background: #f4f5f7;
-    border-radius: 12px;
-    padding: 4px;
-  }
-  
-  .lang-btn {
-    padding: 6px 14px;
-    font-size: 12px;
-    font-weight: 600;
-    border-radius: 10px;
-    color: #555;
-    cursor: pointer;
-  }
-  
-  .lang-btn.active {
-    background: #0b0f19;
-    color: white;
-  }
-  
-  /* PROFILE */
+  /* =================== PROFILE =================== */
   .profile-wrapper {
     position: relative;
   }
@@ -321,6 +216,7 @@
     padding: 6px 10px;
     border-radius: 14px;
     cursor: pointer;
+    transition: all 0.2s;
   }
   
   .profile-btn:hover {
@@ -344,7 +240,7 @@
     color: #6b7280;
   }
   
-  /* PROFILE DROPDOWN */
+  /* =================== PROFILE DROPDOWN =================== */
   .profile-dropdown {
     position: absolute;
     top: calc(100% + 12px);
@@ -369,6 +265,7 @@
     width: 42px;
     height: 42px;
     border-radius: 50%;
+    object-fit: cover;
   }
   
   .dropdown-user p {
@@ -389,9 +286,63 @@
     font-weight: 600;
     color: #dc2626;
     cursor: pointer;
+    transition: all 0.2s;
   }
   
   .dropdown-logout:hover {
     background: rgba(220, 38, 38, 0.08);
+  }
+  
+  /* =================== CONTENT =================== */
+  .content {
+    flex: 1;
+    padding: 28px;
+    overflow-y: auto;
+  }
+  .profile-wrapper {
+    display: flex;
+    align-items: center;
+    position: relative;
+  }
+  
+  /* Avatar button */
+  .profile-btn {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 0;
+    background: transparent;
+    border: none;
+    cursor: pointer;
+    transition: all 0.3s ease;
+  }
+  
+  /* Rotate avatar when clicked */
+  .profile-btn.open .avatar-img {
+    transform: rotate(360deg);
+  }
+  
+  /* Avatar image */
+  .avatar-img {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    object-fit: cover;
+    transition: transform 0.5s ease;
+  }
+  
+  /* Name appears next to avatar */
+  .profile-name {
+    font-weight: 600;
+    font-size: 14px;
+    color: #111;
+    opacity: 0;
+    animation: fadeInName 0.3s forwards;
+  }
+  
+  /* Fade in name animation */
+  @keyframes fadeInName {
+    from { opacity: 0; transform: translateX(-5px); }
+    to { opacity: 1; transform: translateX(0); }
   }
   
