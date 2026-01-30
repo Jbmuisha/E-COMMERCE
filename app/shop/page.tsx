@@ -50,14 +50,14 @@ export default function Home() {
 
       {/* ================= FILTER BAR ================= */}
       <section className="w-full">
-        <div className="max-w-[1400px] mx-auto px-4">
-          <div className="flex justify-between items-center border-b pb-6 mb-6">
-            <button className="flex items-center gap-2 text-sm font-semibold text-gray-600 hover:text-black transition">
+        <div className="max-w-[1400px] mx-auto px-[4]">
+          <div className="flex justify-between items-center border-b pb-[6] mb-[6]">
+            <button className="flex items-center gap-[2] text-sm font-semibold text-gray-600 hover:text-black transition">
               <SlidersHorizontal size={16} />
               Filtrer
             </button>
 
-            <div className="flex gap-2">
+            <div className="flex gap-[2]">
               {["ALL PERFUMS", "WOMEN'S", "MEN'S"].map((item) => (
                 <button
                   key={item}
@@ -73,8 +73,8 @@ export default function Home() {
 
       {/* ================= PRODUCTS ================= */}
       <section className="w-full">
-        <div className="max-w-[1400px] mx-auto px-4 pb-24">
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
+        <div className="max-w-[1400px] mx-auto px-[4] pb-[24]">
+          <div className="grid grid-cols-4 sm:grid-cols-2 lg:grid-cols-4 gap-[8]">
             {products.map((product) => (
               <ProductCard key={product.id} product={product} />
             ))}
@@ -83,7 +83,7 @@ export default function Home() {
       </section>
 
       {/* ================= BRAND SLIDER ================= */}
-      <section className="w-full bg-white py-12 overflow-hidden border-y border-gray-100 my-10">
+      <section className="w-full bg-white py-[12] overflow-hidden border-y border-gray-100 my-[10]">
         <div className="relative max-w-[1400px] mx-auto">
           <div className="absolute inset-y-0 left-0 w-40 bg-gradient-to-r from-white to-transparent z-10 pointer-events-none" />
           <div className="absolute inset-y-0 right-0 w-40 bg-gradient-to-l from-white to-transparent z-10 pointer-events-none" />
@@ -107,18 +107,18 @@ export default function Home() {
 
       {/* ================= RECOMMENDED ================= */}
       <section
-        className="w-full py-16 overflow-hidden"
+        className="w-full py-[16px] overflow-hidden mb-[20px] mt-[20px]"
         style={{ background: "linear-gradient(180deg, #F6F1EB 0%, #F3ECE5 100%)" }}
       >
-        <div className="max-w-[1400px] mx-auto px-4">
-          <h2 className="text-3xl md:text-4xl font-black mb-8">
+        <div className="max-w-[1400px] mx-auto px-[4px]">
+          <h2 className="text-3xl md:text-4xl font-black mb-[8px]">
             Recommended for you
           </h2>
 
           <div className="relative group">
             <div
               ref={carouselRef}
-              className="flex gap-8 overflow-x-auto snap-x snap-mandatory no-scrollbar pb-10"
+              className="flex gap-[8px] overflow-x-auto snap-x snap-mandatory no-scrollbar pb-10"
             >
               {[0, 2, 4, 6].map((start) => (
                 <div

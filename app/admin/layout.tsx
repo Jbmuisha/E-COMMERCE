@@ -23,7 +23,7 @@ export default function AdminLayout({ children }: { children: ReactNode }) {
 
   return (
     <div className="admin">
-      {/* SIDEBAR */}
+   
       <aside className={`sidebar ${open ? "open" : "closed"}`}>
         <div className="sidebar-header">
           {open && (
@@ -41,7 +41,7 @@ export default function AdminLayout({ children }: { children: ReactNode }) {
           <AdminLink href="/admin" icon={faGauge} label="Dashboard" open={open} />
           <AdminLink href="/admin/products" icon={faBox} label="Products" open={open} />
           <AdminLink href="/admin/orders" icon={faCartShopping} label="Orders" open={open} />
-          <AdminLink href="/admin/users" icon={faUsers} label="Users" open={open} />
+          <AdminLink href="/admin/user" icon={faUsers} label="Users" open={open} />
         </nav>
 
         <button className="logout">
@@ -50,24 +50,24 @@ export default function AdminLayout({ children }: { children: ReactNode }) {
         </button>
       </aside>
 
-      {/* MAIN */}
+   
       <div className="main">
-        {/* TOPBAR */}
+      
         <header className="topbar">
-          {/* LOGO */}
+       
           <div className="topbar-logo">
             <img src="/image/logo.png" alt="Admin Logo" />
           </div>
 
-          {/* ACTIONS */}
+          
           <div className="topbar-actions">
-            {/* NOTIFICATIONS */}
+           
             <button className="icon-btn" title="Notifications">
               <FontAwesomeIcon icon={faBell} />
               <span className="notif-dot" />
             </button>
 
-            {/* LANGUAGE SWITCH */}
+           
             <div className="lang-switch">
               <button
                 className={`lang-btn ${lang === "EN" ? "active" : ""}`}
@@ -83,7 +83,7 @@ export default function AdminLayout({ children }: { children: ReactNode }) {
               </button>
             </div>
 
-            {/* PROFILE DROPDOWN */}
+          
             <div className="profile-wrapper">
   <button
     className={`profile-btn ${profileOpen ? "open" : ""}`}
@@ -97,14 +97,14 @@ export default function AdminLayout({ children }: { children: ReactNode }) {
           </div>
         </header>
 
-        {/* CONTENT */}
+      
         <main className="content">{children}</main>
       </div>
     </div>
   );
 }
 
-/* LINK COMPONENT */
+
 function AdminLink({
   href,
   icon,
