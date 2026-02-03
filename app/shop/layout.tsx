@@ -107,7 +107,7 @@ export default function ShopLayout({ children }: LayoutProps) {
           backgroundColor: scrolled ? "rgba(255, 255, 255, 0.95)" : "white",
         }}
       >
-        {/* MAIN HEADER */}
+        {/*  */}
         <div
           className="header-inner max-w-[1400px] w-full mx-auto px-6 lg:px-8 flex items-center justify-between transition-all duration-300"
           style={{ height: scrolled ? "80px" : "100px" }}
@@ -152,7 +152,7 @@ export default function ShopLayout({ children }: LayoutProps) {
           <div className="flex items-center gap-4 sm:gap-6">
             <LangButton />
 
-            <Link href="/account" className="icon-btn" title="Account">
+            <Link href={`${SHOP}/user`}  className="icon-btn" title="login / signup">
               <FontAwesomeIcon icon={faUser} />
             </Link>
 
@@ -207,7 +207,7 @@ export default function ShopLayout({ children }: LayoutProps) {
       {/* FOOTER */}
       <footer className="bg-[#F6F1EB] border-t border-gray-100">
         <div className="max-w-[1400px] mx-auto px-[16px] py-[96px]">
-          <div className="grid grid-cols-1 md:grid-cols-4 gap-[64px] mb-[32px]">
+          <div className="grid grid-cols-4 md:grid-cols-4 gap-[64px] mb-[32px]">
             <div>
               <img
                 src="/image/parfum-copie-2.png"
