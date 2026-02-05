@@ -20,7 +20,7 @@ export default async function connection(){
 
     try{
         await mongoose.connect(mongodbUrl, {dbName: mongodbName});
-        console.log("✅ DATA BASE CONNECTED SUCCESSFULLY");
+        console.log(" DATA BASE CONNECTED SUCCESSFULLY");
         return mongoose.connection;
     } catch( err){
         console.error(" Erreur de connexion MongoDB:", err);

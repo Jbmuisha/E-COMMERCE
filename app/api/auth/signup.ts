@@ -11,7 +11,7 @@ export default async function Sigin_Handler(req:NextApiRequest,res:NextApiRespon
         await connection()
         const {username,email,password}=req.body;
         if (!username || !email || !password ) {
-            return res.status(400).json({message:" all filsd are required"});
+            return res.status(400).json({message:" all filed are required"});
             
         }
         const exitingUser= await Users.findOne({})
