@@ -1,49 +1,52 @@
+import mongoose from "mongoose";
+import { createDefaultAdmin } from "./createDefaultAdmin";
 
-import mongoose  from 'mongoose'
+const mongodbUrl = process.env.MONGODB_URI as string;
+const mongodbName = process.env.MONGODB_NAME as string;
 
-const mongodbUrl=process.env.MONGODB_URI as string
-const mongodbName= process.env.MONGODB_NAME as string
-
-if (!mongodbUrl){
-    throw new Error (" mongoDBurl is not exist")
+if (!mongodbUrl) {
+  throw new Error("MONGODB_URI is missing");
 }
-if(!mongodbName){
-    throw new Error(" mongoDb name does not exist")
-}
-
-export default async function connection(){
-  
-    if (mongoose.connection.readyState === 1) {
-        console.log("MongoDB déjà connecté");
-        return mongoose.connection;
-    }
-
-    try{
-        await mongoose.connect(mongodbUrl, {dbName: mongodbName});
-        console.log(" DATA BASE CONNECTED SUCCESSFULLY");
-        return mongoose.connection;
-    } catch( err){
-        console.error(" Erreur de connexion MongoDB:", err);
-        throw err;
-    }
+if (!mongodbName) {
+  throw new Error("MONGODB_NAME is missing");
 }
 
+let isConnected = false;
+
+export default async function connection() {
+  if (isConnected || mongoose.connection.readyState === 1) {
+    return mongoose.connection;
+  }
+
+  try {
+    await mongoose.connect(mongodbUrl, {
+      dbName: mongodbName,
+    });
+
+    isConnected = true;
+    console.log("✅ DATABASE CONNECTED SUCCESSFULLY");
+
+    // 🔥 CREATE DEFAULT ADMIN (ONCE)
+    await createDefaultAdmin();
+
+    return mongoose.connection;
+  } catch (error) {
+    console.error("❌ MongoDB connection error:", error);
+    throw error;
+  }
+}
 
 export async function testConnection(): Promise<boolean> {
-    try {
-        if (mongoose.connection.readyState === 1) {
-         
-            if (mongoose.connection.db) {
-                await mongoose.connection.db.admin().ping();
-            }
-            return true;
-        } else {
-            await connection();
-            return true;
-        }
-    } catch (error) {
-        console.error("Test de connexion échoué:", error);
-        return false;
-    }
-}
+  try {
+    await connection();
 
+    if (mongoose.connection.db) {
+      await mongoose.connection.db.admin().ping();
+    }
+
+    return true;
+  } catch (error) {
+    console.error("❌ MongoDB ping failed:", error);
+    return false;
+  }
+}
