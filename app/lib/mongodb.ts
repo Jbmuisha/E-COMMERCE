@@ -1,6 +1,7 @@
 import mongoose from "mongoose";
 import { createDefaultAdmin } from "./createDefaultAdmin";
 
+
 const mongodbUrl = process.env.MONGODB_URI as string;
 const mongodbName = process.env.MONGODB_NAME as string;
 
@@ -24,9 +25,9 @@ export default async function connection() {
     });
 
     isConnected = true;
-    console.log("✅ DATABASE CONNECTED SUCCESSFULLY");
+    console.log("DATABASE CONNECTED SUCCESSFULLY");
 
-    // 🔥 CREATE DEFAULT ADMIN (ONCE)
+  
     await createDefaultAdmin();
 
     return mongoose.connection;
@@ -46,7 +47,7 @@ export async function testConnection(): Promise<boolean> {
 
     return true;
   } catch (error) {
-    console.error("❌ MongoDB ping failed:", error);
+    console.error(" MongoDB ping failed:", error);
     return false;
   }
 }
