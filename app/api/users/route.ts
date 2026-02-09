@@ -1,12 +1,19 @@
-import { NextApiRequest, NextApiResponse } from "next";
+import { NextResponse } from "next/server";
 import Users from "@/app/admin/models/Users";
 import connection from "@/app/lib/mongodb";
 import bcrypt from "bcryptjs";
 import jwt from "jsonwebtoken";
 
-function verifyAdmin(req: NextApiRequest) {
-  const auth = req.headers.authorization;
-  if (!auth) throw new Error("Unauthorized");
+export const runtime = "nodejs";
+
+/* ------------------ helpers ------------------ */
+
+function verifyAdmin(request: Request) {
+  const auth = request.headers.get("authorization");
+
+  if (!auth) {
+    throw new Error("Unauthorized");
+  }
 
   const token = auth.split(" ")[1];
   const decoded: any = jwt.verify(token, process.env.JWT_SECRET!);
@@ -18,61 +25,83 @@ function verifyAdmin(req: NextApiRequest) {
   return decoded;
 }
 
-export default async function handler(
-  req: NextApiRequest,
-  res: NextApiResponse
-) {
+/* ------------------ GET /api/users ------------------ */
+export async function GET(request: Request) {
   try {
     await connection();
-    verifyAdmin(req);
+    verifyAdmin(request);
 
-    
-    if (req.method === "GET") {
-      const users = await Users.find().select("-password");
-      return res.status(200).json(users);
-    }
+    const users = await Users.find().select("-password");
 
-  
-    if (req.method === "POST") {
-      const { username, email, password, role } = req.body;
-
-      if (!username || !email || !password || !role) {
-        return res.status(400).json({ message: "All fields required" });
-      }
-
-      const exists = await Users.findOne({ email });
-      if (exists) {
-        return res.status(400).json({ message: "Email already exists" });
-      }
-
-      const hashedPassword = await bcrypt.hash(password, 10);
-
-      const user = await Users.create({
-        username,
-        email,
-        password: hashedPassword,
-        role,
-      });
-
-      return res.status(201).json(user);
-    }
-
-
-    if (req.method === "PUT") {
-      const { id, username, email, role } = req.body;
-
-      const user = await Users.findByIdAndUpdate(
-        id,
-        { username, email, role },
-        { new: true }
-      ).select("-password");
-
-      return res.status(200).json(user);
-    }
-
-    return res.status(405).json({ message: "Method not allowed" });
+    return NextResponse.json(users, { status: 200 });
   } catch (error: any) {
-    console.error(error.message);
-    return res.status(401).json({ message: error.message });
+    return NextResponse.json(
+      { message: error.message || "Unauthorized" },
+      { status: 401 }
+    );
+  }
+}
+
+/* ------------------ POST /api/users ------------------ */
+export async function POST(request: Request) {
+  try {
+    await connection();
+    verifyAdmin(request);
+
+    const { username, email, password, role } = await request.json();
+
+    if (!username || !email || !password || !role) {
+      return NextResponse.json(
+        { message: "All fields required" },
+        { status: 400 }
+      );
+    }
+
+    const exists = await Users.findOne({ email });
+    if (exists) {
+      return NextResponse.json(
+        { message: "Email already exists" },
+        { status: 400 }
+      );
+    }
+
+    const hashedPassword = await bcrypt.hash(password, 10);
+
+    const user = await Users.create({
+      username,
+      email,
+      password: hashedPassword,
+      role,
+    });
+
+    return NextResponse.json(user, { status: 201 });
+  } catch (error: any) {
+    return NextResponse.json(
+      { message: error.message || "Server error" },
+      { status: 401 }
+    );
+  }
+}
+
+/* ------------------ PUT /api/users ------------------ */
+export async function PUT(request: Request) {
+  try {
+    await connection();
+    verifyAdmin(request);
+
+    const { id, username, email, role } = await request.json();
+
+    const user = await Users.findByIdAndUpdate(
+      id,
+      { username, email, role },
+      { new: true }
+    ).select("-password");
+
+    return NextResponse.json(user, { status: 200 });
+  } catch (error: any) {
+    return NextResponse.json(
+      { message: error.message || "Server error" },
+      { status: 401 }
+    );
   }
 }

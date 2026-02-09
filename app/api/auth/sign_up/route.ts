@@ -4,15 +4,11 @@ import connection from "@/app/lib/mongodb";
 import bcrypt from "bcryptjs";
 import jwt from "jsonwebtoken";
 
-export const runtime = "nodejs"; // 👈 important for JWT + bcrypt
-
 export async function POST(request: Request) {
   try {
     await connection();
 
-    const body = await request.json();
-    const email = body.email?.toLowerCase();
-    const password = body.password;
+    const { email, password } = await request.json();
 
     if (!email || !password) {
       return NextResponse.json(
@@ -45,7 +41,7 @@ export async function POST(request: Request) {
 
     const token = jwt.sign(
       {
-        id: user._id.toString(),
+        id: user._id,
         role: user.role,
       },
       process.env.JWT_SECRET,
@@ -57,7 +53,7 @@ export async function POST(request: Request) {
         message: "Successful login",
         token,
         user: {
-          id: user._id.toString(),
+          id: user._id,
           Username: user.Username,
           email: user.email,
           role: user.role,
@@ -66,10 +62,7 @@ export async function POST(request: Request) {
       { status: 200 }
     );
   } catch (error) {
-    if (process.env.NODE_ENV === "development") {
-      console.error(error);
-    }
-
+    console.error(error);
     return NextResponse.json(
       { message: "Server error" },
       { status: 500 }

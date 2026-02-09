@@ -1,7 +1,5 @@
 import mongoose from "mongoose";
 import { createDefaultAdmin } from "./createDefaultAdmin";
-
-
 const mongodbUrl = process.env.MONGODB_URI as string;
 const mongodbName = process.env.MONGODB_NAME as string;
 

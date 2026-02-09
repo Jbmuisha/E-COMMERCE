@@ -8,7 +8,7 @@ export default function UsersPage() {
   const [error, setError] = useState("");
 
   const [form, setForm] = useState({
-    Username: "",
+    username: "",
     email: "",
     password: "",
   });
@@ -23,12 +23,17 @@ export default function UsersPage() {
     setError("");
 
     try {
+      const payload =
+        mode === "login"
+          ? { email: form.email, password: form.password }
+          : form;
+
       const res = await fetch(
         mode === "login" ? "/api/auth/login" : "/api/auth/signup",
         {
           method: "POST",
           headers: { "Content-Type": "application/json" },
-          body: JSON.stringify(form),
+          body: JSON.stringify(payload),
         }
       );
 
@@ -43,10 +48,10 @@ export default function UsersPage() {
         localStorage.setItem("token", data.token);
         localStorage.setItem("user", JSON.stringify(data.user));
 
-       
-        window.location.href = "/dashboard";
+        // ✅ GO TO ADMIN
+        window.location.href = "/admin";
       } else {
-        
+        // After signup → login screen
         setMode("login");
       }
     } catch (err) {
@@ -77,9 +82,9 @@ export default function UsersPage() {
           {mode === "signup" && (
             <input
               type="text"
-              name="Username"
+              name="username"
               placeholder="Full name"
-              value={form.Username}
+              value={form.username}
               onChange={handleChange}
               required
               className="w-full border rounded-[10px] px-[14px] py-[12px]"
