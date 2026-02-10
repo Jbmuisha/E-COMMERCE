@@ -1,107 +1,57 @@
 import { NextResponse } from "next/server";
-import Users from "@/app/admin/models/Users";
 import connection from "@/app/lib/mongodb";
+import Users from "@/app/admin/models/Users";
 import bcrypt from "bcryptjs";
 import jwt from "jsonwebtoken";
 
 export const runtime = "nodejs";
 
-/* ------------------ helpers ------------------ */
-
 function verifyAdmin(request: Request) {
   const auth = request.headers.get("authorization");
-
-  if (!auth) {
-    throw new Error("Unauthorized");
-  }
+  if (!auth || !auth.startsWith("Bearer ")) throw new Error("Unauthorized");
+  if (!process.env.JWT_SECRET) throw new Error("JWT secret not configured");
 
   const token = auth.split(" ")[1];
-  const decoded: any = jwt.verify(token, process.env.JWT_SECRET!);
-
-  if (decoded.role !== "Admin") {
-    throw new Error("Forbidden");
-  }
+  const decoded = jwt.verify(token, process.env.JWT_SECRET) as { id: string; role: string };
+  if (decoded.role !== "admin") throw new Error("Forbidden");
 
   return decoded;
 }
 
-/* ------------------ GET /api/users ------------------ */
+// GET all users
 export async function GET(request: Request) {
-  try {
-    await connection();
-    verifyAdmin(request);
-
-    const users = await Users.find().select("-password");
-
-    return NextResponse.json(users, { status: 200 });
-  } catch (error: any) {
-    return NextResponse.json(
-      { message: error.message || "Unauthorized" },
-      { status: 401 }
-    );
-  }
+  await connection();
+  verifyAdmin(request);
+  const users = await Users.find().select("-password");
+  return NextResponse.json(users);
 }
 
-/* ------------------ POST /api/users ------------------ */
+// POST new user
 export async function POST(request: Request) {
-  try {
-    await connection();
-    verifyAdmin(request);
+  await connection();
+  verifyAdmin(request);
 
-    const { username, email, password, role } = await request.json();
+  const { username, email, password, role } = await request.json();
+  if (!username || !email || !password || !role) return NextResponse.json({ message: "All fields required" }, { status: 400 });
 
-    if (!username || !email || !password || !role) {
-      return NextResponse.json(
-        { message: "All fields required" },
-        { status: 400 }
-      );
-    }
+  const normalizedEmail = email.toLowerCase();
+  const exists = await Users.findOne({ email: normalizedEmail });
+  if (exists) return NextResponse.json({ message: "Email already exists" }, { status: 400 });
 
-    const exists = await Users.findOne({ email });
-    if (exists) {
-      return NextResponse.json(
-        { message: "Email already exists" },
-        { status: 400 }
-      );
-    }
+  const hashedPassword = await bcrypt.hash(password, 10);
+  const user = await Users.create({ username, email: normalizedEmail, password: hashedPassword, role: role.toLowerCase() });
 
-    const hashedPassword = await bcrypt.hash(password, 10);
-
-    const user = await Users.create({
-      username,
-      email,
-      password: hashedPassword,
-      role,
-    });
-
-    return NextResponse.json(user, { status: 201 });
-  } catch (error: any) {
-    return NextResponse.json(
-      { message: error.message || "Server error" },
-      { status: 401 }
-    );
-  }
+  return NextResponse.json({ id: user._id, username: user.username, email: user.email, role: user.role }, { status: 201 });
 }
 
-/* ------------------ PUT /api/users ------------------ */
+// PUT update role
 export async function PUT(request: Request) {
-  try {
-    await connection();
-    verifyAdmin(request);
+  await connection();
+  verifyAdmin(request);
 
-    const { id, username, email, role } = await request.json();
+  const { id, role } = await request.json();
+  const user = await Users.findByIdAndUpdate(id, { role: role.toLowerCase() }, { new: true }).select("-password");
+  if (!user) return NextResponse.json({ message: "User not found" }, { status: 404 });
 
-    const user = await Users.findByIdAndUpdate(
-      id,
-      { username, email, role },
-      { new: true }
-    ).select("-password");
-
-    return NextResponse.json(user, { status: 200 });
-  } catch (error: any) {
-    return NextResponse.json(
-      { message: error.message || "Server error" },
-      { status: 401 }
-    );
-  }
+  return NextResponse.json(user);
 }

@@ -23,10 +23,11 @@ export default function UsersPage() {
     setError("");
 
     try {
+      // Signup payload does NOT include role
       const payload =
         mode === "login"
           ? { email: form.email, password: form.password }
-          : form;
+          : { username: form.username, email: form.email, password: form.password };
 
       const res = await fetch(
         mode === "login" ? "/api/auth/login" : "/api/auth/signup",
@@ -47,11 +48,9 @@ export default function UsersPage() {
       if (mode === "login") {
         localStorage.setItem("token", data.token);
         localStorage.setItem("user", JSON.stringify(data.user));
-
-        // ✅ GO TO ADMIN
-        window.location.href = "/admin";
+        window.location.href = "/admin"; // redirect after login
       } else {
-        // After signup → login screen
+        // After signup → go to login screen
         setMode("login");
       }
     } catch (err) {

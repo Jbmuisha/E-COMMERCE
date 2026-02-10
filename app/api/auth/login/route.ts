@@ -4,55 +4,31 @@ import Users from "@/app/admin/models/Users";
 import bcrypt from "bcryptjs";
 import jwt from "jsonwebtoken";
 
-export async function POST(req: Request) {
-  try {
-    await connection();
+export const runtime = "nodejs";
 
-    const { email, password } = await req.json();
+export async function POST(request: Request) {
+  await connection();
 
-    if (!email || !password) {
-      return NextResponse.json(
-        { message: "All fields are required" },
-        { status: 400 }
-      );
-    }
+  const { email, password } = await request.json();
 
-    const user = await Users.findOne({ email }).select("+password");
-    if (!user) {
-      return NextResponse.json(
-        { message: "Invalid credentials" },
-        { status: 400 }
-      );
-    }
-
-    const isMatch = await bcrypt.compare(password, user.password);
-    if (!isMatch) {
-      return NextResponse.json(
-        { message: "Invalid credentials" },
-        { status: 400 }
-      );
-    }
-
-    const token = jwt.sign(
-      { id: user._id, role: user.role },
-      process.env.JWT_SECRET!,
-      { expiresIn: "7d" }
-    );
-
-    return NextResponse.json({
-      token,
-      user: {
-        id: user._id,
-        username: user.username,
-        email: user.email,
-        role: user.role,
-      },
-    });
-  } catch (error) {
-    console.error(error);
-    return NextResponse.json(
-      { message: "Server error" },
-      { status: 500 }
-    );
+  if (!email || !password) {
+    return NextResponse.json({ message: "All fields required" }, { status: 400 });
   }
+
+  const normalizedEmail = email.toLowerCase();
+  const user = await Users.findOne({ email: normalizedEmail }).select("+password");
+
+  if (!user) return NextResponse.json({ message: "Invalid credentials" }, { status: 400 });
+
+  const isMatch = await bcrypt.compare(password, user.password);
+  if (!isMatch) return NextResponse.json({ message: "Invalid credentials" }, { status: 400 });
+
+  if (!process.env.JWT_SECRET) throw new Error("JWT_SECRET is not defined");
+
+  const token = jwt.sign({ id: user._id.toString(), role: user.role }, process.env.JWT_SECRET, { expiresIn: "7d" });
+
+  return NextResponse.json({
+    token,
+    user: { id: user._id.toString(), username: user.username, email: user.email, role: user.role },
+  });
 }

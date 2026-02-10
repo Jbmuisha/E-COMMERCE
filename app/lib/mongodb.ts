@@ -1,51 +1,41 @@
 import mongoose from "mongoose";
 import { createDefaultAdmin } from "./createDefaultAdmin";
-const mongodbUrl = process.env.MONGODB_URI as string;
-const mongodbName = process.env.MONGODB_NAME as string;
 
-if (!mongodbUrl) {
-  throw new Error("MONGODB_URI is missing");
-}
-if (!mongodbName) {
-  throw new Error("MONGODB_NAME is missing");
-}
+const MONGODB_URI = process.env.MONGODB_URI!;
+const MONGODB_NAME = process.env.MONGODB_NAME!;
 
-let isConnected = false;
+if (!MONGODB_URI) throw new Error("MONGODB_URI is missing");
+if (!MONGODB_NAME) throw new Error("MONGODB_NAME is missing");
+
+type MongooseCache = { conn: typeof mongoose | null; promise: Promise<typeof mongoose> | null };
+const globalForMongoose = globalThis as unknown as { mongoose: MongooseCache };
+
+if (!globalForMongoose.mongoose) globalForMongoose.mongoose = { conn: null, promise: null };
+const cached = globalForMongoose.mongoose;
 
 export default async function connection() {
-  if (isConnected || mongoose.connection.readyState === 1) {
-    return mongoose.connection;
+  if (cached.conn) return cached.conn;
+
+  if (!cached.promise) {
+    cached.promise = mongoose.connect(MONGODB_URI, { dbName: MONGODB_NAME }).then(m => m);
   }
 
-  try {
-    await mongoose.connect(mongodbUrl, {
-      dbName: mongodbName,
-    });
+  cached.conn = await cached.promise;
+  console.log("✅ DATABASE CONNECTED SUCCESSFULLY");
 
-    isConnected = true;
-    console.log("DATABASE CONNECTED SUCCESSFULLY");
+  // Create default admin
+  await createDefaultAdmin();
 
-  
-    await createDefaultAdmin();
-
-    return mongoose.connection;
-  } catch (error) {
-    console.error("❌ MongoDB connection error:", error);
-    throw error;
-  }
+  return cached.conn;
 }
 
+// Optional ping test
 export async function testConnection(): Promise<boolean> {
   try {
-    await connection();
-
-    if (mongoose.connection.db) {
-      await mongoose.connection.db.admin().ping();
-    }
-
+    const conn = await connection();
+    if (conn.connection.db) await conn.connection.db.admin().ping();
     return true;
-  } catch (error) {
-    console.error(" MongoDB ping failed:", error);
+  } catch {
     return false;
   }
 }
