@@ -20,18 +20,17 @@ export default function AdminUsersPage() {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState("");
 
-  const token = typeof window !== "undefined" ? localStorage.getItem("token") : null;
+  const token =
+    typeof window !== "undefined" ? localStorage.getItem("token") : null;
 
-  // ✅ Fetch all users
+  /* ================= FETCH USERS ================= */
   useEffect(() => {
     if (!token) return;
 
     const fetchUsers = async () => {
       try {
         const res = await fetch("/api/admin/users", {
-          headers: {
-            Authorization: `Bearer ${token}`,
-          },
+          headers: { Authorization: `Bearer ${token}` },
         });
 
         if (!res.ok) throw new Error("Failed to fetch users");
@@ -46,9 +45,10 @@ export default function AdminUsersPage() {
     fetchUsers();
   }, [token]);
 
-  // ✅ Add user
+  /* ================= ADD USER ================= */
   const addUser = async () => {
     if (!token) return;
+
     setLoading(true);
     setError("");
 
@@ -59,7 +59,7 @@ export default function AdminUsersPage() {
           "Content-Type": "application/json",
           Authorization: `Bearer ${token}`,
         },
-        body: JSON.stringify({ ...newUser, role: newUser.role.toLowerCase() }),
+        body: JSON.stringify(newUser),
       });
 
       const data = await res.json();
@@ -75,7 +75,7 @@ export default function AdminUsersPage() {
     }
   };
 
-  // ✅ Update role
+  /* ================= UPDATE ROLE ================= */
   const updateRole = async (id: string, role: string) => {
     if (!token) return;
 
@@ -86,7 +86,7 @@ export default function AdminUsersPage() {
           "Content-Type": "application/json",
           Authorization: `Bearer ${token}`,
         },
-        body: JSON.stringify({ id, role: role.toLowerCase() }),
+        body: JSON.stringify({ id, role }),
       });
 
       if (!res.ok) {
@@ -95,85 +95,108 @@ export default function AdminUsersPage() {
       }
 
       const updated = await res.json();
-      setUsers(users.map(u => (u._id === id ? updated : u)));
+      setUsers(users.map((u) => (u._id === id ? updated : u)));
     } catch (err: any) {
       setError(err.message || "Server error");
     }
   };
 
   return (
-    <div className="p-6 space-y-6">
-      <h1 className="text-2xl font-bold">Admin Users</h1>
+    <div className="relative min-h-screen overflow-hidden">
+      <div className="relative z-[10] p-[40px] max-w-[1100px] mx-auto space-y-[40px]">
+        <h1 className="text-[32px] font-bold text-white drop-shadow-lg">
+          Admin Users Management
+        </h1>
 
-      {error && <p className="text-red-500">{error}</p>}
+        {/* ERROR */}
+        {error && (
+          <div className="bg-red-500/20 backdrop-blur-md text-red-200 p-[14px] rounded-[14px] border border-red-400/30">
+            {error}
+          </div>
+        )}
 
-      {/* ADD USER */}
-      <div className="bg-white p-4 rounded shadow space-y-2">
-        <input
-          placeholder="Username"
-          value={newUser.username}
-          onChange={e => setNewUser({ ...newUser, username: e.target.value })}
-          className="border p-2 w-full"
-        />
-        <input
-          placeholder="Email"
-          value={newUser.email}
-          onChange={e => setNewUser({ ...newUser, email: e.target.value })}
-          className="border p-2 w-full"
-        />
-        <input
-          placeholder="Password"
-          type="password"
-          value={newUser.password}
-          onChange={e => setNewUser({ ...newUser, password: e.target.value })}
-          className="border p-2 w-full"
-        />
-        <select
-          value={newUser.role}
-          onChange={e => setNewUser({ ...newUser, role: e.target.value })}
-          className="border p-2 w-full"
-        >
-          <option value="user">User</option>
-          <option value="admin">Admin</option>
-        </select>
+        {/* CREATE USER CARD */}
+        <div className="bg-white/10 backdrop-blur-xl p-[30px] rounded-[24px] space-y-[20px] border border-white/30">
+          <h2 className="text-[22px] font-semibold text-white drop-shadow-md">
+            Create New User
+          </h2>
 
-        <button
-          onClick={addUser}
-          disabled={loading}
-          className="bg-black text-white px-4 py-2 disabled:opacity-50"
-        >
-          {loading ? "Adding..." : "Add User"}
-        </button>
-      </div>
+          <div className="grid grid-cols-2 gap-[20px]">
+            {["username", "email", "password"].map((field) => (
+              <input
+                key={field}
+                type={field === "password" ? "password" : "text"}
+                placeholder={field.charAt(0).toUpperCase() + field.slice(1)}
+                value={(newUser as any)[field]}
+                onChange={(e) =>
+                  setNewUser({ ...newUser, [field]: e.target.value })
+                }
+                className="bg-transparent border border-white text-white placeholder-white/70 px-[16px] py-[14px] rounded-[14px] focus:outline-none focus:ring-2 focus:ring-white/60 transition-all"
+              />
+            ))}
 
-      {/* USERS TABLE */}
-      <table className="w-full border mt-4">
-        <thead>
-          <tr className="bg-gray-100">
-            <th className="p-2 border">Name</th>
-            <th className="p-2 border">Email</th>
-            <th className="p-2 border">Role</th>
-          </tr>
-        </thead>
-        <tbody>
-          {users.map(u => (
-            <tr key={u._id} className="border-t">
-              <td className="p-2">{u.username}</td>
-              <td className="p-2">{u.email}</td>
-              <td className="p-2">
-                <select
-                  value={u.role}
-                  onChange={e => updateRole(u._id, e.target.value)}
-                  className="border p-1"
+            <select
+              value={newUser.role}
+              onChange={(e) =>
+                setNewUser({ ...newUser, role: e.target.value as any })
+              }
+              className="bg-transparent border border-white text-white px-[16px] py-[14px] rounded-[14px] focus:outline-none focus:ring-2 focus:ring-white/60"
+            >
+              <option value="user">User</option>
+              <option value="admin">Admin</option>
+            </select>
+          </div>
+
+          <button
+            onClick={addUser}
+            disabled={loading}
+            className="bg-white text-black px-[26px] py-[14px] rounded-[14px] font-semibold hover:scale-[1.02] transition-all disabled:opacity-40"
+          >
+            {loading ? "Adding..." : "Add User"}
+          </button>
+        </div>
+
+        {/* USERS TABLE */}
+        <div className="bg-white/10 backdrop-blur-xl rounded-[24px] border border-white/30 shadow-[0_20px_80px_rgba(0,0,0,0.3)] overflow-hidden">
+          <table className="w-full text-left text-white">
+            <thead className="bg-white/10">
+              <tr>
+                <th className="p-[18px]">Username</th>
+                <th className="p-[18px]">Email</th>
+                <th className="p-[18px]">Role</th>
+              </tr>
+            </thead>
+
+            <tbody>
+              {users.map((u) => (
+                <tr
+                  key={u._id}
+                  className="border-t border-white/20 hover:bg-white/10 transition-all"
                 >
-                  <option value="user">User</option>
-                  <option value="admin">Admin</option>
-                </select>
-              </td>
-            </tr>
-          ))}
-        </tbody>
-      </table>
+                  <td className="p-[18px]">{u.username}</td>
+                  <td className="p-[18px]">{u.email}</td>
+                  <td className="p-[18px]">
+                    <select
+                      value={u.role}
+                      onChange={(e) => updateRole(u._id, e.target.value)}
+                      className="bg-transparent border border-white text-white px-[12px] py-[8px] rounded-[10px]"
+                    >
+                      <option value="user">User</option>
+                      <option value="admin">Admin</option>
+                    </select>
+                  </td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+
+          {users.length === 0 && (
+            <div className="p-[30px] text-center text-white/70">
+              No users found
+            </div>
+          )}
+        </div>
+      </div>
     </div>
   );
 }

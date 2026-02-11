@@ -1,3 +1,4 @@
+// app/api/admin/users/route.ts
 import { NextResponse } from "next/server";
 import connection from "@/app/lib/mongodb";
 import Users from "@/app/admin/models/Users";
@@ -18,7 +19,6 @@ function verifyAdmin(request: Request) {
   return decoded;
 }
 
-// GET all users
 export async function GET(request: Request) {
   await connection();
   verifyAdmin(request);
@@ -26,32 +26,27 @@ export async function GET(request: Request) {
   return NextResponse.json(users);
 }
 
-// POST new user
 export async function POST(request: Request) {
   await connection();
   verifyAdmin(request);
-
   const { username, email, password, role } = await request.json();
-  if (!username || !email || !password || !role) return NextResponse.json({ message: "All fields required" }, { status: 400 });
+  if (!username || !email || !password || !role)
+    return NextResponse.json({ message: "All fields required" }, { status: 400 });
 
-  const normalizedEmail = email.toLowerCase();
-  const exists = await Users.findOne({ email: normalizedEmail });
-  if (exists) return NextResponse.json({ message: "Email already exists" }, { status: 400 });
+  const exists = await Users.findOne({ email: email.toLowerCase() });
+  if (exists) return NextResponse.json({ message: "Email exists" }, { status: 400 });
 
-  const hashedPassword = await bcrypt.hash(password, 10);
-  const user = await Users.create({ username, email: normalizedEmail, password: hashedPassword, role: role.toLowerCase() });
+  const hashed = await bcrypt.hash(password, 10);
+  const user = await Users.create({ username, email: email.toLowerCase(), password: hashed, role });
 
   return NextResponse.json({ id: user._id, username: user.username, email: user.email, role: user.role }, { status: 201 });
 }
 
-// PUT update role
 export async function PUT(request: Request) {
   await connection();
   verifyAdmin(request);
-
   const { id, role } = await request.json();
-  const user = await Users.findByIdAndUpdate(id, { role: role.toLowerCase() }, { new: true }).select("-password");
+  const user = await Users.findByIdAndUpdate(id, { role }, { new: true }).select("-password");
   if (!user) return NextResponse.json({ message: "User not found" }, { status: 404 });
-
   return NextResponse.json(user);
 }

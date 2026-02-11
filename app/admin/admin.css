@@ -3,7 +3,7 @@
     width: 100vw;
     height: 100vh;
     display: flex;
-    background: #f4f6f8;
+    background: linear-gradient(135deg, #fdfbfb, #f9f5f5, #faf8f8, #f3f3f7);
     overflow: hidden;
     font-family: 'Inter', sans-serif;
   }
@@ -11,7 +11,7 @@
   /* =================== SIDEBAR =================== */
   .sidebar {
     height: 100%;
-    background: #0b0f19;
+    background: linear-gradient(135deg, #131314, #080808, #dad5d5, #1f1d2f);
     display: flex;
     flex-direction: column;
     transition: width 0.3s ease;
@@ -31,7 +31,7 @@
     display: flex;
     align-items: center;
     justify-content: space-between;
-    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+    background: linear-gradient(135deg, #fdfbfb, #f9f5f5, #faf8f8, #f3f3f7);
   }
   
   .logo {
@@ -294,11 +294,7 @@
   }
   
   /* =================== CONTENT =================== */
-  .content {
-    flex: 1;
-    padding: 28px;
-    overflow-y: auto;
-  }
+
   .profile-wrapper {
     display: flex;
     align-items: center;
@@ -345,4 +341,15 @@
     from { opacity: 0; transform: translateX(-5px); }
     to { opacity: 1; transform: translateX(0); }
   }
-  
+  /* =================== BIG BLOB BACKGROUND =================== */
+/* =================== BIG BLOB BACKGROUND =================== */
+.content {
+  position: relative; /* needed so the blob is positioned inside main */
+  flex: 1;
+  padding: 28px;
+  overflow-y: auto;
+}
+
+
+
+

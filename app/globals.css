@@ -1044,7 +1044,7 @@ header input[type="text"]:focus {
   }
 }
 
-/* New Arrival Responsive Styles */
+
 .new-arrival-grid {
   display: grid;
   grid-template-columns: repeat(2, 1fr);

@@ -98,7 +98,14 @@ export default function AdminLayout({ children }: { children: ReactNode }) {
         </header>
 
       
-        <main className="content">{children}</main>
+        <main className="content">
+  {/* Blob background inside the content */}
+  <div className="admin-bg-blob" />
+
+  {/* Your page content */}
+  {children}
+</main>
+
       </div>
     </div>
   );

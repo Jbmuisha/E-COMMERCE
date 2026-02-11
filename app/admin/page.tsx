@@ -14,7 +14,7 @@ export default function AdminDashboard() {
   
   function Card({ title, value }: { title: string; value: string }) {
     return (
-      <div className="bg-white rounded-xl shadow-sm p-6">
+      <div className="bg-white rounded-xl shadow-sm p-[6]">
         <p className="text-sm text-gray-400">{title}</p>
         <p className="text-3xl font-bold mt-2">{value}</p>
       </div>
