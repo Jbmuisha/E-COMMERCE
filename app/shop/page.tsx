@@ -1,34 +1,30 @@
 "use client";
 
 import HeroCarosel from "@/component/home";
-import { useRef } from "react";
+import { useRef, useState, useEffect } from "react";
 import { SlidersHorizontal, ChevronLeft, ChevronRight } from "lucide-react";
-import ProductCard from "@/component/ProductCard";
+import ProductCard, { Product } from "@/component/ProductCard";
+import ProductModel from "@/app/admin/models/product"; // Mongoose model
+import { InferSchemaType } from "mongoose";
+
+type ProductType = InferSchemaType<typeof ProductModel.schema>;
 
 export default function Home() {
-  const products = [
-    { id: 1, image: "/image/product1.webp", itemDetails: "Chaussures de sport", price: "85.00€" },
-    { id: 2, image: "/image/product2.jpeg", itemDetails: "Montre connectée", price: "199.00€" },
-    { id: 3, image: "/image/product2.jpg", itemDetails: "Sac à dos", price: "45.00€" },
-    { id: 4, image: "/image/product4.webp", itemDetails: "Casque Audio", price: "120.00€" },
-    { id: 5, image: "/image/product5.webp", itemDetails: "Clavier RGB", price: "75.00€" },
-    { id: 6, image: "/image/product7.png", itemDetails: "Souris Gamer", price: "55.00€" },
-    { id: 7, image: "/image/product8.png", itemDetails: "Écran 4K", price: "350.00€" },
-    { id: 8, image: "/image/product9.jpg", itemDetails: "Bureau Setup", price: "299.00€" },
-  ];
+  const carouselRef = useRef<HTMLDivElement>(null);
+  const [products, setProducts] = useState<ProductType[]>([]);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState("");
 
   const logos = [
-    { id: 1, image: "/image/ajmal .webp" },
+    { id: 1, image: "/image/ajmal.webp" },
     { id: 2, image: "/image/chanel.svg" },
     { id: 3, image: "/image/dior.png" },
     { id: 4, image: "/image/kalvin.png" },
     { id: 5, image: "/image/lafata.webp" },
     { id: 6, image: "/image/blackopium.png" },
     { id: 7, image: "/image/haramain.png" },
-    { id: 8, image: "/image/afana.webp" }
+    { id: 8, image: "/image/afana.webp" },
   ];
-
-  const carouselRef = useRef<HTMLDivElement>(null);
 
   const scrollCarousel = (direction: "left" | "right") => {
     if (!carouselRef.current) return;
@@ -39,25 +35,43 @@ export default function Home() {
     });
   };
 
+  useEffect(() => {
+    const fetchProducts = async () => {
+      try {
+        const res = await fetch("/api/admin/product");
+        if (!res.ok) throw new Error("Failed to fetch products");
+        const data: ProductType[] = await res.json();
+        setProducts(data);
+      } catch (err: any) {
+        setError(err.message || "Error loading products");
+      } finally {
+        setLoading(false);
+      }
+    };
+    fetchProducts();
+  }, []);
+
+  if (loading) return <p className="text-center mt-12 text-gray-700">Loading products...</p>;
+  if (error) return <p className="text-center mt-12 text-red-500">{error}</p>;
+
   return (
     <div className="w-full">
-      {/* ================= HERO ================= */}
       <section className="w-full">
         <div className="max-w-[1400px] mx-auto px-4 mb-6">
           <HeroCarosel />
         </div>
       </section>
 
-      {/* ================= FILTER BAR ================= */}
+      {/* FILTER BAR */}
       <section className="w-full">
-        <div className="max-w-[1400px] mx-auto px-[4]">
-          <div className="flex justify-between items-center border-b pb-[6] mb-[6]">
-            <button className="flex items-center gap-[2] text-sm font-semibold text-gray-600 hover:text-black transition">
+        <div className="max-w-[1400px] mx-auto px-4">
+          <div className="flex justify-between items-center border-b pb-1 mb-1">
+            <button className="flex items-center gap-1 text-sm font-semibold text-gray-600 hover:text-black transition">
               <SlidersHorizontal size={16} />
               Filtrer
             </button>
 
-            <div className="flex gap-[2]">
+            <div className="flex gap-2">
               {["ALL PERFUMS", "WOMEN'S", "MEN'S"].map((item) => (
                 <button
                   key={item}
@@ -71,23 +85,35 @@ export default function Home() {
         </div>
       </section>
 
-      {/* ================= PRODUCTS ================= */}
+      {/* PRODUCTS GRID */}
       <section className="w-full">
-        <div className="max-w-[1400px] mx-auto px-[4] pb-[24]">
-          <div className="grid grid-cols-4 sm:grid-cols-2 lg:grid-cols-4 gap-[8]">
-            {products.map((product) => (
-              <ProductCard key={product.id} product={product} />
-            ))}
-          </div>
+        <div className="max-w-[1400px] mx-auto px-4 pb-24">
+          {products.length === 0 ? (
+            <p className="text-center text-gray-500">No products found.</p>
+          ) : (
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+              {products.map((product) => (
+                <ProductCard
+                  key={product._id}
+                  product={{
+                    _id: product._id.toString(),
+                    name: product.name,
+                    image: product.image,
+                    price: product.price, // number ✅
+                    description: product.description,
+                  }}
+                />
+              ))}
+            </div>
+          )}
         </div>
       </section>
 
-      {/* ================= BRAND SLIDER ================= */}
-      <section className="w-full bg-white py-[12] overflow-hidden border-y border-gray-100 my-[10]">
+      {/* BRAND SLIDER */}
+      <section className="w-full bg-white py-12 overflow-hidden border-y border-gray-100 my-10">
         <div className="relative max-w-[1400px] mx-auto">
           <div className="absolute inset-y-0 left-0 w-40 bg-gradient-to-r from-white to-transparent z-10 pointer-events-none" />
           <div className="absolute inset-y-0 right-0 w-40 bg-gradient-to-l from-white to-transparent z-10 pointer-events-none" />
-
           <div className="slide-track-custom flex gap-8">
             {[...logos, ...logos].map((img, index) => (
               <div
@@ -105,30 +131,32 @@ export default function Home() {
         </div>
       </section>
 
-      {/* ================= RECOMMENDED ================= */}
+      {/* RECOMMENDED */}
       <section
-        className="w-full py-[16px] overflow-hidden mb-[20px] mt-[20px]"
+        className="w-full py-16 overflow-hidden mb-20 mt-20"
         style={{ background: "linear-gradient(180deg, #F6F1EB 0%, #F3ECE5 100%)" }}
       >
-        <div className="max-w-[1400px] mx-auto px-[4px]">
-          <h2 className="text-3xl md:text-4xl font-black mb-[8px]">
-            Recommended for you
-          </h2>
-
+        <div className="max-w-[1400px] mx-auto px-4">
+          <h2 className="text-3xl md:text-4xl font-black mb-8">Recommended for you</h2>
           <div className="relative group">
             <div
               ref={carouselRef}
-              className="flex gap-[8px] overflow-x-auto snap-x snap-mandatory no-scrollbar pb-10"
+              className="flex gap-8 overflow-x-auto snap-x snap-mandatory no-scrollbar pb-10"
             >
               {[0, 2, 4, 6].map((start) => (
-                <div
-                  key={start}
-                  className="snap-start flex gap-8 min-w-[760px]"
-                >
+                <div key={start} className="snap-start flex gap-8 min-w-[760px]">
                   {products.slice(start, start + 2).map((item, i) => (
-                    <div key={item.id} className={`w-1/2 ${i === 1 ? "mt-16" : ""}`}>
+                    <div key={item._id} className={`w-1/2 ${i === 1 ? "mt-16" : ""}`}>
                       <div className="bg-white rounded-[32px] p-8 hover:-translate-y-2 hover:shadow-2xl transition">
-                        <ProductCard product={item} />
+                        <ProductCard
+                          product={{
+                            _id: item._id.toString(),
+                            name: item.name,
+                            image: item.image,
+                            price: item.price,
+                            description: item.description,
+                          }}
+                        />
                       </div>
                     </div>
                   ))}

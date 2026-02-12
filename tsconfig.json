@@ -15,7 +15,8 @@
     "incremental": true,
     "baseUrl": ".",
     "paths": {
-      "@/*": ["./*"]
+      "@/*": ["./*"],
+      "@admin/*": ["app/admin/*"]       // ← New alias for admin folder
     },
     "plugins": [
       { "name": "next" }

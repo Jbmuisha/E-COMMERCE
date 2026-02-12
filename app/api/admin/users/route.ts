@@ -1,0 +1,93 @@
+import { NextResponse } from "next/server";
+import connection from "@/app/lib/mongodb";
+import Users from "@/app/admin/models/Users";
+import bcrypt from "bcryptjs";
+import jwt from "jsonwebtoken";
+
+export const runtime = "nodejs";
+
+function verifyAdmin(request: Request) {
+  const auth = request.headers.get("authorization");
+  if (!auth || !auth.startsWith("Bearer ")) throw new Error("Unauthorized");
+  if (!process.env.JWT_SECRET) throw new Error("JWT secret not configured");
+
+  const token = auth.split(" ")[1];
+  const decoded = jwt.verify(token, process.env.JWT_SECRET) as {
+    id: string;
+    role: string;
+  };
+
+  if (decoded.role !== "admin") throw new Error("Forbidden");
+
+  return decoded;
+}
+
+// GET users
+export async function GET(req: Request) {
+  await connection();
+  verifyAdmin(req);
+
+  const users = await Users.find().select("-password");
+  return NextResponse.json(users);
+}
+
+// POST create user
+export async function POST(req: Request) {
+  await connection();
+  verifyAdmin(req);
+
+  const body = await req.json();
+  const { username, email, password, role } = body;
+
+  if (!username || !email || !password || !role)
+    return NextResponse.json(
+      { message: "All fields required" },
+      { status: 400 }
+    );
+
+  const exists = await Users.findOne({ email: email.toLowerCase() });
+  if (exists)
+    return NextResponse.json(
+      { message: "Email already exists" },
+      { status: 400 }
+    );
+
+  const hashedPassword = await bcrypt.hash(password, 10);
+
+  const user = await Users.create({
+    username,
+    email: email.toLowerCase(),
+    password: hashedPassword,
+    role,
+  });
+
+  return NextResponse.json(
+    {
+      _id: user._id,
+      username: user.username,
+      email: user.email,
+      role: user.role,
+    },
+    { status: 201 }
+  );
+}
+
+// PUT update role
+export async function PUT(req: Request) {
+  await connection();
+  verifyAdmin(req);
+
+  const body = await req.json();
+  const { id, role } = body;
+
+  const user = await Users.findByIdAndUpdate(
+    id,
+    { role },
+    { new: true }
+  ).select("-password");
+
+  if (!user)
+    return NextResponse.json({ message: "User not found" }, { status: 404 });
+
+  return NextResponse.json(user);
+}

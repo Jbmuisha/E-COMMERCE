@@ -39,7 +39,7 @@ export default function AdminLayout({ children }: { children: ReactNode }) {
 
         <nav className="menu">
           <AdminLink href="/admin" icon={faGauge} label="Dashboard" open={open} />
-          <AdminLink href="/admin/products" icon={faBox} label="Products" open={open} />
+          <AdminLink href="/admin/product" icon={faBox} label="Products" open={open} />
           <AdminLink href="/admin/orders" icon={faCartShopping} label="Orders" open={open} />
           <AdminLink href="/admin/user" icon={faUsers} label="Users" open={open} />
         </nav>

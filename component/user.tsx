@@ -20,33 +20,54 @@ export default function AdminUsersPage() {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState("");
 
-  const token =
-    typeof window !== "undefined" ? localStorage.getItem("token") : null;
-
   /* ================= FETCH USERS ================= */
   useEffect(() => {
-    if (!token) return;
-
     const fetchUsers = async () => {
+      const token = localStorage.getItem("token");
+
+      if (!token) {
+        setError("Not authenticated");
+        return;
+      }
+
       try {
         const res = await fetch("/api/admin/users", {
           headers: { Authorization: `Bearer ${token}` },
         });
 
-        if (!res.ok) throw new Error("Failed to fetch users");
+        const text = await res.text();
 
-        const data: User[] = await res.json();
+        if (!res.ok) {
+          console.error("Server response:", text);
+          setError(
+            res.status === 403
+              ? "Access denied (Admin only)"
+              : res.status === 401
+              ? "Unauthorized"
+              : "Failed to fetch users"
+          );
+          return;
+        }
+
+        if (!text) {
+          setUsers([]);
+          return;
+        }
+
+        const data: User[] = JSON.parse(text);
         setUsers(data);
       } catch (err: any) {
-        setError(err.message || "Error loading users");
+        console.error("Fetch error:", err);
+        setError("Network error");
       }
     };
 
     fetchUsers();
-  }, [token]);
+  }, []);
 
   /* ================= ADD USER ================= */
   const addUser = async () => {
+    const token = localStorage.getItem("token");
     if (!token) return;
 
     setLoading(true);
@@ -62,11 +83,15 @@ export default function AdminUsersPage() {
         body: JSON.stringify(newUser),
       });
 
-      const data = await res.json();
+      const text = await res.text();
 
-      if (!res.ok) throw new Error(data.message || "Failed to add user");
+      if (!res.ok) {
+        const err = text ? JSON.parse(text) : {};
+        throw new Error(err.message || "Failed to add user");
+      }
 
-      setUsers([...users, data]);
+      const data: User = JSON.parse(text);
+      setUsers((prev) => [...prev, data]);
       setNewUser({ username: "", email: "", password: "", role: "user" });
     } catch (err: any) {
       setError(err.message || "Server error");
@@ -77,6 +102,7 @@ export default function AdminUsersPage() {
 
   /* ================= UPDATE ROLE ================= */
   const updateRole = async (id: string, role: string) => {
+    const token = localStorage.getItem("token");
     if (!token) return;
 
     try {
@@ -89,13 +115,18 @@ export default function AdminUsersPage() {
         body: JSON.stringify({ id, role }),
       });
 
+      const text = await res.text();
+
       if (!res.ok) {
-        const err = await res.json();
+        const err = text ? JSON.parse(text) : {};
         throw new Error(err.message || "Failed to update role");
       }
 
-      const updated = await res.json();
-      setUsers(users.map((u) => (u._id === id ? updated : u)));
+      const updated: User = JSON.parse(text);
+
+      setUsers((prev) =>
+        prev.map((u) => (u._id === id ? updated : u))
+      );
     } catch (err: any) {
       setError(err.message || "Server error");
     }
@@ -108,16 +139,15 @@ export default function AdminUsersPage() {
           Admin Users Management
         </h1>
 
-        {/* ERROR */}
         {error && (
           <div className="bg-red-500/20 backdrop-blur-md text-red-200 p-[14px] rounded-[14px] border border-red-400/30">
             {error}
           </div>
         )}
 
-        {/* CREATE USER CARD */}
+        {/* CREATE USER */}
         <div className="bg-white/10 backdrop-blur-xl p-[30px] rounded-[24px] space-y-[20px] border border-white/30">
-          <h2 className="text-[22px] font-semibold text-white drop-shadow-md">
+          <h2 className="text-[22px] font-semibold text-white">
             Create New User
           </h2>
 
@@ -126,12 +156,12 @@ export default function AdminUsersPage() {
               <input
                 key={field}
                 type={field === "password" ? "password" : "text"}
-                placeholder={field.charAt(0).toUpperCase() + field.slice(1)}
+                placeholder={field}
                 value={(newUser as any)[field]}
                 onChange={(e) =>
                   setNewUser({ ...newUser, [field]: e.target.value })
                 }
-                className="bg-transparent border border-white text-white placeholder-white/70 px-[16px] py-[14px] rounded-[14px] focus:outline-none focus:ring-2 focus:ring-white/60 transition-all"
+                className="bg-transparent border border-white text-white px-[16px] py-[14px] rounded-[14px]"
               />
             ))}
 
@@ -140,7 +170,7 @@ export default function AdminUsersPage() {
               onChange={(e) =>
                 setNewUser({ ...newUser, role: e.target.value as any })
               }
-              className="bg-transparent border border-white text-white px-[16px] py-[14px] rounded-[14px] focus:outline-none focus:ring-2 focus:ring-white/60"
+              className="bg-transparent border border-white text-white px-[16px] py-[14px] rounded-[14px]"
             >
               <option value="user">User</option>
               <option value="admin">Admin</option>
@@ -150,14 +180,14 @@ export default function AdminUsersPage() {
           <button
             onClick={addUser}
             disabled={loading}
-            className="bg-white text-black px-[26px] py-[14px] rounded-[14px] font-semibold hover:scale-[1.02] transition-all disabled:opacity-40"
+            className="bg-white text-black px-[26px] py-[14px] rounded-[14px] font-semibold"
           >
             {loading ? "Adding..." : "Add User"}
           </button>
         </div>
 
         {/* USERS TABLE */}
-        <div className="bg-white/10 backdrop-blur-xl rounded-[24px] border border-white/30 shadow-[0_20px_80px_rgba(0,0,0,0.3)] overflow-hidden">
+        <div className="bg-white/10 backdrop-blur-xl rounded-[24px] border border-white/30 overflow-hidden">
           <table className="w-full text-left text-white">
             <thead className="bg-white/10">
               <tr>
@@ -166,19 +196,17 @@ export default function AdminUsersPage() {
                 <th className="p-[18px]">Role</th>
               </tr>
             </thead>
-
             <tbody>
               {users.map((u) => (
-                <tr
-                  key={u._id}
-                  className="border-t border-white/20 hover:bg-white/10 transition-all"
-                >
+                <tr key={u._id} className="border-t border-white/20">
                   <td className="p-[18px]">{u.username}</td>
                   <td className="p-[18px]">{u.email}</td>
                   <td className="p-[18px]">
                     <select
                       value={u.role}
-                      onChange={(e) => updateRole(u._id, e.target.value)}
+                      onChange={(e) =>
+                        updateRole(u._id, e.target.value)
+                      }
                       className="bg-transparent border border-white text-white px-[12px] py-[8px] rounded-[10px]"
                     >
                       <option value="user">User</option>
