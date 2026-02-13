@@ -23,7 +23,9 @@ export default function AdminLayout({ children }: { children: ReactNode }) {
 
   return (
     <div className="admin">
-   
+      {/* Backdrop for mobile when sidebar is open */}
+      {open && <div className="sidebar-backdrop" onClick={() => setOpen(false)} />}
+
       <aside className={`sidebar ${open ? "open" : "closed"}`}>
         <div className="sidebar-header">
           {open && (
@@ -37,37 +39,34 @@ export default function AdminLayout({ children }: { children: ReactNode }) {
           </button>
         </div>
 
-        <nav className="menu">
+        <nav className="menu" onClick={() => setOpen(false)}>
           <AdminLink href="/admin" icon={faGauge} label="Dashboard" open={open} />
           <AdminLink href="/admin/product" icon={faBox} label="Products" open={open} />
           <AdminLink href="/admin/orders" icon={faCartShopping} label="Orders" open={open} />
           <AdminLink href="/admin/user" icon={faUsers} label="Users" open={open} />
         </nav>
 
-        <button className="logout">
+        <button className="logout" onClick={() => setOpen(false)}>
           <FontAwesomeIcon icon={faRightFromBracket} />
           {open && <span>Logout</span>}
         </button>
       </aside>
 
-   
       <div className="main">
-      
         <header className="topbar">
-       
+          <button className="toggle mobile-only" onClick={() => setOpen(true)}>
+            <FontAwesomeIcon icon={faBars} />
+          </button>
           <div className="topbar-logo">
             <img src="/image/logo.png" alt="Admin Logo" />
           </div>
 
-          
           <div className="topbar-actions">
-           
             <button className="icon-btn" title="Notifications">
               <FontAwesomeIcon icon={faBell} />
               <span className="notif-dot" />
             </button>
 
-           
             <div className="lang-switch">
               <button
                 className={`lang-btn ${lang === "EN" ? "active" : ""}`}
@@ -83,29 +82,22 @@ export default function AdminLayout({ children }: { children: ReactNode }) {
               </button>
             </div>
 
-          
             <div className="profile-wrapper">
-  <button
-    className={`profile-btn ${profileOpen ? "open" : ""}`}
-    onClick={() => setProfileOpen(!profileOpen)}
-  >
-    <img src="/image/avatar.png" className="avatar-img" alt="Admin Avatar" />
-    {profileOpen && <span className="profile-name">Admin</span>}
-  </button>
-</div>
-
+              <button
+                className={`profile-btn ${profileOpen ? "open" : ""}`}
+                onClick={() => setProfileOpen(!profileOpen)}
+              >
+                <img src="/image/avatar.png" className="avatar-img" alt="Admin Avatar" />
+                {profileOpen && <span className="profile-name">Admin</span>}
+              </button>
+            </div>
           </div>
         </header>
 
-      
         <main className="content">
-  {/* Blob background inside the content */}
-  <div className="admin-bg-blob" />
-
-  {/* Your page content */}
-  {children}
-</main>
-
+          <div className="admin-bg-blob" />
+          {children}
+        </main>
       </div>
     </div>
   );

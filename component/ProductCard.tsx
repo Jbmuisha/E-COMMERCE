@@ -23,14 +23,13 @@ export default function ProductCard({ product, onAddToCart }: ProductCardProps) 
   const handleAddToCart = (e: React.MouseEvent) => {
     e.stopPropagation();
 
-    // Provide defaults so TS is happy
     const cartItem = {
-      id: product._id,                 // ✅ required
+      id: product._id,
       name: product.name,
       image: product.image,
       price: product.price,
-      category: product.category || "Uncategorized", // ✅ default string
-      description: product.description || "",        // ✅ default string
+      category: product.category || "Uncategorized",
+      description: product.description || "",
     };
 
     addToCart(cartItem);
@@ -39,14 +38,14 @@ export default function ProductCard({ product, onAddToCart }: ProductCardProps) 
   };
 
   return (
-    <div className="group bg-white rounded-2xl overflow-hidden transition-all duration-300 hover:shadow-xl">
+    <a href={`/shop/product/${product._id}`} className="group bg-white rounded-2xl overflow-hidden transition-all duration-300 hover:shadow-xl block">
       <div className="relative h-[280px] bg-[#FAFAFA] flex items-center justify-center">
         <img
           src={product.image}
           alt={product.name}
           className="max-h-[75%] object-contain transition-transform duration-500 group-hover:scale-110"
         />
-        <button className="absolute top-[20px] right-[20px] p-[2px] rounded-full bg-transparent shadow hover:text-red-500 hover:bg-red-100 transition border-none">
+        <button className="absolute top-[20px] right-[20px] p-[2px] rounded-full bg-transparent shadow hover:text-red-500 hover:bg-red-100 transition border-none" onClick={(e) => e.preventDefault()}>
           <Heart size={25} />
         </button>
       </div>
@@ -57,12 +56,12 @@ export default function ProductCard({ product, onAddToCart }: ProductCardProps) 
           {product.price.toFixed(2)}€
         </span>
         <button
-          onClick={handleAddToCart}
+          onClick={(e) => { e.preventDefault(); handleAddToCart(e); }}
           className="mt-6 w-full h-[46px] rounded-xl border border-black text-black text-sm font-semibold tracking-wide bg-transparent opacity-0 group-hover:opacity-100 transition-all duration-300 hover:bg-black hover:text-white"
         >
           Ajouter au panier
         </button>
       </div>
-    </div>
+    </a>
   );
 }

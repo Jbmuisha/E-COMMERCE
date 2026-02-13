@@ -1,0 +1,49 @@
+
+
+.pd-container { max-width: 1100px; margin: 0 auto; padding: 20px; }
+.pd-breadcrumb { margin-bottom: 14px; }
+.pd-breadcrumb a { color: #2563eb; text-decoration: none; font-weight: 600; }
+
+.pd-grid { display: grid; grid-template-columns: 1.1fr 0.9fr; gap: 22px; }
+
+.pd-media { background: #f7f7f7; border-radius: 14px; padding: 16px; display: flex; align-items: center; justify-content: center; }
+.pd-image { max-width: 100%; max-height: 520px; object-fit: contain; display: block; }
+
+.pd-info { padding: 8px 4px; }
+.pd-title { font-size: 28px; margin: 0 0 8px 0; color: #111; font-weight: 800; line-height: 1.2; }
+.pd-price { font-size: 24px; font-weight: 800; color: #111; margin-bottom: 10px; }
+.pd-desc { font-size: 14px; color: #444; line-height: 1.6; margin-bottom: 14px; }
+
+.pd-qty-row { display: flex; align-items: center; gap: 10px; margin: 14px 0 16px 0; }
+.pd-qty-row label { font-size: 14px; color: #374151; }
+.pd-qty { width: 72px; height: 40px; border: 1px solid #d1d5db; border-radius: 10px; padding: 0 10px; font-size: 16px; }
+
+.pd-pay-grid { display: grid; grid-template-columns: 1fr; gap: 10px; margin-top: 14px; }
+.btn { display: inline-flex; align-items: center; justify-content: center; gap: 8px; height: 44px; border-radius: 12px; font-weight: 800; border: 1px solid transparent; cursor: pointer; text-decoration: none; }
+.btn:active { transform: translateY(1px); }
+
+.btn-stripe { background: #111; color: #fff; }
+.btn-stripe:hover { background: #000; }
+
+.btn-orange { background: #ff7900; color: #fff; }
+.btn-orange:hover { background: #e66e00; }
+
+.btn-airtel { background: #ef1c26; color: #fff; }
+.btn-airtel:hover { background: #d3131b; }
+
+.pd-note { color: #6b7280; font-size: 13px; margin-top: 8px; }
+
+/* Responsive */
+@media (max-width: 900px) {
+  .pd-grid { grid-template-columns: 1fr; }
+  .pd-image { max-height: 420px; }
+}
+
+@media (max-width: 480px) {
+  .pd-container { padding: 14px; }
+  .pd-title { font-size: 22px; }
+  .pd-price { font-size: 20px; }
+  .pd-image { max-height: 360px; }
+  .pd-qty { width: 64px; height: 38px; font-size: 15px; }
+  .btn { height: 42px; border-radius: 10px; }
+}

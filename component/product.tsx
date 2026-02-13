@@ -43,9 +43,10 @@ export default function ProductList() {
       <div className="w-full max-w-[1400px] mx-auto px-4 pb-24">
         <div className="grid grid-cols-4 sm:grid-cols-2 lg:grid-cols-2 gap-8 mt-16">
           {products.map((item) => (
-            <div
+            <a
               key={item._id}
-              className="group bg-white rounded-2xl overflow-hidden transition-all duration-300 hover:shadow-xl"
+              href={`/shop/product/${item._id}`}
+              className="group bg-white rounded-2xl overflow-hidden transition-all duration-300 hover:shadow-xl block"
             >
               <div className="relative h-[280px] bg-[#FAFAFA] flex items-center justify-center">
                 <img
@@ -53,18 +54,18 @@ export default function ProductList() {
                   alt={item.name}
                   className="max-h-[75%] object-contain transition-transform duration-500 group-hover:scale-110"
                 />
-                <button className="absolute top-5 right-5 p-2 rounded-full bg-transparent shadow hover:text-red-500 hover:bg-red transition border-none">
+                <button className="absolute top-5 right-5 p-2 rounded-full bg-transparent shadow hover:text-red-500 hover:bg-red transition border-none" onClick={(e) => e.preventDefault()}>
                   <Heart size={25} />
                 </button>
               </div>
               <div className="p-5">
                 <p className="text-sm text-gray-500 mb-2">{item.name}</p>
                 <span className="text-xl font-black text-gray-900">{item.price.toFixed(2)}€</span>
-                <button className="mt-6 w-full h-[46px] rounded-xl border border-black text-black text-sm font-semibold tracking-wide bg-transparent opacity-0 group-hover:opacity-100 transition-all duration-300 hover:bg-black hover:text-white">
+                <button className="mt-6 w-full h-[46px] rounded-xl border border-black text-black text-sm font-semibold tracking-wide bg-transparent opacity-0 group-hover:opacity-100 transition-all duration-300 hover:bg-black hover:text-white" onClick={(e) => e.preventDefault()}>
                   Ajouter au panier
                 </button>
               </div>
-            </div>
+            </a>
           ))}
         </div>
       </div>

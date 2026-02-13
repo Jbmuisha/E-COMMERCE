@@ -22,6 +22,7 @@ import Cart from "@/component/Cart";
 
 import "@/component/cart-button.css";
 import "@/component/ui-buttons.css";
+import "./shop-layout.css";
 
 interface LayoutProps {
   children: ReactNode;
@@ -99,110 +100,54 @@ export default function ShopLayout({ children }: LayoutProps) {
       <Cart />
 
       {/* HEADER */}
-      <header
-        className={`w-full fixed top-0 left-0 z-50 transition-all duration-300`}
-        style={{
-          boxShadow: scrolled ? "rgba(0, 0, 0, 0.08) 0px 4px 12px" : "none",
-          backdropFilter: scrolled ? "blur(8px)" : "none",
-          backgroundColor: scrolled ? "rgba(255, 255, 255, 0.95)" : "white",
-        }}
-      >
-        {/*  */}
-        <div
-          className="header-inner max-w-[1400px] w-full mx-auto px-6 lg:px-8 flex items-center justify-between transition-all duration-300"
-          style={{ height: scrolled ? "80px" : "100px" }}
-        >
-          <div className="logo flex items-center transition-transform duration-300 hover:scale-105">
-            <img
-              src="/image/logo.png"
-              alt="Logo"
-              className="w-[120px] h-auto transition-all duration-300"
-              style={{
-                transform: scrolled ? "scale(0.9)" : "scale(1)",
-              }}
-            />
+      <header className={`shop-header ${scrolled ? "scrolled" : ""}`}>
+        <div className="header-inner">
+          <div className="logo">
+            <img src="/image/logo.png" alt="Logo" />
           </div>
 
-          <div className="search-wrapper hidden md:flex">
+          <div className="search-wrapper">
             <div className="search-input-wrapper">
-              <input
-                type="text"
-                placeholder={t("nav.search")}
-                className="search-input"
-              />
+              <input type="text" placeholder={t("nav.search")} className="search-input" />
               <FontAwesomeIcon icon={faSearch} className="search-icon-right" />
             </div>
           </div>
 
-          <nav className="desktop-menu hidden md:flex items-center gap-[32px] font-bold text-[12px] tracking-[0.15em] uppercase text-gray-500">
-  <Link href={SHOP} className="hover:text-black transition">
-    {t("nav.home")}
-  </Link>
+          <nav className="nav-menu">
+            <Link href={SHOP}> {t("nav.home")} </Link>
+            <Link href={`${SHOP}/about`}> {t("nav.about")} </Link>
+            <Link href={`${SHOP}/contact`}> {t("nav.contact")} </Link>
+          </nav>
 
-  <Link href={`${SHOP}/about`} className="hover:text-black transition">
-    {t("nav.about")}
-  </Link>
-
-  <Link href={`${SHOP}/contact`} className="hover:text-black transition">
-    {t("nav.contact")}
-  </Link>
-</nav>
-
-
-          <div className="flex items-center gap-4 sm:gap-6">
+          <div className="icon-bar">
             <LangButton />
-
-            <Link href={`${SHOP}/user`}  className="icon-btn" title="login / signup">
+            <Link href={`${SHOP}/user`} className="icon-btn icon-btn-standard" title="login / signup">
               <FontAwesomeIcon icon={faUser} />
             </Link>
-
             <CartButton />
           </div>
         </div>
 
-        {/* SUB HEADER */}
-        <div className="sub-header w-full bg-[#E5E7EB] border-b border-gray-200">
-          <div className="sub-header-inner max-w-[1400px] mx-auto px-[24px] h-[44px] flex items-center gap-[28px]">
-            <div className="all-menu relative group cursor-pointer">
-              <div className="flex items-center gap-[6px] font-bold uppercase text-[12px] tracking-wide hover:text-black transition">
-                <FontAwesomeIcon icon={faBars} className="w-[14px] h-[14px]" />
+        <div className="sub-header">
+          <div className="sub-header-inner">
+            <div className="all-menu">
+              <div className="all-label">
+                <FontAwesomeIcon icon={faBars} />
                 {t("nav.all")}
               </div>
-
-              <div className="mega-menu absolute top-[100%] left-[0] w-[1500px] bg-white shadow-lg rounded-[12px] p-[16px] opacity-0 group-hover:opacity-100 transition-opacity duration-300 z-50">
-                {/* Mega Menu Content */}
-              </div>
+              <div className="mega-menu">{/* Mega Menu Content */}</div>
             </div>
 
-            <Link href={`${SHOP}/newArrival`} className="sub-link">
-  {t("nav.new")}
-</Link>
-
-<Link href={`${SHOP}/femme`} className="sub-link">
-  {t("nav.women")}
-</Link>
-
-<Link href={`${SHOP}/homme`} className="sub-link">
-  {t("nav.men")}
-</Link>
-
-<Link href={`${SHOP}/bestSeller`} className="sub-link">
-  {t("nav.bestSellers")}
-</Link>
-
-<Link
-  href={`${SHOP}/offers`}
-  className="sub-link hover:text-red-600 transition"
->
-  {t("nav.offers")}
-</Link>
-
+            <Link href={`${SHOP}/newArrival`} className="sub-link">{t("nav.new")}</Link>
+            <Link href={`${SHOP}/femme`} className="sub-link">{t("nav.women")}</Link>
+            <Link href={`${SHOP}/homme`} className="sub-link">{t("nav.men")}</Link>
+            <Link href={`${SHOP}/bestSeller`} className="sub-link">{t("nav.bestSellers")}</Link>
+            <Link href={`${SHOP}/offers`} className="sub-link offers">{t("nav.offers")}</Link>
           </div>
         </div>
       </header>
 
-      {/* MAIN CONTENT */}
-      <main className="pt-[144px]">{children}</main>
+      <main className="shop-main">{children}</main>
 
       {/* FOOTER */}
       <footer className="bg-[#F6F1EB] border-t border-gray-100">
