@@ -13,7 +13,7 @@ export async function POST(request: Request) {
     const body = await request.json();
     const { username, email, password } = body;
 
-    // Validate fields
+   
     if (!username || !email || !password) {
       return NextResponse.json(
         { message: "All fields are required" },
@@ -23,7 +23,7 @@ export async function POST(request: Request) {
 
     const normalizedEmail = email.toLowerCase();
 
-    // Check existing user
+ 
     const exists = await Users.findOne({ email: normalizedEmail });
     if (exists) {
       return NextResponse.json(
