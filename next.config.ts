@@ -1,7 +1,10 @@
 import type { NextConfig } from "next";
 
 /** @type {import('next').NextConfig} */
-const nextConfig = {
+const nextConfig: NextConfig = {
+  turbopack: {
+    root: "/Users/JBOY/Desktop/e-commerce/e-commerce",
+  },
   images: {
     remotePatterns: [
       {
@@ -10,9 +13,6 @@ const nextConfig = {
       },
     ],
   },
-  experimental: {
-    // Configuration expérimentale si nécessaire
-  }
 };
 
 export default nextConfig;
